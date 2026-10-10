@@ -108,7 +108,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coredeck-linux-${{ github.run_id }}
-          path: build/Throne
+          path: build/CoreDeck
           retention-days: 7
 
   build-linux-clang:

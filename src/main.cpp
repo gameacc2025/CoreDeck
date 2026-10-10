@@ -15,7 +15,7 @@
 #include <QLocalServer>
 #include <QThread>
 #include <QDateTime>
-#include <3rdparty/WinCommander.hpp>
+#include "3rdparty/WinCommander.hpp"
 
 
 #include "include/global/Configs.hpp"
@@ -33,7 +33,7 @@
 #include <windows.h>
 #endif
 #ifdef Q_OS_LINUX
-#include <include/sys/linux/coreDump.h>
+#include "include/sys/coreDump.h"
 #include <qfontdatabase.h>
 #include <QSocketNotifier>
 #include <signal.h>
@@ -221,7 +221,7 @@ namespace {
     }
 }
 
-#define LOCAL_SERVER_PREFIX "throne-"
+#define LOCAL_SERVER_PREFIX "coredeck-"
 
 int main(int argc, char* argv[]) {
     Logging::InstallQtMessageHandler();
@@ -284,7 +284,7 @@ int main(int argc, char* argv[]) {
 #ifdef NKR_CPP_USE_APPDATA
     useAppdata = true;
 #endif
-    QApplication::setApplicationName("Throne");
+    QApplication::setApplicationName("CoreDeck");
     if(useAppdata) {
         if (!appdataDir.isEmpty()) {
             wd.setPath(appdataDir);

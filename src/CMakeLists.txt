@@ -175,7 +175,6 @@ set(UI_SOURCES
     src/ui/profile/dialog_edit_profile_singbox.cpp
     src/ui/profile/dialog_edit_profile_xhttp.cpp
     src/ui/profile/dialog_edit_profile_xray.cpp
-    src/ui/profile/dialog_edit_profile.cpp
     src/ui/profile/dialog_vpn_auth.cpp
     src/ui/profile/edit_chain.cpp
     src/ui/profile/edit_advanced.cpp
@@ -222,7 +221,7 @@ set(UI_SOURCES
     src/ui/scanner/IpEntriesModel.cpp
     src/ui/scanner/IpListItem.cpp
     src/ui/setting/dialog_basic_settings.cpp
-    src/ui/setting/DialogDiagnosticsTab.cpp
+    src/ui/setting/DiagnosticsTab.cpp
     src/ui/setting/dialog_edit_otp.cpp
     src/ui/setting/dialog_integration.cpp
     src/ui/setting/dialog_manage_routes.cpp
@@ -292,7 +291,7 @@ set_target_properties(CoreDeck PROPERTIES
     AUTOMOC ON
     AUTORCC ON
     WIN32_EXECUTABLE TRUE
-    MACOSX_BUNDLE TRUE
+    MACOSX_BUNDLE FALSE
 )
 
 if (WIN32 AND MSVC)
