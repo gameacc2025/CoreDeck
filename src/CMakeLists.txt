@@ -134,6 +134,8 @@ set(SYS_SOURCES
     src/sys/UrlScheme.cpp
     src/sys/SystemProxy.cpp
     src/sys/GlobalHotkeys.cpp
+    src/sys/coreDump.cpp
+    src/sys/LinuxCap.cpp
     src/sys/windows/AutoRun.cpp
     src/sys/windows/eventHandler.cpp
     src/sys/windows/GlobalHotkeys.cpp
@@ -258,6 +260,7 @@ set(THIRDPARTY_SOURCES
     3rdparty/qrcodegen.cpp
     3rdparty/QtExtKeySequenceEdit.cpp
     3rdparty/QrDecoder.cpp
+    3rdparty/WinCommander.cpp
     3rdparty/quirc/decode.c
     3rdparty/quirc/identify.c
     3rdparty/quirc/quirc.c
