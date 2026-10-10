@@ -136,7 +136,40 @@
 | Task | Status | Notes |
 |------|--------|-------|
 | MI-002: Verify baseline build | BLOCKED | Toolchain missing: CMake, Qt6, MSVC/MinGW, Ninja not installed |
-| MI-020: InstanceManager singleton | NEXT | Phase 2: Default Instance & Multi-Instance Management |
+
+---
+
+## Completed (Session 005)
+
+### MI-020: InstanceManager Singleton
+- **Files Created:**
+  - `include/instance/InstanceManager.h` - Singleton interface for Instance lifecycle management
+  - `src/instance/InstanceManager.cpp` - Implementation with InstanceRepository integration
+  - `tests/test_instancemanager.cpp` - Unit tests (interface contracts & logic flow)
+
+- **Features Implemented:**
+  1. ✅ Singleton pattern with thread-safe access
+  2. ✅ Instance CRUD: create, get (by ID/name), getAll, update, delete
+  3. ✅ Active Instance management (get/set/clear) with QSettings persistence
+  4. ✅ Default Instance creation on first run (ensureDefaultInstanceExists)
+  5. ✅ Auto-start Instance query (getAutoStartInstanceIds)
+  6. ✅ Default Instance access (getDefaultInstance)
+  7. ✅ Thread-safe: all public methods protected by std::mutex
+  8. ✅ Cache invalidation after modifications
+  9. ✅ Last Instance deletion protection
+  10. ✅ Duplicate name prevention
+
+- **Integration:**
+  - Initializes with DatabaseManager (provides InstanceRepository)
+  - Uses InstanceRepository for all persistence operations
+  - Active Instance ID persisted in QSettings (CoreDeck/CoreDeck)
+  - Instance cache loaded on initialization, refreshed after changes
+
+- **Acceptance Criteria (MI-020):**
+  - Manages Instance lifecycle ✅
+  - Singleton access ✅
+  - Thread-safe operations ✅
+  - Persistence via InstanceRepository ✅
 
 ---
 
@@ -171,13 +204,15 @@
 | 2 | 2026-10-10 | Build verification + MI-010 | Build blocked (missing toolchain), Instance model design completed |
 | 3 | 2026-10-10 | Repository migration | Git remote updated to gameacc2025/CoreDeck, docs corrected |
 | 4 | 2026-10-10 | MI-011 Database schema & migration | Phase 1 complete: instances, instance_settings, port_allocations tables, migration logic, InstanceRepository |
+| 5 | 2026-10-10 | MI-020 InstanceManager singleton | Phase 2 started: Instance lifecycle management, singleton, CRUD, active instance persistence |
 
 ---
 
-## Next Session Plan (Session 005)
+## Next Session Plan (Session 006)
 
-1. Begin Phase 2: MI-020 InstanceManager singleton implementation
-2. Plan toolchain installation or CI setup for build verification
+1. Continue Phase 2: MI-021 Default Instance creation on first run
+2. MI-022 Instance selector UI component
+3. Plan toolchain installation or CI setup for build verification
 
 ---
 
@@ -186,7 +221,7 @@
 ```
 Phase 0: ████████░░ 80% (docs done, build blocked)
 Phase 1: ██████████ 100% (MI-010, MI-011 done)
-Phase 2: ░░░░░░░░░░  0%
+Phase 2: ████░░░░░░  20% (MI-020 done, MI-021 next)
 Phase 3: ░░░░░░░░░░  0%
 Phase 4: ░░░░░░░░░░  0%
 Phase 5: ░░░░░░░░░░  0%

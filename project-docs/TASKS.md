@@ -52,7 +52,7 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-020 | Implement InstanceManager singleton | TODO | High | MI-012 | src/instance/InstanceManager.h, .cpp | Manages Instance lifecycle | Integration test |
+| MI-020 | Implement InstanceManager singleton | DONE | High | MI-012 | include/instance/InstanceManager.h, src/instance/InstanceManager.cpp, tests/test_instancemanager.cpp | Manages Instance lifecycle | Unit test (static review) |
 | MI-021 | Default Instance creation on first run | TODO | High | MI-014, MI-020 | InstanceManager.cpp | Default Instance exists with valid ports | First-run test |
 | MI-022 | Instance selector UI component | TODO | High | MI-020 | src/ui/InstanceSelector.h, .cpp, mainwindow.ui | Switch between Instances in UI | Manual UI test |
 | MI-023 | Instance create/edit/delete dialogs | TODO | High | MI-022 | src/ui/InstanceDialog.h, .cpp, .ui | All fields editable, validation works | Manual UI test |

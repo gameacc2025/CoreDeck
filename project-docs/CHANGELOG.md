@@ -8,6 +8,16 @@
 ## [Unreleased] - Development
 
 ### Added
+- **MI-020: InstanceManager Singleton (Session 005)**
+  - InstanceManager singleton for Instance lifecycle management
+  - Instance CRUD: create, get (by ID/name), getAll, update, delete
+  - Active Instance management with QSettings persistence
+  - Default Instance creation on first run
+  - Auto-start Instance query support
+  - Thread-safe operations via std::mutex
+  - Instance cache with invalidation on modifications
+  - Duplicate name prevention and last-instance deletion protection
+  - Unit tests for interface contracts and logic flow
 - **MI-011: Database Schema & Migration (Phase 1 Complete)**
   - `instances` table with UUID primary key, all Instance fields, timestamps
   - `instance_settings` table for per-instance settings (FK to instances)
