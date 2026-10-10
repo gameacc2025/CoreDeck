@@ -84,6 +84,7 @@ set(CONFIG_SOURCES
     src/configs/outbounds/vmess.cpp
     src/configs/outbounds/wireguard.cpp
     src/configs/outbounds/masque.cpp
+    src/configs/outbounds/mieru.cpp
     src/configs/outbounds/openvpn.cpp
     src/configs/outbounds/openconnect.cpp
     src/configs/outbounds/custom.cpp
