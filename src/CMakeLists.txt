@@ -51,6 +51,7 @@ set(GLOBAL_SOURCES
     src/global/OtpPlaceholder.cpp
     src/global/VpnCredentialOverride.cpp
     src/global/RunningProfiles.cpp
+    src/global/Common.cpp
 )
 
 # Configs
