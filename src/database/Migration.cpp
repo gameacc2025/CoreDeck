@@ -6,9 +6,12 @@
 #include <QJsonArray>
 #include <QUuid>
 #include <QDateTime>
+#include <QFile>
+#include <QDir>
 #include <3rdparty/SQLiteCpp/include/SQLiteCpp.h>
 #include <algorithm>
 #include <set>
+#include <memory>
 
 namespace Configs {
 
@@ -114,7 +117,19 @@ qint64 currentTimestamp() {
     return QDateTime::currentSecsSinceEpoch();
 }
 
-MigrationResult runThroneToCoreDeckMigration(Database& db) {
+bool backupDatabaseFile(const std::string& dbPath) {
+    const QString srcPath = QString::fromStdString(dbPath);
+    const QString backupPath = srcPath + ".pre-migration-backup-" + QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss");
+    
+    if (!QFile::copy(srcPath, backupPath)) {
+        LOG_ERROR(QString("Failed to create database backup at %1").arg(backupPath));
+        return false;
+    }
+    LOG_INFO(QString("Database backup created at %1").arg(backupPath));
+    return true;
+}
+
+MigrationResult runThroneToCoreDeckMigration(Database& db, const std::string& dbPath) {
     MigrationResult result;
     
     if (!isMigrationNeeded(db)) {
@@ -124,6 +139,11 @@ MigrationResult runThroneToCoreDeckMigration(Database& db) {
     }
 
     LOG_INFO("Starting Throne -> CoreDeck database migration...");
+
+    if (!backupDatabaseFile(dbPath)) {
+        result.error = "Failed to create database backup before migration";
+        return result;
+    }
 
     if (!db.transaction("ThroneToCoreDeckMigration", [&]() {
         try {
@@ -155,13 +175,15 @@ MigrationResult runThroneToCoreDeckMigration(Database& db) {
             );
 
             if (!columnExists(db, "groups", "instance_id")) {
-                db.exec("ALTER TABLE groups ADD COLUMN instance_id TEXT NOT NULL DEFAULT ?", defaultInstanceId);
+                db.exec("ALTER TABLE groups ADD COLUMN instance_id TEXT");
             }
 
             if (!columnExists(db, "groups", "instance_id")) {
                 result.error = "Failed to add instance_id column to groups table";
                 return false;
             }
+
+            db.exec("UPDATE groups SET instance_id = ? WHERE instance_id IS NULL", defaultInstanceId);
 
             auto groupsQuery = db.query("SELECT COUNT(*) FROM groups");
             int totalGroups = 0;
@@ -221,11 +243,14 @@ MigrationResult runThroneToCoreDeckMigration(Database& db) {
             }
             result.settingsMigrated = settingsCount;
 
-            if (!columnExists(db, "groups", "instance_id")) {
-                db.exec("ALTER TABLE groups ADD COLUMN instance_id TEXT NOT NULL DEFAULT ?", defaultInstanceId);
-            }
-            
             db.exec("CREATE INDEX IF NOT EXISTS idx_groups_instance_id ON groups(instance_id)");
+            
+            db.exec("PRAGMA foreign_keys = ON");
+            try {
+                db.exec("ALTER TABLE groups ADD CONSTRAINT fk_groups_instance_id FOREIGN KEY (instance_id) REFERENCES instances(id) ON DELETE CASCADE");
+            } catch (...) {
+                LOG_WARN("Could not add foreign key constraint on groups.instance_id (may already exist or SQLite version limitation)");
+            }
 
             setMigrationVersion(db, CURRENT_MIGRATION_VERSION);
             

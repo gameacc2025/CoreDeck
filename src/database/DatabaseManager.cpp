@@ -6,6 +6,7 @@
 #include "include/database/ProfilesRepo.h"
 #include "include/database/RoutesRepo.h"
 #include "include/database/TrafficStatsRepo.h"
+#include "include/database/Migration.h"
 
 #include "include/global/Configs.hpp"
 #include "include/global/Logger.hpp"
@@ -68,6 +69,9 @@ namespace Configs {
         : db(dbPath), statsDb(prepareStatsDb(deriveStatsDbPath(dbPath)), true), scanDb(dbPath) {
         // entity_ids must exist before the repos are constructed.
         createEntityIdsTable(db);
+
+        // Run Throne -> CoreDeck migration if needed
+        runThroneToCoreDeckMigration(db, dbPath);
 
         initializeRepos();
         applyMigrations();

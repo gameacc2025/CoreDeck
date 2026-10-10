@@ -16,7 +16,7 @@ struct MigrationResult {
     std::string error;
 };
 
-MigrationResult runThroneToCoreDeckMigration(Database& db);
+MigrationResult runThroneToCoreDeckMigration(Database& db, const std::string& dbPath);
 
 bool isMigrationNeeded(Database& db);
 std::string getMigrationVersion(Database& db);
