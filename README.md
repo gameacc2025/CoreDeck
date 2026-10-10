@@ -92,7 +92,7 @@ All project documentation is in [`project-docs/`](project-docs/):
 - **Throne Repository:** https://github.com/throneproj/Throne
 - **v2rayN Reference:** https://github.com/2dust/v2rayN (for Chain Core selection behavior)
 - **NekoRay (Historical):** https://github.com/MatsuriDayo/nekoray
-- **CoreDeck Repository:** https://github.com/DevastBit/CoreDeck
+- **CoreDeck Repository:** https://github.com/gameacc2025/CoreDeck
 
 ## License
 

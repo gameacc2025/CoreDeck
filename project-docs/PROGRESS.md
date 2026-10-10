@@ -110,7 +110,7 @@
 | Resource | URL |
 |----------|-----|
 | Throne Repository | https://github.com/throneproj/Throne |
-| CoreDeck Repository | https://github.com/DevastBit/CoreDeck |
+| CoreDeck Repository | https://github.com/gameacc2025/CoreDeck |
 | v2rayN Reference | https://github.com/2dust/v2rayN |
 | sing-box | https://github.com/SagerNet/sing-box |
 | Xray-core | https://github.com/XTLS/Xray-core |
