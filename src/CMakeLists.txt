@@ -221,6 +221,7 @@ set(UI_SOURCES
     src/ui/scanner/dialog_new_scan.cpp
     src/ui/scanner/dialog_ip_lists.cpp
     src/ui/scanner/dialog_edit_ip_list.cpp
+    src/ui/scanner/dialog_scan_instance.cpp
     src/ui/scanner/ScanItem.cpp
     src/ui/scanner/IpEntriesModel.cpp
     src/ui/scanner/IpListItem.cpp
