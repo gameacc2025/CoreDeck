@@ -1,7 +1,7 @@
 # CoreDeck Task List
 
-**Version:** 0.1 (Draft)  
-**Status:** PLANNED  
+**Version:** 0.2  
+**Status:** ACTIVE (single source of task IDs, DEC-014)  
 **Last Updated:** 2026-10-10
 
 ---
@@ -13,8 +13,12 @@
 | `TODO` | Not started |
 | `IN_PROGRESS` | Currently being worked on |
 | `BLOCKED` | Waiting on dependency or decision |
-| `DONE` | Implementation complete |
-| `VERIFIED` | Tested and confirmed working |
+| `DONE_UNVERIFIED` | Code written, but not built or tests not executed (static review does not count) |
+| `VERIFIED` | Built and relevant tests actually executed and passed (local run or cited CI run) |
+| `SUPERSEDED` | Replaced by another task (named) |
+| `DROPPED` | Out of scope by decision (named) |
+
+Scope tiers (P0/P1/P2) per task are defined in `MVP_SCOPE.md`. Do P0 first.
 
 ---
 
@@ -22,15 +26,31 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-000 | Clone Throne repository | DONE | High | — | Throne/ | Repository cloned locally | `git status` in Throne/ |
-| MI-001 | Analyze Throne architecture | DONE | High | MI-000 | ARCHITECTURE.md | Architecture documented | Review ARCHITECTURE.md |
-| MI-002 | Verify baseline build | BLOCKED | High | MI-000 | BUILD_AND_TEST.md | Throne builds successfully | CMake build passes |
-| MI-003 | Create project documentation structure | DONE | High | — | project-docs/ | All doc files created | `ls project-docs/` |
-| MI-004 | Write PROJECT_SPEC.md | DONE | High | MI-001 | PROJECT_SPEC.md | Complete requirements documented | Review spec |
-| MI-005 | Write ARCHITECTURE.md | DONE | High | MI-001 | ARCHITECTURE.md | Current + target architecture documented | Review arch |
-| MI-006 | Write ROADMAP.md | DONE | High | MI-004 | ROADMAP.md | Phases and tasks defined | Review roadmap |
-| MI-007 | Write AI_WORKFLOW.md | DONE | High | — | AI_WORKFLOW.md | Development rules documented | Review workflow |
-| MI-008 | Write DEPENDENCIES_AND_LICENSES.md | DONE | High | MI-000 | DEPENDENCIES_AND_LICENSES.md | All licenses documented | Review licenses |
+| MI-000 | Clone Throne repository | VERIFIED | High | — | Throne/ | Repository cloned locally | `git status` in Throne/ |
+| MI-001 | Analyze Throne architecture | VERIFIED | High | MI-000 | ARCHITECTURE.md | Architecture documented | Review ARCHITECTURE.md |
+| MI-002 | Verify baseline build | SUPERSEDED | High | MI-000 | BUILD_AND_TEST.md | Replaced by MI-118 (toolchain) and MI-120 (first build of integrated CoreDeck) | — |
+| MI-003 | Create project documentation structure | VERIFIED | High | — | project-docs/ | All doc files created | `ls project-docs/` |
+| MI-004 | Write PROJECT_SPEC.md | VERIFIED | High | MI-001 | PROJECT_SPEC.md | Complete requirements documented | Review spec |
+| MI-005 | Write ARCHITECTURE.md | VERIFIED | High | MI-001 | ARCHITECTURE.md | Current + target architecture documented | Review arch |
+| MI-006 | Write ROADMAP.md | VERIFIED | High | MI-004 | ROADMAP.md | Phases and tasks defined | Review roadmap |
+| MI-007 | Write AI_WORKFLOW.md | VERIFIED | High | — | AI_WORKFLOW.md | Development rules documented | Review workflow |
+| MI-008 | Write DEPENDENCIES_AND_LICENSES.md | VERIFIED | High | MI-000 | DEPENDENCIES_AND_LICENSES.md | All licenses documented | Review licenses |
+
+---
+
+## Phase 0b: Bootstrap to First Build (Milestones M0, M1) — DO THIS FIRST
+
+| ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
+|----|-------|--------|----------|--------------|---------------|---------------------|-------------|
+| MI-118 | Provision toolchain or CI (M0) | TODO | P0 | — | BUILD_AND_TEST.md, .github/workflows/build.yml | CMake, Ninja, compiler, Qt present locally, OR a CI workflow builds on windows-latest and ubuntu-latest; first configure/build result recorded | `cmake --version`, `qmake -v`, or green CI run cited |
+| MI-119 | Integrate required Throne code into CoreDeck tree + root CMakeLists.txt | TODO | P0 | MI-118 | src/, include/, 3rdparty/, res/, CMakeLists.txt, DEPENDENCIES_AND_LICENSES.md | Required Throne files copied (no macOS-only code, no build output), licence headers kept, own root CMake, no path to `Throne/` | `grep -ri "Throne/" CMakeLists.txt cmake/ script/` shows nothing; configure succeeds |
+| MI-120 | First successful build and launch (M1) | TODO | P0 | MI-119 | BUILD_AND_TEST.md | Compiles on Windows (local or CI) and Linux (CI); app starts and shows the main window | build log + launch evidence recorded |
+| MI-121 | Build and run existing tests (MI-010..MI-020), fix failures | TODO | P0 | MI-120 | tests/, CMake tests | `test_instance`, `test_instancemanager` registered in CTest, executed; failures fixed; static-only tests rewritten to test real behavior | `ctest --output-on-failure` counts recorded |
+| MI-122 | Fix migration: nullable groups.instance_id, backup, foreign_keys pragma, fixture tests | TODO | P0 | MI-121 | src/database/Migration.cpp, tests/ | Per DEC-015 and Master Plan section 8; fresh, Throne-format, partial, rollback cases tested; Throne-readability of migrated DB checked | migration tests pass in CTest |
+| MI-123 | Remove temporary Throne folder and stale references | TODO | P0 | MI-120, MI-121 | repo-wide | Exact path verified, no owner work inside, folder removed; tracked files contain no sibling/absolute Throne path; build still passes | grep + clean-clone build |
+| MI-124 | Write MVP_SCOPE.md and freeze P0 | VERIFIED | P0 | — | MVP_SCOPE.md | P0/P1/P2 listed and mapped to task IDs | document review |
+| MI-125 | Xray core acquisition/location and launch check | TODO | P0 | MI-120 | core manager code | Xray binary found or downloaded from official source; missing-binary error is clear; version recorded | unit test + manual |
+| MI-126 | End-to-end smoke test S1/S2 and multi-instance MI-1..MI-3 | TODO | P0 | MI-035, MI-042 | BUILD_AND_TEST.md | Smoke results recorded honestly | manual + scripted |
 
 ---
 
@@ -38,13 +58,13 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-010 | Design Instance C++ class | DONE | High | MI-002 | include/database/entities/Instance.h, src/database/entities/Instance.cpp, tests/test_instance.cpp | Class with all fields, JSON serialization | Unit test |
-| MI-011 | Add Instance tables to Database.cpp | DONE | High | MI-010 | include/database/Migration.h, src/database/Migration.cpp, src/database/DatabaseManager.cpp | Migration creates tables on first run | Migration test |
-| MI-012 | Implement InstanceRepository | DONE | High | MI-011 | include/database/InstanceRepository.h, src/database/InstanceRepository.cpp | CRUD operations work | Unit test |
-| MI-013 | Add instance_id to Group entity | DONE | High | MI-011 | Migration adds instance_id column to groups table | Integration test |
-| MI-014 | Write migration logic (Throne → CoreDeck) | DONE | High | MI-011 | src/database/Migration.cpp | Existing data moves to Default Instance | Migration test with real DB |
-| MI-015 | Add InstanceSettings table & repo | DONE | Medium | MI-011 | Migration creates instance_settings table | Unit test |
-| MI-016 | Add PortAllocations table & repo | DONE | Medium | MI-011 | Migration creates port_allocations table | Unit test |
+| MI-010 | Design Instance C++ class | DONE_UNVERIFIED | High | MI-120 | include/database/entities/Instance.h, src/database/entities/Instance.cpp, tests/test_instance.cpp | Class with all fields, JSON serialization | Unit test |
+| MI-011 | Add Instance tables to Database.cpp | DONE_UNVERIFIED | High | MI-010 | include/database/Migration.h, src/database/Migration.cpp, src/database/DatabaseManager.cpp | Migration creates tables on first run | Migration test |
+| MI-012 | Implement InstanceRepository | DONE_UNVERIFIED | High | MI-011 | include/database/InstanceRepository.h, src/database/InstanceRepository.cpp | CRUD operations work | Unit test |
+| MI-013 | Add instance_id to Group entity | DONE_UNVERIFIED | High | MI-011 | Migration adds instance_id column to groups table | Integration test |
+| MI-014 | Write migration logic (Throne → CoreDeck) | DONE_UNVERIFIED | High | MI-011 | src/database/Migration.cpp | Existing data moves to Default Instance | Migration test with real DB |
+| MI-015 | Add InstanceSettings table & repo | DONE_UNVERIFIED | Medium | MI-011 | Migration creates instance_settings table | Unit test |
+| MI-016 | Add PortAllocations table & repo | DONE_UNVERIFIED | Medium | MI-011 | Migration creates port_allocations table | Unit test |
 
 ---
 
@@ -52,7 +72,7 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-020 | Implement InstanceManager singleton | DONE | High | MI-012 | include/instance/InstanceManager.h, src/instance/InstanceManager.cpp, tests/test_instancemanager.cpp | Manages Instance lifecycle | Unit test (static review) |
+| MI-020 | Implement InstanceManager singleton | DONE_UNVERIFIED | High | MI-012 | include/instance/InstanceManager.h, src/instance/InstanceManager.cpp, tests/test_instancemanager.cpp | Manages Instance lifecycle | Unit test (never executed; static review only) |
 | MI-021 | Default Instance creation on first run | TODO | High | MI-014, MI-020 | InstanceManager.cpp | Default Instance exists with valid ports | First-run test |
 | MI-022 | Instance selector UI component | TODO | High | MI-020 | src/ui/InstanceSelector.h, .cpp, mainwindow.ui | Switch between Instances in UI | Manual UI test |
 | MI-023 | Instance create/edit/delete dialogs | TODO | High | MI-022 | src/ui/InstanceDialog.h, .cpp, .ui | All fields editable, validation works | Manual UI test |
@@ -112,7 +132,7 @@
 
 ---
 
-## Phase 7: Core Adapters (sing-box, External)
+## Phase 7: Core Adapters (sing-box, External)  — P1 (XrayAdapter MI-070/071/074 may be pulled into P0 if needed)
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
@@ -125,7 +145,7 @@
 
 ---
 
-## Phase 8: Core Selection for Chain & Profiles
+## Phase 8: Core Selection for Chain & Profiles  — P1
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
@@ -137,7 +157,7 @@
 
 ---
 
-## Phase 9: Central Router (Future)
+## Phase 9: Central Router (Future) — P2
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
@@ -149,13 +169,13 @@
 
 ---
 
-## Phase 10: TUN & Cross-Platform (Future)
+## Phase 10: TUN & Cross-Platform (Future) — P2 (Windows + Linux only)
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
 | MI-100 | TUN per Instance (Windows) | TODO | Low | MI-065 | src/sys/windows/TunAdapter.cpp | Wintun adapter per Instance | Windows TUN test |
 | MI-101 | TUN per Instance (Linux) | TODO | Low | MI-065 | src/sys/linux/TunAdapter.cpp | tun device per Instance | Linux TUN test |
-| MI-102 | TUN per Instance (macOS) | TODO | Low | MI-065 | src/sys/macos/TunAdapter.cpp | NetworkExtension per Instance | macOS TUN test |
+| MI-102 | TUN per Instance (macOS) | DROPPED | — | — | — | Dropped by DEC-012 | — |
 | MI-103 | System Proxy single-owner model | TODO | Medium | MI-065 | src/sys/*/SystemProxy.cpp | Only one Instance controls SP | SP transfer test |
 | MI-104 | Kill switch per Instance | TODO | Medium | MI-065 | src/sys/KillSwitch.cpp | Blocks traffic if Instance down | Kill switch test |
 
@@ -171,14 +191,14 @@
 | MI-113 | Startup time benchmark | TODO | Medium | MI-065 | BUILD_AND_TEST.md | < 10s for 5 auto-start | Benchmark |
 | MI-114 | Windows build & installer | TODO | High | MI-110 | cmake/windows/ | .exe + portable ZIP | Build test |
 | MI-115 | Linux build (AppImage, deb) | TODO | High | MI-110 | cmake/linux/ | Packages install & run | Build test |
-| MI-116 | macOS build & notarization | TODO | High | MI-110 | cmake/macos/ | .app runs without quarantine | Build test |
+| MI-116 | macOS build & notarization | DROPPED | — | — | — | Dropped by DEC-012 | — |
 | MI-117 | Complete all documentation | TODO | High | All | project-docs/ | All docs current | Doc review |
 
 ---
 
 ## Notes
 
-- Tasks marked with `DONE` or `VERIFIED` have been completed in this session
+- Only `VERIFIED` means finished. `DONE_UNVERIFIED` code has never been built or tested
 - Tasks in `IN_PROGRESS` are currently being worked on
 - Priority: High = blocks other tasks, Medium = important but not blocking, Low = future phase
 - Dependencies show which tasks must complete first
@@ -192,3 +212,4 @@
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-10-10 | Initial | Draft task list from roadmap |
+| 0.2 | 2026-10-10 | Review | Honest statuses (DEC-014), bootstrap phase 0b (MI-118..MI-126), macOS dropped (DEC-012) |

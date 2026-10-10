@@ -1,0 +1,255 @@
+#include "include/ui/mainwindow.h"
+
+#include <QAbstractItemView>
+#include <QMenu>
+#include <QMessageBox>
+#include <QTextDocument>
+#include <QTimer>
+#include <QVBoxLayout>
+
+#include "include/configs/sub/GroupUpdater.hpp"
+#include "include/database/GroupsRepo.h"
+#include "include/ui/group/dialog_edit_group.h"
+#include "include/ui/mainWindow/MainWindowInternal.h"
+#include "include/ui/mainWindow/TestRunner.h"
+#include "include/ui/stats/dialog_endpoint_details.h"
+#include "include/ui/utils/ProfilesTableFilterHeader.h"
+#include "include/global/Utils.hpp"
+
+void MainWindow::on_tabWidget_currentChanged(int index) {
+    if (Configs::dataManager->settingsRepo->refreshing_group_list) return;
+    const auto gid = tabIndex2GroupId(index);
+    if (gid == Configs::dataManager->settingsRepo->current_group) return;
+    show_group(gid);
+}
+
+void MainWindow::updateTabToolTip(int gid) {
+    int tabIdx = -1;
+    for (int i = 0; i < ui->tabWidget->count(); i++) {
+        if (ui->tabWidget->tabBar()->tabData(i).toInt() == gid) {
+            tabIdx = i;
+            break;
+        }
+    }
+    if (tabIdx < 0) return;
+    auto group = Configs::dataManager->groupsRepo->GetGroup(gid);
+    if (!group) return;
+
+    const auto &subInfo = group->sub_info;
+
+    if (group->url.isEmpty()) {
+        ui->tabWidget->setTabToolTip(tabIdx, Qt::convertFromPlainText(group->name));
+    } else {
+        QString html = QStringLiteral("<div style='max-width:320px;line-height:1.3;'>");
+        html += QStringLiteral("<b>%1</b><br>").arg(group->name.toHtmlEscaped());
+        if (!subInfo.title.isEmpty() && subInfo.title != group->name) {
+            html += tr("Provider: %1").arg(subInfo.title.toHtmlEscaped()) + QStringLiteral("<br>");
+        }
+        html += QStringLiteral("<span style='opacity:0.8;'>%1</span><br>").arg(tr("Type: Subscription"));
+
+        if (group->sub_last_update > 0) {
+            html += QStringLiteral("%1: %2<br>").arg(tr("Last updated"), DisplayTime(group->sub_last_update, QLocale::ShortFormat));
+        }
+        if (const auto plan = Subscription::ResolveAutoUpdate(*group); plan.interval > 0) {
+            html += tr("Auto-update: every %1").arg(Stats::HumanizeDuration(plan.interval)) + QStringLiteral("<br>");
+        }
+        if (subInfo.has_quota) {
+            html += QStringLiteral("%1: %2<br>").arg(tr("Used"), ReadableSize(subInfo.used()));
+            if (subInfo.total > 0) {
+                html += QStringLiteral("%1: %2 (%3: %4)<br>").arg(
+                    tr("Total"), ReadableSize(subInfo.total), tr("Remaining"), ReadableSize(subInfo.remaining()));
+            }
+        }
+        if (subInfo.expire > 0) {
+            html += QStringLiteral("%1: %2<br>").arg(tr("Expires"), DisplayTime(subInfo.expire, QLocale::ShortFormat));
+        }
+        if (!subInfo.support_url.isEmpty()) {
+            html += QStringLiteral("%1: %2<br>").arg(tr("Support"), subInfo.support_url.toHtmlEscaped());
+        }
+        if (!subInfo.web_url.isEmpty()) {
+            html += QStringLiteral("%1: %2<br>").arg(tr("Portal"), subInfo.web_url.toHtmlEscaped());
+        }
+        if (const QString announce = subInfo.announce.trimmed(); !announce.isEmpty()) {
+            html += QStringLiteral("<hr><b>%1:</b>%2").arg(tr("Announcement"), Qt::convertFromPlainText(announce, Qt::WhiteSpaceNormal));
+        }
+        html += QStringLiteral("</div>");
+        ui->tabWidget->setTabToolTip(tabIdx, html);
+    }
+}
+
+void MainWindow::show_group(int gid) {
+    if (Configs::dataManager->settingsRepo->refreshing_group) return;
+    Configs::dataManager->settingsRepo->refreshing_group = true;
+
+    const auto group = Configs::dataManager->groupsRepo->GetGroup(gid);
+    if (group == nullptr) {
+        MessageBoxWarning(tr("Error"), QString("No such group: %1").arg(gid));
+        Configs::dataManager->settingsRepo->refreshing_group = false;
+        return;
+    }
+
+    if (Configs::dataManager->settingsRepo->current_group != gid) {
+        saveProfileFocusState();
+        if (auto lastGroup = Configs::dataManager->groupsRepo->CurrentGroup()) {
+            lastGroup->scroll_last_profile = ui->profilesTableView->firstVisibleRow();
+            Configs::dataManager->groupsRepo->Save(lastGroup);
+        }
+        Configs::dataManager->settingsRepo->current_group = gid;
+        Configs::dataManager->settingsRepo->Save();
+    }
+
+    ui->tabWidget->widget(groupId2TabIndex(gid))->layout()->addWidget(ui->profilesTableView);
+
+    auto *filterHeader = dynamic_cast<ProfilesTableFilterHeader*>(ui->profilesTableView->horizontalHeader());
+    if (filterHeader != nullptr) {
+        filterHeader->setGroup(group);
+    }
+
+    updateTabToolTip(gid);
+
+    refresh_proxy_list({}, true);
+
+    // scroll_last_profile came from firstVisibleRow(), so it is a proxy row.
+    const int rowCount = profilesFilterModel->rowCount();
+    int targetRow = group->scroll_last_profile;
+    if (targetRow >= rowCount && rowCount > 0) targetRow = rowCount - 1;
+    QTimer::singleShot(0, ui->profilesTableView, [=, this]() {
+        if (targetRow >= 0) {
+            if (QModelIndex idx = profilesFilterModel->index(targetRow, 0); idx.isValid()) {
+                ui->profilesTableView->scrollTo(idx, QAbstractItemView::PositionAtTop);
+            }
+        }
+        refresh_proxy_list_column_size();
+    });
+
+    Configs::dataManager->settingsRepo->refreshing_group = false;
+}
+
+void MainWindow::refresh_groups() {
+    Configs::dataManager->settingsRepo->refreshing_group_list = true;
+
+    for (int i = ui->tabWidget->count() - 1; i > 0; i--) {
+        ui->tabWidget->removeTab(i);
+    }
+
+    int index = 0;
+    for (const auto &gid: Configs::dataManager->groupsRepo->GetGroupsTabOrder()) {
+        const auto group = Configs::dataManager->groupsRepo->GetGroup(gid);
+        if (index == 0) {
+            ui->tabWidget->setTabText(0, group->name);
+        } else {
+            auto widget2 = new QWidget();
+            auto layout2 = new QVBoxLayout();
+            layout2->setContentsMargins(QMargins());
+            layout2->setSpacing(0);
+            widget2->setLayout(layout2);
+            ui->tabWidget->addTab(widget2, group->name);
+        }
+        ui->tabWidget->tabBar()->setTabData(index, gid);
+        updateTabToolTip(gid);
+        index++;
+    }
+
+    if (Configs::dataManager->groupsRepo->CurrentGroup() == nullptr) {
+        Configs::dataManager->settingsRepo->current_group = -1;
+        ui->tabWidget->setCurrentIndex(groupId2TabIndex(0));
+        const auto tabOrder = Configs::dataManager->groupsRepo->GetGroupsTabOrder();
+        show_group(tabOrder.count() > 0 ? tabOrder.first() : 0);
+    } else {
+        ui->tabWidget->setCurrentIndex(groupId2TabIndex(Configs::dataManager->settingsRepo->current_group));
+        show_group(Configs::dataManager->settingsRepo->current_group);
+    }
+
+    Configs::dataManager->settingsRepo->refreshing_group_list = false;
+}
+
+// The strip right of the last tab belongs to the tabWidget, not the tab bar.
+void MainWindow::on_tabWidget_customContextMenuRequested(const QPoint &p) {
+    show_group_tab_menu(ui->tabWidget->tabBar()->mapFrom(ui->tabWidget, p));
+}
+
+void MainWindow::show_group_tab_menu(const QPoint &p) {
+    const int clickedIndex = ui->tabWidget->tabBar()->tabAt(p);
+    if (clickedIndex == -1) {
+        QMenu menu(this);
+        connect(menu.addAction(tr("Add new Group")), &QAction::triggered, this, [=,this]{
+            auto ent = Configs::dataManager->groupsRepo->NewGroup();
+            auto dialog = new DialogEditGroup(ent, this);
+            const int ret = dialog->exec();
+            dialog->deleteLater();
+
+            if (ret == QDialog::Accepted) {
+                Configs::dataManager->groupsRepo->AddGroup(ent);
+                MW_dialog_message(MwMessage::GroupsChanged, {});
+            }
+        });
+
+        menu.exec(ui->tabWidget->tabBar()->mapToGlobal(p));
+        return;
+    }
+
+    ui->tabWidget->setCurrentIndex(clickedIndex);
+    QMenu menu(this);
+
+    const auto clickedGroup = Configs::dataManager->groupsRepo->GetGroup(Configs::dataManager->groupsRepo->GetGroupsTabOrder()[clickedIndex]);
+
+    connect(menu.addAction(tr("Add new Group")), &QAction::triggered, this, [=,this]{
+        auto ent = Configs::dataManager->groupsRepo->NewGroup();
+        auto dialog = new DialogEditGroup(ent, this);
+        const int ret = dialog->exec();
+        dialog->deleteLater();
+
+        if (ret == QDialog::Accepted) {
+            Configs::dataManager->groupsRepo->AddGroup(ent);
+            MW_dialog_message(MwMessage::GroupsChanged, {});
+        }
+    });
+    connect(menu.addAction(tr("Edit selected Group")), &QAction::triggered, this, [=,this]{
+        const auto id = Configs::dataManager->groupsRepo->GetGroupsTabOrder()[clickedIndex];
+        auto ent = Configs::dataManager->groupsRepo->GetGroup(id);
+        auto dialog = new DialogEditGroup(ent, this);
+        connect(dialog, &QDialog::finished, this, [=,this] {
+            if (dialog->result() == QDialog::Accepted) {
+                Configs::dataManager->groupsRepo->Save(ent);
+                MW_dialog_message(MwMessage::GroupsChanged, dialog->RestartNeeded() ? QStringList{MwArg::RestartProxy} : QStringList{});
+            }
+            dialog->deleteLater();
+        });
+        dialog->show();
+    });
+    if (Configs::dataManager->groupsRepo->GetAllGroupIds().size() > 1) {
+        connect(menu.addAction(tr("Delete selected Group")), &QAction::triggered, this, [=,this] {
+            const auto id = Configs::dataManager->groupsRepo->GetGroupsTabOrder()[clickedIndex];
+            if (QMessageBox::question(this, tr("Confirmation"), tr("Remove %1?").arg(Configs::dataManager->groupsRepo->GetGroup(id)->name)) ==
+                QMessageBox::StandardButton::Yes) {
+                if (running != nullptr) {
+                    if (running->gid == id) profile_stop(false, true, false);
+                }
+                Configs::dataManager->groupsRepo->DeleteGroup(id);
+                MW_dialog_message(MwMessage::GroupsChanged, {});
+            }
+        });
+    }
+    if (clickedGroup != nullptr && !clickedGroup->url.isEmpty()) {
+        connect(menu.addAction(tr("Update subscription")), &QAction::triggered, this, [=,this]{
+            const auto id = Configs::dataManager->groupsRepo->GetGroupsTabOrder()[clickedIndex];
+            auto group = Configs::dataManager->groupsRepo->GetGroup(id);
+            if (group->url.isEmpty()) return;
+            if (mw_sub_updating) return;
+            mw_sub_updating = true;
+            Subscription::updater()->RefreshGroup(group->id, [&] { mw_sub_updating = false; }, true);
+        });
+    }
+    if (clickedGroup != nullptr) {
+        connect(menu.addAction(tr("Url Test selected Group")), &QAction::triggered, this, [=,this]{
+            testRunner->runUrlTests(clickedGroup->Profiles());
+        });
+        connect(menu.addAction(tr("Speed Test selected Group")), &QAction::triggered, this, [=,this]{
+            testRunner->runSpeedTests(clickedGroup->Profiles());
+        });
+        // Clean up acts on the current group; setCurrentIndex above already switched to the clicked one.
+        menu.addSeparator();
+        menu.addMenu(ui->menu_clean_up);
+    }
+    menu.exec(ui->tabWidget->tabBar()->mapToGlobal(p));
+}

@@ -8,17 +8,7 @@
 ## [Unreleased] - Development
 
 ### Added
-- **MI-020: InstanceManager Singleton (Session 005)**
-  - InstanceManager singleton for Instance lifecycle management
-  - Instance CRUD: create, get (by ID/name), getAll, update, delete
-  - Active Instance management with QSettings persistence
-  - Default Instance creation on first run
-  - Auto-start Instance query support
-  - Thread-safe operations via std::mutex
-  - Instance cache with invalidation on modifications
-  - Duplicate name prevention and last-instance deletion protection
-  - Unit tests for interface contracts and logic flow
-- **MI-011: Database Schema & Migration (Phase 1 Complete)**
+- **MI-011: Database Schema & Migration (code written, UNVERIFIED — never compiled or run)**
   - `instances` table with UUID primary key, all Instance fields, timestamps
   - `instance_settings` table for per-instance settings (FK to instances)
   - `port_allocations` table for central port tracking with unique port index
@@ -28,7 +18,7 @@
   - Migration version tracking in settings
   - InstanceRepository with full CRUD operations
   - Thread-safe database operations via WriteMutex
-- **MI-010: Instance Data Model (Session 002)**
+- **MI-010: Instance Data Model (Session 002) (code written, UNVERIFIED)**
   - Instance entity class with all fields from PROJECT_SPEC.md Section 3
   - CoreType enum: Xray (default), SingBox, External
   - Nested InstanceCoreConfig and InstanceDNSSettings structs
@@ -36,7 +26,7 @@
   - Validation methods (IsValid, Validate)
   - UUID primary key generation and preservation
   - Equality operators based on UUID identity
-  - 13 comprehensive unit tests covering all acceptance criteria
+  - 13 unit tests written (not yet compiled or executed)
 - Project documentation structure (`project-docs/`)
 - `README.md` - Project overview, quick start, documentation index
 - `PROJECT_SPEC.md` - Complete product specification with 17 sections
@@ -45,9 +35,10 @@
 - `TASKS.md` - 117 tasks with acceptance criteria and test methods
 - `PROGRESS.md` - Current status tracker
 - CoreDeck Git repository initialized at `G:\Project\CoreDeck\`
-- Throne upstream cloned for reference at `G:\Project\CoreDeck\Throne\`
+- Throne cloned at `G:\Project\CoreDeck\Throne\` as a temporary source folder (to be integrated and removed, DEC-011)
 
 ### Changed
+- **Project mode and scope (documentation review, 2026-10-10):** fully autonomous AI execution with automatic commit/push (DEC-013); Throne code to be absorbed into CoreDeck and the temporary Throne folder removed (DEC-011); macOS dropped, Windows + Linux only (DEC-012); honest task statuses `DONE_UNVERIFIED` / `VERIFIED` (DEC-014); `groups.instance_id` nullable + backfill (DEC-015); `AI_WORKFLOW.md` v2.0; new `MVP_SCOPE.md`; ROADMAP/TASKS ID collisions removed; licence corrections (Xray-core MPL-2.0, Wintun)
 - **Repository URL corrected** (Session 003): Git remote updated from `DevastBit/CoreDeck` to `gameacc2025/CoreDeck`
 - Documentation links updated in README.md and PROGRESS.md
 
@@ -66,7 +57,7 @@
 ### Project Setup
 - CoreDeck repository created as fork of Throne
 - Documentation framework established
-- Development workflow defined (AI_WORKFLOW.md pending)
+- Development workflow defined (AI_WORKFLOW.md)
 - License compliance: GPL-3.0 inherited from Throne
 
 ---

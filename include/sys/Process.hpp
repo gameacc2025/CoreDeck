@@ -1,0 +1,48 @@
+#pragma once
+
+#include <atomic>
+#include <memory>
+#include <QElapsedTimer>
+#include <QProcess>
+
+namespace Configs_sys {
+    class CoreProcess : public QProcess
+    {
+    public:
+        QString tag;
+        QString program;
+        QStringList arguments;
+
+        ~CoreProcess();
+
+        // start & kill is one time
+
+        void Start();
+
+        void Kill();
+
+        CoreProcess(const QString &core_path, const QString &socketName, bool debugMode);
+
+        void Restart();
+
+        int start_profile_when_core_is_up = -1;
+
+        // A core adopts the kill switch group (Linux/macOS) only at startup; this records whether the running one was asked to.
+        std::atomic<bool> guard_identity = false;
+
+    private:
+        QString m_socketName;
+        bool m_debugMode = false;
+        bool show_stderr = false;
+        bool failed_to_start = false;
+        bool restarting = false;
+
+        QElapsedTimer coreRestartTimer;
+
+    protected:
+        bool started = false;
+        bool crashed = false;
+    };
+
+    inline QAtomicInt logCounter;
+} // namespace Configs_sys

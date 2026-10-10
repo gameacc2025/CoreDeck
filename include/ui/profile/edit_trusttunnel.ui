@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditTrustTunnel</class>
+ <widget class="QWidget" name="EditTrustTunnel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string notr="true">Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Password</string>
+     </property>
+     <property name="buddy">
+      <cstring>password</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Custom SNI</string>
+     </property>
+     <property name="buddy">
+      <cstring>custom_sni</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="custom_sni">
+     <property name="toolTip">
+      <string>Server name sent in the TLS ClientHello instead of the TLS server name, which is still used to verify the certificate; not compatible with ECH or REALITY</string>
+     </property>
+     <property name="placeholderText">
+      <string>optional, e.g. cdn.example.net</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Client Random</string>
+     </property>
+     <property name="buddy">
+      <cstring>client_random</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="client_random">
+     <property name="toolTip">
+      <string>TLS ClientHello random prefix required by the server's client_random_prefix rule; not compatible with ECH or REALITY</string>
+     </property>
+     <property name="placeholderText">
+      <string>prefix[/mask] (hex), e.g. a0b0/f0f0</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QCheckBox" name="health_check">
+     <property name="text">
+      <string>Health Check</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="username"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="password"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Username</string>
+     </property>
+     <property name="buddy">
+      <cstring>username</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QComboBox" name="congestion_control">
+     <item>
+      <property name="text">
+       <string>bbr</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>cubic</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>reno</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>bbr_standard</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>bbr2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>bbr_variant</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Congestion Control</string>
+     </property>
+     <property name="buddy">
+      <cstring>congestion_control</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QCheckBox" name="quic">
+     <property name="text">
+      <string>QUIC</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>username</tabstop>
+  <tabstop>password</tabstop>
+  <tabstop>custom_sni</tabstop>
+  <tabstop>client_random</tabstop>
+  <tabstop>health_check</tabstop>
+  <tabstop>quic</tabstop>
+  <tabstop>congestion_control</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

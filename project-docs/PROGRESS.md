@@ -1,9 +1,10 @@
 # CoreDeck Progress Tracker
 
-**Version:** 0.1  
+**Version:** 0.2  
 **Last Updated:** 2026-10-10  
 **Branch:** `feature/multi-instance`  
-**Latest Commit:** 18554a1 (Repository URL correction)
+**Latest Commit:** 18554a1 (Repository URL correction) — later commits not recorded here; verify with `git log`  
+**Mode:** Fully autonomous (DEC-013). Platforms: Windows + Linux (DEC-012). Throne code is absorbed into CoreDeck (DEC-011).
 
 ---
 
@@ -11,12 +12,21 @@
 
 | Metric | Value |
 |--------|-------|
-| **Phase** | 1: Instance Data Model & Storage (MI-010, MI-011 complete) |
-| **Overall Progress** | ~35% (Documentation complete, Phase 1 database schema & migration done, build blocked) |
-| **Last Verified Build** | BLOCKED - Missing toolchain (CMake, Qt6, MSVC/MinGW, Ninja) |
-| **Last Successful Test** | N/A - Static review only |
-| **Blocking Issues** | KI-001: Build toolchain not installed on Windows 11 machine |
-| **Next Milestone** | Phase 2: Default Instance & Multi-Instance Management (MI-020) |
+| **Milestone** | M0 NOT reached (no toolchain/CI) |
+| **Current phase** | 0b Bootstrap (toolchain/CI, integrate Throne code, first build) |
+| **Verified progress** | Documentation only. No code has ever been compiled or tested, so 0% of code is VERIFIED. The earlier "~35%" counted unverified code and was misleading |
+| **Code written but UNVERIFIED** | MI-010, MI-011..MI-016, MI-020 (status `DONE_UNVERIFIED`) |
+| **Last verified build** | NONE |
+| **Last executed test** | NONE |
+| **Blocking issue** | KI-001: no CMake/Qt6/compiler/Ninja; also no root CMakeLists.txt and Throne code not yet integrated (KI-013) |
+| **Next task** | MI-118 provision toolchain or CI, then MI-119, MI-120, MI-121, MI-122 |
+| **Push status** | Not verified in this document; check `git ls-remote origin feature/multi-instance` |
+
+### Known correctness items to fix (found in review)
+- `groups.instance_id` was designed as `NOT NULL DEFAULT 'default-instance-uuid'` with a foreign key; this is invalid in SQLite and not a real UUID. Use nullable + backfill (DEC-015) — MI-122.
+- `PRAGMA foreign_keys = ON` must be set on every connection or `ON DELETE CASCADE` will not work — MI-122.
+- Migration must back up the DB file first — MI-122.
+- "Throne can still read the migrated DB" is unverified.
 
 ---
 
@@ -46,7 +56,7 @@
 
 ### Git Status
 - [x] CoreDeck repository initialized at `G:\Project\CoreDeck\`
-- [x] Throne upstream preserved as reference (not renamed - it's the upstream source)
+- [x] Throne cloned as a TEMPORARY source folder; its needed code will be integrated into CoreDeck and the folder removed (DEC-011)
 - [x] Branch `feature/multi-instance` ready for development
 - [x] Initial commit d1225b7 with all documentation
 
@@ -56,14 +66,14 @@
 
 | Task | Status | Notes |
 |------|--------|-------|
-| MI-002: Verify baseline build | BLOCKED | Toolchain missing: CMake, Qt6, MSVC/MinGW, Ninja not installed |
-| MI-010: Design Instance C++ class | DONE | Instance entity created with all fields, JSON serialization, unit tests |
-| MI-007: Write AI_WORKFLOW.md | DONE | Completed in Session 001 |
-| MI-008: Write DEPENDENCIES_AND_LICENSES.md | DONE | Completed in Session 001 |
+| MI-002: Verify baseline build | SUPERSEDED | Replaced by MI-118 (toolchain/CI) and MI-120 (first build of integrated CoreDeck) |
+| MI-010: Design Instance C++ class | DONE_UNVERIFIED | Instance entity created with all fields, JSON serialization, unit tests |
+| MI-007: Write AI_WORKFLOW.md | VERIFIED (rewritten v2.0) | Completed in Session 001 |
+| MI-008: Write DEPENDENCIES_AND_LICENSES.md | VERIFIED | Completed in Session 001 |
 
 ---
 
-## Completed (Session 002)
+## Written in Session 002 (UNVERIFIED — never compiled or run)
 
 ### MI-010: Instance Data Model Implementation
 - **Files Created:**
@@ -71,7 +81,7 @@
   - `src/database/entities/Instance.cpp` - Implementation with JSON serialization/deserialization
   - `tests/test_instance.cpp` - Comprehensive unit tests covering all acceptance criteria
 
-- **Acceptance Criteria Covered:**
+- **Acceptance criteria addressed in code (NOT yet verified by any executed test):**
   1. ✅ Create a valid Instance (CreateDefault factory method)
   2. ✅ Generate and preserve its UUID (QUuid primary key)
   3. ✅ Rename Instance without changing identity (UUID stable, name mutable)
@@ -94,7 +104,7 @@
 
 ---
 
-## Completed (Session 003-004)
+## Written in Session 003-004 (UNVERIFIED — never compiled or run)
 
 ### MI-011: Database Schema & Migration (Phase 1 Complete)
 - **Files Created:**
@@ -135,11 +145,11 @@
 
 | Task | Status | Notes |
 |------|--------|-------|
-| MI-002: Verify baseline build | BLOCKED | Toolchain missing: CMake, Qt6, MSVC/MinGW, Ninja not installed |
+| MI-002: Verify baseline build | SUPERSEDED | Replaced by MI-118 (toolchain/CI) and MI-120 (first build of integrated CoreDeck) |
 
 ---
 
-## Completed (Session 005)
+## Written in Session 005 (UNVERIFIED — never compiled or run)
 
 ### MI-020: InstanceManager Singleton
 - **Files Created:**
@@ -165,11 +175,7 @@
   - Active Instance ID persisted in QSettings (CoreDeck/CoreDeck)
   - Instance cache loaded on initialization, refreshed after changes
 
-- **Acceptance Criteria (MI-020):**
-  - Manages Instance lifecycle ✅
-  - Singleton access ✅
-  - Thread-safe operations ✅
-  - Persistence via InstanceRepository ✅
+- **Acceptance criteria (MI-020) addressed in code, unverified:** lifecycle, singleton access, thread safety, persistence via InstanceRepository. `tests/test_instancemanager.cpp` only covers interface contracts and has never run; it must be strengthened to test real behavior (MI-121).
 
 ---
 
@@ -203,36 +209,34 @@
 | 1 | 2026-10-10 | Phase 0: Analysis & Documentation | 13 doc files created, architecture analyzed, repo initialized |
 | 2 | 2026-10-10 | Build verification + MI-010 | Build blocked (missing toolchain), Instance model design completed |
 | 3 | 2026-10-10 | Repository migration | Git remote updated to gameacc2025/CoreDeck, docs corrected |
-| 4 | 2026-10-10 | MI-011 Database schema & migration | Phase 1 complete: instances, instance_settings, port_allocations tables, migration logic, InstanceRepository |
-| 5 | 2026-10-10 | MI-020 InstanceManager singleton | Phase 2 started: Instance lifecycle management, singleton, CRUD, active instance persistence |
+| 4 | 2026-10-10 | MI-011 Database schema & migration | Code written, unverified |
+| 5 | 2026-10-10 | MI-020 InstanceManager | Code written, unverified |
+| 6 | 2026-10-10 | Documentation review | Autonomy mode, Throne absorbed, Windows+Linux only, honest statuses, MVP_SCOPE.md (DEC-011..015) |
 
 ---
 
-## Next Session Plan (Session 006)
+## Next Session Plan (autonomous; do in order)
 
-1. Continue Phase 2: MI-021 Default Instance creation on first run
-2. MI-022 Instance selector UI component
-3. Plan toolchain installation or CI setup for build verification
+1. MI-118: run `winget --version`; install CMake, Ninja, MSVC Build Tools, Python, aqtinstall + Qt 6.6; if impossible add `.github/workflows/build.yml` and use CI results. Record in BUILD_AND_TEST.md.
+2. MI-119: inspect the temporary `Throne/` folder, copy only what CoreDeck needs (no macOS code), keep licence headers, write root `CMakeLists.txt`, exclude `Throne/` via `.git/info/exclude`.
+3. MI-120: first build and launch (M1).
+4. MI-121: register tests in CTest, run, fix, strengthen.
+5. MI-122: migration fixes + fixture tests.
+6. MI-123: remove `Throne/` after verifying the exact path and contents.
+7. Continue by P0 order in MVP_SCOPE.md until the prototype gate passes, committing and pushing after each verified stage.
 
 ---
 
-## Metrics Dashboard
+## Metrics Dashboard (VERIFIED work only)
 
 ```
-Phase 0: ████████░░ 80% (docs done, build blocked)
-Phase 1: ██████████ 100% (MI-010, MI-011 done)
-Phase 2: ████░░░░░░  20% (MI-020 done, MI-021 next)
-Phase 3: ░░░░░░░░░░  0%
-Phase 4: ░░░░░░░░░░  0%
-Phase 5: ░░░░░░░░░░  0%
-Phase 6: ░░░░░░░░░░  0%
-Phase 7: ░░░░░░░░░░  0%
-Phase 8: ░░░░░░░░░░  0%
-Phase 9: ░░░░░░░░░░  0%
-Phase 10: ░░░░░░░░░░  0%
-Phase 11: ░░░░░░░░░░  0%
+Phase 0 (docs):       ██████████ 100% docs; baseline build superseded
+Phase 0b (bootstrap): ░░░░░░░░░░   0%
+Phase 1:              ░░░░░░░░░░   0% verified (code written, unverified)
+Phase 2:              ░░░░░░░░░░   0% verified
+Phases 3-11:          ░░░░░░░░░░   0%
 ```
 
 ---
 
-*Update this file after every significant work session. Keep it accurate for session recovery.*
+*Update this file after every stage. Count only VERIFIED work as progress.*
