@@ -54,6 +54,11 @@ set(GLOBAL_SOURCES
     src/global/Common.cpp
 )
 
+# Instance management
+set(INSTANCE_SOURCES
+    src/instance/InstanceManager.cpp
+)
+
 # Configs
 set(CONFIG_SOURCES
     src/configs/common/DialFields.cpp
@@ -281,6 +286,7 @@ qt_add_executable(CoreDeck
     ${ENTITY_SOURCES}
     ${REPO_SOURCES}
     ${GLOBAL_SOURCES}
+    ${INSTANCE_SOURCES}
     ${CONFIG_SOURCES}
     ${API_SOURCES}
     ${SCANNER_SOURCES}
