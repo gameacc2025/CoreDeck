@@ -18,6 +18,8 @@ namespace Configs {
     bool isSetuidSet(const std::string& path);
 
     QString GetBasePath();
+    
+    QString get_jsdelivr_link(const QString& url);
 } // namespace Configs
 
 #define ROUTES_PREFIX_NAME QString("route_profiles")
