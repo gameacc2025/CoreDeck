@@ -19,10 +19,17 @@ add_executable(test_instancemanager
     src/instance/InstanceManager.cpp
     src/database/InstanceRepository.cpp
     src/database/entities/Instance.cpp
+    src/database/Database.cpp
+    src/database/SettingsRepo.cpp
+    src/global/Logger.cpp
+    src/global/Utils.cpp
 )
 target_link_libraries(test_instancemanager PRIVATE
     Qt6::Core
     Qt6::Test
+    SQLiteCpp
+    simple-protobuf
+    Threads::Threads
 )
 add_test(NAME test_instancemanager COMMAND test_instancemanager)
 
