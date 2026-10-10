@@ -1,7 +1,7 @@
 # CoreDeck Build and Test Guide
 
 **Version:** 0.1  
-**Status:** PENDING_VERIFICATION  
+**Status:** BLOCKED - Missing Toolchain  
 **Last Updated:** 2026-10-10
 
 ---
@@ -9,15 +9,132 @@
 ## Prerequisites
 
 ### Windows
+| Tool | Version | Notes | Available |
+|------|---------|-------|-----------|
+| Git | 2.40+ | | ✅ 2.49.0 |
+| CMake | 3.20+ | | ❌ Not installed |
+| Qt | 6.5+ (6.6+ recommended) | MSVC 2022 64-bit or MinGW-w64 | ❌ Not installed |
+| Visual Studio | 2022 17.6+ | Community/Pro/Enterprise | ❌ Not installed |
+| Ninja | 1.11+ | Optional, faster builds | ❌ Not installed |
+| Python | 3.10+ | For install scripts | ❓ Unknown |
+| 7-Zip | | For packaging | ❓ Unknown |
+
+### Linux
 | Tool | Version | Notes |
 |------|---------|-------|
 | Git | 2.40+ | |
 | CMake | 3.20+ | |
-| Qt | 6.5+ (6.6+ recommended) | MSVC 2022 64-bit or MinGW-w64 |
-| Visual Studio | 2022 17.6+ | Community/Pro/Enterprise |
-| Ninja | 1.11+ | Optional, faster builds |
-| Python | 3.10+ | For install scripts |
-| 7-Zip | | For packaging |
+| Qt | 6.5+ | `qt6-base-dev`, `qt6-tools-dev` |
+| GCC | 11+ / Clang 14+ | C++20 support |
+| Ninja | 1.11+ | Recommended |
+| sqlite3 | 3.38+ | Dev headers |
+| protobuf | 3.21+ | For simple-protobuf (bundled) |
+
+### macOS
+| Tool | Version | Notes |
+|------|---------|-------|
+| Git | 2.40+ | |
+| CMake | 3.20+ | |
+| Qt | 6.5+ | `brew install qt6` |
+| Xcode | 14.3+ | Command Line Tools |
+| Ninja | 1.11+ | `brew install ninja` |
+
+---
+
+## Environment Verification (2026-10-10)
+
+**OS:** Windows 11 Pro (10.0.26300 Build 26300)  
+**Architecture:** x64  
+
+**Toolchain Status:**
+- Git: ✅ Available (2.49.0.windows.1)
+- CMake: ❌ Not in PATH, not installed
+- Qt6: ❌ Not installed (no `C:\Qt\`, `C:\Qt6\`, `C:\Tools\Qt\`)
+- Visual Studio 2022: ❌ Not installed (no `C:\Program Files\Microsoft Visual Studio\2022\`)
+- Visual Studio Build Tools: ❌ Not installed
+- MinGW-w64: ❌ Not in PATH
+- Ninja: ❌ Not in PATH
+- Chocolatey/Scoop: ❌ Not available
+
+**Conclusion:** The current Windows environment lacks the complete C++/Qt toolchain required to build Throne. This is a **blocker** for MI-002 (Verify baseline build).
+
+**Required to proceed:**
+1. Install Visual Studio 2022 Community/Build Tools with "Desktop development with C++" workload
+2. Install Qt 6.6+ (MSVC 2022 64-bit kit) via Qt Online Installer
+3. Install CMake 3.20+ and add to PATH
+4. Install Ninja 1.11+ and add to PATH
+
+Alternatively, use a Windows machine/VM with the toolchain pre-installed, or use GitHub Actions for CI builds.
+
+---
+
+## Throne Baseline Build (Verification)
+
+### Windows (MSVC)
+```powershell
+cd Throne
+mkdir build
+cd build
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
+ninja
+# Or with VS:
+cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --config Release
+```
+
+### Windows (MinGW)
+```powershell
+cd Throne
+mkdir build
+cd build
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ..
+ninja
+```
+
+### Linux
+```bash
+cd Throne
+mkdir build
+cd build
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
+ninja
+```
+
+### macOS
+```bash
+cd Throne
+mkdir build
+cd build
+cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt6)" ..
+ninja
+```
+
+### Expected Artifacts
+| Platform | Output |
+|----------|--------|
+| Windows | `build/Throne.exe` (+ DLLs in same dir) |
+| Linux | `build/Throne` (AppImage via script) |
+| macOS | `build/Throne.app` |
+
+---
+
+## Build Verification Results (2026-10-10)
+
+| Step | Command | Result | Notes |
+|------|---------|--------|-------|
+| Environment check | `cmake --version` | FAILED | CMake not installed |
+| Environment check | `where qmake` | FAILED | Qt not installed |
+| Environment check | `where cl` | FAILED | MSVC not installed |
+| CMake configure | `cmake -G "Ninja" ..` | NOT RUN | Blocked by missing tools |
+| Build | `ninja` | NOT RUN | Blocked by missing tools |
+
+**Status:** BLOCKED - Cannot proceed with build verification until toolchain is installed.
+
+---
+
+## CoreDeck Build (Future)
+
+*To be documented after Phase 1 implementation.*
 
 ### Linux
 | Tool | Version | Notes |

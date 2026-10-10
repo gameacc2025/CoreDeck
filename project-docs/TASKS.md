@@ -24,13 +24,13 @@
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
 | MI-000 | Clone Throne repository | DONE | High | — | Throne/ | Repository cloned locally | `git status` in Throne/ |
 | MI-001 | Analyze Throne architecture | DONE | High | MI-000 | ARCHITECTURE.md | Architecture documented | Review ARCHITECTURE.md |
-| MI-002 | Verify baseline build | IN_PROGRESS | High | MI-000 | BUILD_AND_TEST.md | Throne builds successfully | CMake build passes |
+| MI-002 | Verify baseline build | BLOCKED | High | MI-000 | BUILD_AND_TEST.md | Throne builds successfully | CMake build passes |
 | MI-003 | Create project documentation structure | DONE | High | — | project-docs/ | All doc files created | `ls project-docs/` |
 | MI-004 | Write PROJECT_SPEC.md | DONE | High | MI-001 | PROJECT_SPEC.md | Complete requirements documented | Review spec |
 | MI-005 | Write ARCHITECTURE.md | DONE | High | MI-001 | ARCHITECTURE.md | Current + target architecture documented | Review arch |
 | MI-006 | Write ROADMAP.md | DONE | High | MI-004 | ROADMAP.md | Phases and tasks defined | Review roadmap |
-| MI-007 | Write AI_WORKFLOW.md | TODO | High | — | AI_WORKFLOW.md | Development rules documented | Review workflow |
-| MI-008 | Write DEPENDENCIES_AND_LICENSES.md | TODO | High | MI-000 | DEPENDENCIES_AND_LICENSES.md | All licenses documented | Review licenses |
+| MI-007 | Write AI_WORKFLOW.md | DONE | High | — | AI_WORKFLOW.md | Development rules documented | Review workflow |
+| MI-008 | Write DEPENDENCIES_AND_LICENSES.md | DONE | High | MI-000 | DEPENDENCIES_AND_LICENSES.md | All licenses documented | Review licenses |
 
 ---
 
@@ -38,7 +38,7 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-010 | Design Instance C++ class | TODO | High | MI-002 | src/instance/Instance.h, .cpp | Class with all fields, JSON serialization | Unit test |
+| MI-010 | Design Instance C++ class | IN_PROGRESS | High | MI-002 | include/database/entities/Instance.h, src/database/entities/Instance.cpp, tests/test_instance.cpp | Class with all fields, JSON serialization | Unit test |
 | MI-011 | Add Instance tables to Database.cpp | TODO | High | MI-010 | src/database/Database.cpp, Schema.sql | Migration creates tables on first run | Migration test |
 | MI-012 | Implement InstanceRepository | TODO | High | MI-011 | src/database/InstanceRepository.h, .cpp | CRUD operations work | Unit test |
 | MI-013 | Add instance_id to Group entity | TODO | High | MI-011 | include/database/entities/Group.h, GroupsRepo.cpp | Groups queryable by instance_id | Integration test |

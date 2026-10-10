@@ -10,7 +10,7 @@
 ### Build & Environment
 | ID | Issue | Severity | Status | Reproduction | Expected | Actual |
 |----|-------|----------|--------|--------------|----------|--------|
-| KI-001 | Baseline build not verified | High | OPEN | Run CMake build on Throne/ | Successful build | Not tested |
+| KI-001 | Baseline build not verified | High | OPEN | Run CMake build on Throne/ | Successful build | Blocked: CMake, Qt6, MSVC/MinGW, Ninja not installed on Windows 11 build machine |
 
 ### Architecture & Design
 | ID | Issue | Severity | Status | Reproduction | Expected | Actual |
