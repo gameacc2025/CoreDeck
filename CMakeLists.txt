@@ -82,6 +82,10 @@ include_directories(
 add_subdirectory(3rdparty/SQLiteCpp)
 add_subdirectory(3rdparty/simple-protobuf)
 
+# Protobuf generation for CoreDeck protocol
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS core/gen/libcore.proto)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
 # CoreDeck source
 add_subdirectory(src)
 

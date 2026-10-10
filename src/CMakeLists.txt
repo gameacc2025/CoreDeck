@@ -1,5 +1,8 @@
 # CoreDeck source files
 
+# Include directory for generated protobuf headers
+include_directories(${CMAKE_BINARY_DIR})
+
 # Qt resource files
 qt6_add_resources(COREDECK_QRC
     ${CMAKE_SOURCE_DIR}/res/Throne.qrc
@@ -295,6 +298,8 @@ qt_add_executable(CoreDeck
     ${UI_SOURCES}
     ${THIRDPARTY_SOURCES}
     ${COREDECK_QRC}
+    ${PROTO_SRCS}
+    ${PROTO_HDRS}
 )
 
 # Qt setup
@@ -333,6 +338,7 @@ target_link_libraries(CoreDeck PRIVATE
     ${QT_DBUS_LIBRARY}
     SQLiteCpp
     simple-protobuf
+    protobuf::libprotobuf
     Threads::Threads
     ${CMAKE_DL_LIBS}
 )
