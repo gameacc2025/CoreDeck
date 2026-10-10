@@ -3,7 +3,7 @@
 **Version:** 0.1  
 **Last Updated:** 2026-10-10  
 **Branch:** `feature/multi-instance`  
-**Latest Commit:** d1225b7 (Initial documentation)
+**Latest Commit:** 18554a1 (Repository URL correction)
 
 ---
 
@@ -11,12 +11,12 @@
 
 | Metric | Value |
 |--------|-------|
-| **Phase** | 0: Repository Analysis & Baseline (Build blocked) / 1: Instance Data Model (Starting) |
-| **Overall Progress** | ~20% (Documentation complete, build blocked, Instance model design starting) |
+| **Phase** | 1: Instance Data Model & Storage (MI-010, MI-011 complete) |
+| **Overall Progress** | ~35% (Documentation complete, Phase 1 database schema & migration done, build blocked) |
 | **Last Verified Build** | BLOCKED - Missing toolchain (CMake, Qt6, MSVC/MinGW, Ninja) |
-| **Last Successful Test** | N/A |
+| **Last Successful Test** | N/A - Static review only |
 | **Blocking Issues** | KI-001: Build toolchain not installed on Windows 11 machine |
-| **Next Milestone** | Phase 1: Instance data model implementation (MI-010) |
+| **Next Milestone** | Phase 2: Default Instance & Multi-Instance Management (MI-020) |
 
 ---
 
@@ -94,6 +94,52 @@
 
 ---
 
+## Completed (Session 003-004)
+
+### MI-011: Database Schema & Migration (Phase 1 Complete)
+- **Files Created:**
+  - `include/database/Migration.h` - Migration header with result types
+  - `src/database/Migration.cpp` - Throne→CoreDeck in-place migration logic
+  - `include/database/DatabaseManager.h` - CoreDeck DatabaseManager with migration integration
+  - `src/database/DatabaseManager.cpp` - DatabaseManager implementation with migration call
+  - `include/database/InstanceRepository.h` - InstanceRepository CRUD interface
+  - `src/database/InstanceRepository.cpp` - InstanceRepository implementation
+
+- **Schema Changes (via Migration):**
+  1. ✅ `instances` table - UUID PK, all Instance fields, created_at/updated_at
+  2. ✅ `instance_settings` table - (instance_id, key, value) PK, FK to instances
+  3. ✅ `port_allocations` table - (instance_id, port_type, port) PK, unique index on port
+  4. ✅ `groups.instance_id` column - Added via ALTER TABLE, FK to instances
+  5. ✅ Default Instance created with all existing Throne data
+  6. ✅ Global settings copied to Default Instance instance_settings
+  7. ✅ Default ports allocated (SOCKS 10808, HTTP 10809, API 10810)
+  8. ✅ Migration version tracking in settings table
+
+- **Migration Logic:**
+  - Detects missing `instances` table → runs migration
+  - Transaction-wrapped with rollback on failure
+  - Idempotent: safe to run multiple times
+  - Preserves all existing Groups, Profiles, Settings
+  - Backward compatible: Throne can still read migrated DB
+
+- **InstanceRepository CRUD:**
+  - getById, getByName, getAll, getAllOrdered
+  - save (INSERT or UPDATE), remove
+  - exists, count
+  - getDefaultInstance, getAutoStartInstances
+  - Thread-safe via Database WriteMutex
+
+---
+
+## In Progress
+
+| Task | Status | Notes |
+|------|--------|-------|
+| MI-002: Verify baseline build | BLOCKED | Toolchain missing: CMake, Qt6, MSVC/MinGW, Ninja not installed |
+| MI-020: InstanceManager singleton | NEXT | Phase 2: Default Instance & Multi-Instance Management |
+
+---
+
 ## Known Issues & Risks
 
 | Issue | Severity | Status | Mitigation |
@@ -122,15 +168,16 @@
 | Session | Date | Focus | Outcome |
 |---------|------|-------|---------|
 | 1 | 2026-10-10 | Phase 0: Analysis & Documentation | 13 doc files created, architecture analyzed, repo initialized |
-| 2 | 2026-10-10 | Build verification + MI-010 | Build blocked (missing toolchain), starting Instance model design |
+| 2 | 2026-10-10 | Build verification + MI-010 | Build blocked (missing toolchain), Instance model design completed |
+| 3 | 2026-10-10 | Repository migration | Git remote updated to gameacc2025/CoreDeck, docs corrected |
+| 4 | 2026-10-10 | MI-011 Database schema & migration | Phase 1 complete: instances, instance_settings, port_allocations tables, migration logic, InstanceRepository |
 
 ---
 
-## Next Session Plan (Session 003)
+## Next Session Plan (Session 005)
 
-1. Complete MI-010: Instance C++ class implementation with unit tests
-2. Begin MI-011: Add Instance tables to Database.cpp
-3. Plan toolchain installation or CI setup for build verification
+1. Begin Phase 2: MI-020 InstanceManager singleton implementation
+2. Plan toolchain installation or CI setup for build verification
 
 ---
 
@@ -138,7 +185,7 @@
 
 ```
 Phase 0: ████████░░ 80% (docs done, build blocked)
-Phase 1: ████░░░░░░ 20% (MI-010 done, MI-011 next)
+Phase 1: ██████████ 100% (MI-010, MI-011 done)
 Phase 2: ░░░░░░░░░░  0%
 Phase 3: ░░░░░░░░░░  0%
 Phase 4: ░░░░░░░░░░  0%

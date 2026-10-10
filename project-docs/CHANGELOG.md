@@ -8,6 +8,25 @@
 ## [Unreleased] - Development
 
 ### Added
+- **MI-011: Database Schema & Migration (Phase 1 Complete)**
+  - `instances` table with UUID primary key, all Instance fields, timestamps
+  - `instance_settings` table for per-instance settings (FK to instances)
+  - `port_allocations` table for central port tracking with unique port index
+  - `groups.instance_id` column with foreign key to instances
+  - Throne→CoreDeck in-place migration logic (run on first launch)
+  - Default Instance creation with all existing Throne data migrated
+  - Migration version tracking in settings
+  - InstanceRepository with full CRUD operations
+  - Thread-safe database operations via WriteMutex
+- **MI-010: Instance Data Model (Session 002)**
+  - Instance entity class with all fields from PROJECT_SPEC.md Section 3
+  - CoreType enum: Xray (default), SingBox, External
+  - Nested InstanceCoreConfig and InstanceDNSSettings structs
+  - JSON serialization/deserialization (ToJson/FromJson)
+  - Validation methods (IsValid, Validate)
+  - UUID primary key generation and preservation
+  - Equality operators based on UUID identity
+  - 13 comprehensive unit tests covering all acceptance criteria
 - Project documentation structure (`project-docs/`)
 - `README.md` - Project overview, quick start, documentation index
 - `PROJECT_SPEC.md` - Complete product specification with 17 sections
@@ -17,6 +36,10 @@
 - `PROGRESS.md` - Current status tracker
 - CoreDeck Git repository initialized at `G:\Project\CoreDeck\`
 - Throne upstream cloned for reference at `G:\Project\CoreDeck\Throne\`
+
+### Changed
+- **Repository URL corrected** (Session 003): Git remote updated from `DevastBit/CoreDeck` to `gameacc2025/CoreDeck`
+- Documentation links updated in README.md and PROGRESS.md
 
 ### Analyzed
 - Throne architecture: Qt6, C++20, CMake, SQLite, sing-box/Xray

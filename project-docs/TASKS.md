@@ -38,13 +38,13 @@
 
 | ID | Title | Status | Priority | Dependencies | Related Files | Acceptance Criteria | Test Method |
 |----|-------|--------|----------|--------------|---------------|---------------------|-------------|
-| MI-010 | Design Instance C++ class | IN_PROGRESS | High | MI-002 | include/database/entities/Instance.h, src/database/entities/Instance.cpp, tests/test_instance.cpp | Class with all fields, JSON serialization | Unit test |
-| MI-011 | Add Instance tables to Database.cpp | TODO | High | MI-010 | src/database/Database.cpp, Schema.sql | Migration creates tables on first run | Migration test |
-| MI-012 | Implement InstanceRepository | TODO | High | MI-011 | src/database/InstanceRepository.h, .cpp | CRUD operations work | Unit test |
-| MI-013 | Add instance_id to Group entity | TODO | High | MI-011 | include/database/entities/Group.h, GroupsRepo.cpp | Groups queryable by instance_id | Integration test |
-| MI-014 | Write migration logic (Throne → CoreDeck) | TODO | High | MI-011 | src/database/Migration.cpp | Existing data moves to Default Instance | Migration test with real DB |
-| MI-015 | Add InstanceSettings table & repo | TODO | Medium | MI-011 | src/database/InstanceSettingsRepo.h, .cpp | Per-instance settings persist | Unit test |
-| MI-016 | Add PortAllocations table & repo | TODO | Medium | MI-011 | src/database/PortAllocationRepo.h, .cpp | Port tracking works | Unit test |
+| MI-010 | Design Instance C++ class | DONE | High | MI-002 | include/database/entities/Instance.h, src/database/entities/Instance.cpp, tests/test_instance.cpp | Class with all fields, JSON serialization | Unit test |
+| MI-011 | Add Instance tables to Database.cpp | DONE | High | MI-010 | include/database/Migration.h, src/database/Migration.cpp, src/database/DatabaseManager.cpp | Migration creates tables on first run | Migration test |
+| MI-012 | Implement InstanceRepository | DONE | High | MI-011 | include/database/InstanceRepository.h, src/database/InstanceRepository.cpp | CRUD operations work | Unit test |
+| MI-013 | Add instance_id to Group entity | DONE | High | MI-011 | Migration adds instance_id column to groups table | Integration test |
+| MI-014 | Write migration logic (Throne → CoreDeck) | DONE | High | MI-011 | src/database/Migration.cpp | Existing data moves to Default Instance | Migration test with real DB |
+| MI-015 | Add InstanceSettings table & repo | DONE | Medium | MI-011 | Migration creates instance_settings table | Unit test |
+| MI-016 | Add PortAllocations table & repo | DONE | Medium | MI-011 | Migration creates port_allocations table | Unit test |
 
 ---
 
