@@ -1,0 +1,154 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, feature/* ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+env:
+  QT_VERSION: "6.6"
+  CMAKE_GENERATOR: "Ninja"
+
+jobs:
+  build-windows:
+    name: Windows (MSVC)
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: desktop
+          host: windows
+          arch: win64_msvc2019_64
+          cache: true
+
+      - name: Install CMake and Ninja
+        run: |
+          choco install cmake ninja --no-progress -y
+          refreshenv
+
+      - name: Configure (MSVC)
+        run: |
+          cmake -G "${{ env.CMAKE_GENERATOR }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_PATH }}" \
+            -B build
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Run Tests
+        run: |
+          cd build
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coredeck-windows-${{ github.run_id }}
+          path: build/*.exe
+          retention-days: 7
+
+  build-linux:
+    name: Linux (GCC)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake ninja-build \
+            qt6-base-dev qt6-tools-dev \
+            libsqlite3-dev \
+            protobuf-compiler \
+            libssl-dev
+
+      - name: Install Qt (aqtinstall)
+        run: |
+          pip3 install aqtinstall
+          aqt install-qt linux desktop ${{ env.QT_VERSION }} gcc_64 -O /opt/qt
+
+      - name: Configure (GCC)
+        env:
+          CMAKE_PREFIX_PATH: /opt/qt/${{ env.QT_VERSION }}/gcc_64
+        run: |
+          cmake -G "${{ env.CMAKE_GENERATOR }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}" \
+            -B build
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Run Tests
+        run: |
+          cd build
+          ctest --output-on-failure --parallel 2
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coredeck-linux-${{ github.run_id }}
+          path: build/Throne
+          retention-days: 7
+
+  build-linux-clang:
+    name: Linux (Clang)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake ninja-build clang \
+            qt6-base-dev qt6-tools-dev \
+            libsqlite3-dev \
+            protobuf-compiler \
+            libssl-dev
+
+      - name: Install Qt (aqtinstall)
+        run: |
+          pip3 install aqtinstall
+          aqt install-qt linux desktop ${{ env.QT_VERSION }} gcc_64 -O /opt/qt
+
+      - name: Configure (Clang)
+        env:
+          CMAKE_PREFIX_PATH: /opt/qt/${{ env.QT_VERSION }}/gcc_64
+        run: |
+          CC=clang CXX=clang++ cmake -G "${{ env.CMAKE_GENERATOR }}" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}" \
+            -B build
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Run Tests
+        run: |
+          cd build
+          ctest --output-on-failure --parallel 2
