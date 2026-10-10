@@ -28,7 +28,7 @@ target_link_libraries(test_instancemanager PRIVATE
     Qt6::Core
     Qt6::Test
     SQLiteCpp
-    simple-protobuf
+    spb-proto
     Threads::Threads
 )
 add_test(NAME test_instancemanager COMMAND test_instancemanager)
