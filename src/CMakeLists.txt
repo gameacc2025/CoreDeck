@@ -135,25 +135,46 @@ set(STATS_SOURCES
     src/stats/connectionLister/connectionLister.cpp
 )
 
-# Sys (Windows only)
-set(SYS_SOURCES
-    src/sys/Process.cpp
-    src/sys/KillSwitch.cpp
-    src/sys/ProcessMetrics.cpp
-    src/sys/CoreDiagnostics.cpp
-    src/sys/UrlScheme.cpp
-    src/sys/SystemProxy.cpp
-    src/sys/GlobalHotkeys.cpp
-    src/sys/coreDump.cpp
-    src/sys/LinuxCap.cpp
-    src/sys/windows/AutoRun.cpp
-    src/sys/windows/eventHandler.cpp
-    src/sys/windows/GlobalHotkeys.cpp
-    src/sys/windows/MiniDump.cpp
-    src/sys/windows/SystemProxy.cpp
-    src/sys/windows/UrlScheme.cpp
-    src/sys/windows/WinVersion.cpp
-)
+# Sys
+if (WIN32)
+    set(SYS_SOURCES
+        src/sys/Process.cpp
+        src/sys/KillSwitch.cpp
+        src/sys/ProcessMetrics.cpp
+        src/sys/CoreDiagnostics.cpp
+        src/sys/UrlScheme.cpp
+        src/sys/SystemProxy.cpp
+        src/sys/GlobalHotkeys.cpp
+        src/sys/coreDump.cpp
+        src/sys/LinuxCap.cpp
+        src/sys/windows/AutoRun.cpp
+        src/sys/windows/eventHandler.cpp
+        src/sys/windows/GlobalHotkeys.cpp
+        src/sys/windows/guihelper.cpp
+        src/sys/windows/MiniDump.cpp
+        src/sys/windows/SystemProxy.cpp
+        src/sys/windows/UrlScheme.cpp
+        src/sys/windows/WinVersion.cpp
+    )
+else ()
+    set(SYS_SOURCES
+        src/sys/Process.cpp
+        src/sys/KillSwitch.cpp
+        src/sys/ProcessMetrics.cpp
+        src/sys/CoreDiagnostics.cpp
+        src/sys/UrlScheme.cpp
+        src/sys/SystemProxy.cpp
+        src/sys/GlobalHotkeys.cpp
+        src/sys/coreDump.cpp
+        src/sys/LinuxCap.cpp
+        src/sys/linux/AutoRun.cpp
+        src/sys/linux/GlobalHotkeysKde.cpp
+        src/sys/linux/GlobalHotkeysX11.cpp
+        src/sys/linux/SystemProxy.cpp
+        src/sys/linux/UrlScheme.cpp
+        src/sys/linux/systemChecks.cpp
+    )
+endif ()
 
 # UI
 set(UI_SOURCES
