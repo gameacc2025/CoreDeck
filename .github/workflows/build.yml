@@ -26,7 +26,6 @@ jobs:
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
-        id: install-qt
         with:
           version: ${{ env.QT_VERSION }}
           target: desktop
@@ -40,28 +39,24 @@ jobs:
           refreshenv
 
       - name: Configure (MSVC)
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-        env:
-          Qt6_DIR: ${{ steps.install-qt.outputs.qt-install-path }}
+        shell: cmd
         run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
             -B build
 
       - name: Build
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-        run: cmake --build build --config Release --parallel
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
+          cmake --build build --config Release --parallel
 
       - name: Run Tests
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
+        shell: cmd
         run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
           cd build
           ctest --output-on-failure --parallel 2
 
