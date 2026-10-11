@@ -39,10 +39,13 @@ jobs:
           refreshenv
 
       - name: Configure (MSVC)
+        shell: pwsh
+        env:
+          QT_INSTALL_PATH: ${{ steps.install-qt.outputs.qt-install-path }}
         run: |
-          cmake -G "${{ env.CMAKE_GENERATOR }}" \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_PATH }}" \
+          cmake -G "${{ env.CMAKE_GENERATOR }}" `
+            -DCMAKE_BUILD_TYPE=Release `
+            -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_PATH }}" `
             -B build
 
       - name: Build

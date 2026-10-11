@@ -303,6 +303,15 @@ set(THIRDPARTY_SOURCES
     3rdparty/qv2ray/v2/ui/LogHighlighter.cpp
     3rdparty/qv2ray/v2/ui/QvAutoCompleteTextEdit.cpp
     3rdparty/qv2ray/v2/ui/widgets/speedchart/SpeedWidget.cpp
+    # SQLiteCpp sources (compiled directly to avoid submodule dependency on sqlite3)
+    3rdparty/SQLiteCpp/src/Backup.cpp
+    3rdparty/SQLiteCpp/src/Column.cpp
+    3rdparty/SQLiteCpp/src/Database.cpp
+    3rdparty/SQLiteCpp/src/Exception.cpp
+    3rdparty/SQLiteCpp/src/Savepoint.cpp
+    3rdparty/SQLiteCpp/src/sqlite3.c
+    3rdparty/SQLiteCpp/src/Statement.cpp
+    3rdparty/SQLiteCpp/src/Transaction.cpp
 )
 
 # Main executable

@@ -38,9 +38,14 @@ if (UNIX AND NOT APPLE)
     set(QT_DBUS_LIBRARY Qt6::DBus)
 endif ()
 
+# Version and compile definitions (NKR_VERSION, NKR_CPP_DEBUG, NKR_CPP_USE_APPDATA)
+include(cmake/nkr.cmake)
+
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network LinguistTools ${QT_DBUS_COMPONENT})
 find_package(SQLite3 REQUIRED)
-find_package(Protobuf REQUIRED)
+
+# Protobuf generation via myproto.cmake
+include(cmake/myproto.cmake)
 
 # Platform-specific settings
 if (APPLE)
@@ -58,7 +63,7 @@ endif()
 
 add_compile_definitions(QT_MESSAGELOGCONTEXT)
 
-# SQLiteCpp configuration
+# SQLiteCpp configuration - compile definitions for both SQLiteCpp wrapper and sqlite3.c
 add_compile_definitions(
     SQLITE_DQS=0
     SQLITE_DEFAULT_MEMSTATUS=0
@@ -76,15 +81,11 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SQLiteCpp/include
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/simple-protobuf
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-# 3rdparty libraries
-add_subdirectory(3rdparty/SQLiteCpp)
+# 3rdparty: simple-protobuf (SQLiteCpp sources added directly in src/CMakeLists.txt)
 add_subdirectory(3rdparty/simple-protobuf)
-
-# Protobuf generation for CoreDeck protocol
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS core/gen/libcore.proto)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # CoreDeck source
 add_subdirectory(src)
