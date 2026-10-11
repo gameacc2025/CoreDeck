@@ -64,6 +64,7 @@ set(INSTANCE_SOURCES
 
 # Configs
 set(CONFIG_SOURCES
+    src/configs/AutoSelectorPlan.cpp
     src/configs/common/DialFields.cpp
     src/configs/common/QUICFields.cpp
     src/configs/common/TLS.cpp
@@ -204,6 +205,7 @@ set(UI_SOURCES
     src/ui/widget/json/JsonSchemaValidator.cpp
     src/ui/widget/json/JsonIssueList.cpp
     src/ui/widget/json/JsonEditorDialog.cpp
+    src/ui/widget/json/SchemaStore.cpp
     src/ui/profile/dialog_edit_profile.cpp
     src/ui/profile/dialog_edit_profile_singbox.cpp
     src/ui/profile/dialog_edit_profile_xhttp.cpp
