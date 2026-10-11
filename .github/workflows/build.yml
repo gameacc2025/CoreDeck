@@ -40,7 +40,7 @@ jobs:
 
       - name: Install CMake, Ninja, and SQLite3
         run: |
-          choco install cmake ninja sqlite --no-progress -y
+          choco install cmake ninja sqlite protobuf --no-progress -y
           refreshenv
 
       - name: Configure (MSVC)

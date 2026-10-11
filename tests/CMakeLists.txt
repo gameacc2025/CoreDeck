@@ -30,6 +30,7 @@ add_executable(test_instance
 )
 target_link_libraries(test_instance PRIVATE
     Qt6::Core
+    Qt6::Widgets
     Qt6::Test
 )
 add_test(NAME test_instance COMMAND test_instance)
@@ -48,6 +49,7 @@ add_executable(test_instancemanager
 )
 target_link_libraries(test_instancemanager PRIVATE
     Qt6::Core
+    Qt6::Widgets
     Qt6::Test
     spb-proto
     Threads::Threads
