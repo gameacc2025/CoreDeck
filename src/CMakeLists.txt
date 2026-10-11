@@ -176,8 +176,8 @@ else ()
     )
 endif ()
 
-# UI
-set(UI_SOURCES
+# UI - use qt6_wrap_ui to generate headers from .ui files
+set(UI_FILES
     ../include/ui/mainwindow.ui
     ../include/ui/dialog_edit_group.ui
     ../include/ui/dialog_edit_group_advanced.ui
@@ -239,9 +239,13 @@ set(UI_SOURCES
     ../include/ui/scanner/dialog_scanner.ui
     ../include/ui/scanner/dialog_ip_lists.ui
     ../include/ui/scanner/dialog_edit_ip_list.ui
+)
+
+qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+
+set(UI_SOURCES
     ui/mainWindow/mainwindow_setup.cpp
     ui/mainWindow/mainwindow_events.cpp
-    ui/mainWindow/mainwindow_groups.cpp
     ui/mainWindow/mainwindow_view.cpp
     ui/mainWindow/mainwindow_connections.cpp
     ui/mainWindow/mainwindow_profiles.cpp
@@ -388,11 +392,11 @@ qt_add_executable(CoreDeck
     ${COREDECK_QRC}
     ${PROTO_SRCS}
     ${PROTO_HDRS}
+    ${UI_HEADERS}
 )
 
 # Qt setup
 set_target_properties(CoreDeck PROPERTIES
-    AUTOUIC ON
     AUTOMOC ON
     AUTORCC ON
     WIN32_EXECUTABLE TRUE

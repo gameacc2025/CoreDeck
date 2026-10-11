@@ -38,10 +38,14 @@ jobs:
           arch: win64_msvc2019_64
           cache: true
 
-      - name: Install CMake, Ninja, SQLite3, and Protobuf
+      - name: Install CMake, Ninja, SQLite3
         run: |
-          choco install cmake ninja sqlite protobuf --no-progress -y
+          choco install cmake ninja sqlite --no-progress -y
           refreshenv
+
+      - name: Install Protobuf (vcpkg with binary cache)
+        run: |
+          vcpkg install protobuf:x64-windows --triplet=x64-windows --binarysource=clear;nuget,https://github.com/microsoft/vcpkg-ce-catalog/archive/refs/heads/main.zip,readwrite
 
       - name: Configure (MSVC)
         shell: cmd
@@ -49,9 +53,7 @@ jobs:
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
-            -DProtobuf_INCLUDE_DIR="C:/ProgramData/chocolatey/lib/protobuf/tools/include" ^
-            -DProtobuf_LIBRARY="C:/ProgramData/chocolatey/lib/protobuf/tools/lib/libprotobuf.lib" ^
-            -DProtobuf_PROTOC_EXECUTABLE="C:/ProgramData/chocolatey/lib/protobuf/tools/protoc.exe" ^
+            -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
             -B build
 
       - name: Build
