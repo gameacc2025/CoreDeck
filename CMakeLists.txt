@@ -81,6 +81,7 @@ add_compile_definitions(
 # Include directories
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SQLiteCpp/include
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/simple-protobuf
     ${CMAKE_CURRENT_BINARY_DIR}
