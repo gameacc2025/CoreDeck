@@ -13,305 +13,303 @@ qt6_add_resources(COREDECK_QRC
 
 # Database entities
 set(ENTITY_SOURCES
-    src/database/entities/Instance.cpp
-    src/database/entities/Group.cpp
-    src/database/entities/Profile.cpp
-    src/database/entities/RouteProfile.cpp
-    src/database/entities/RouteRule.cpp
-    src/database/entities/OtpProfile.cpp
-    src/database/entities/IpScan.cpp
-    src/database/entities/EndpointSource.cpp
+    database/entities/Instance.cpp
+    database/entities/Group.cpp
+    database/entities/Profile.cpp
+    database/entities/RouteProfile.cpp
+    database/entities/RouteRule.cpp
+    database/entities/OtpProfile.cpp
+    database/entities/IpScan.cpp
+    database/entities/EndpointSource.cpp
 )
 
 # Database repositories
 set(REPO_SOURCES
-    src/database/Database.cpp
-    src/database/DatabaseManager.cpp
-    src/database/Migration.cpp
-    src/database/InstanceRepository.cpp
-    src/database/GroupsRepo.cpp
-    src/database/ProfilesRepo.cpp
-    src/database/RoutesRepo.cpp
-    src/database/SettingsRepo.cpp
-    src/database/TrafficStatsRepo.cpp
-    src/database/MarkersRepo.cpp
-    src/database/OtpProfilesRepo.cpp
-    src/database/IpListsRepo.cpp
-    src/database/IpScansRepo.cpp
+    database/Database.cpp
+    database/DatabaseManager.cpp
+    database/Migration.cpp
+    database/InstanceRepository.cpp
+    database/GroupsRepo.cpp
+    database/ProfilesRepo.cpp
+    database/RoutesRepo.cpp
+    database/SettingsRepo.cpp
+    database/TrafficStatsRepo.cpp
+    database/MarkersRepo.cpp
+    database/OtpProfilesRepo.cpp
+    database/IpListsRepo.cpp
+    database/IpScansRepo.cpp
 )
 
 # Global utilities
 set(GLOBAL_SOURCES
-    src/global/Configs.cpp
-    src/global/Utils.cpp
-    src/global/Logger.cpp
-    src/global/PeriodicRunner.cpp
-    src/global/HTTPRequestHelper.cpp
-    src/global/DeviceDetailsHelper.cpp
-    src/global/CountryHelper.cpp
-    src/global/LocalNetwork.cpp
-    src/global/OTP.cpp
-    src/global/OtpPlaceholder.cpp
-    src/global/VpnCredentialOverride.cpp
-    src/global/RunningProfiles.cpp
-    src/global/Common.cpp
+    global/Configs.cpp
+    global/Utils.cpp
+    global/Logger.cpp
+    global/PeriodicRunner.cpp
+    global/HTTPRequestHelper.cpp
+    global/DeviceDetailsHelper.cpp
+    global/CountryHelper.cpp
+    global/LocalNetwork.cpp
+    global/OTP.cpp
+    global/OtpPlaceholder.cpp
+    global/VpnCredentialOverride.cpp
+    global/RunningProfiles.cpp
+    global/Common.cpp
 )
 
 # Instance management
 set(INSTANCE_SOURCES
-    src/instance/InstanceManager.cpp
+    instance/InstanceManager.cpp
 )
 
 # Configs
 set(CONFIG_SOURCES
-    src/configs/AutoSelectorPlan.cpp
-    src/configs/common/DialFields.cpp
-    src/configs/common/QUICFields.cpp
-    src/configs/common/TLS.cpp
-    src/configs/common/multiplex.cpp
-    src/configs/common/transport.cpp
-    src/configs/common/Outbound.cpp
-    src/configs/common/OutboundFactory.cpp
-    src/configs/common/utils.cpp
-    src/configs/common/xrayMultiplex.cpp
-    src/configs/common/xrayStreamSetting.cpp
-    src/configs/outbounds/anyTLS.cpp
-    src/configs/outbounds/autoselector.cpp
-    src/configs/outbounds/http.cpp
-    src/configs/outbounds/hysteria.cpp
-    src/configs/outbounds/shadowsocks.cpp
-    src/configs/outbounds/socks.cpp
-    src/configs/outbounds/ssh.cpp
-    src/configs/outbounds/tailscale.cpp
-    src/configs/outbounds/trojan.cpp
-    src/configs/outbounds/tuic.cpp
-    src/configs/outbounds/juicity.cpp
-    src/configs/outbounds/trusttunnel.cpp
-    src/configs/outbounds/naive.cpp
-    src/configs/outbounds/shadowtls.cpp
-    src/configs/outbounds/vless.cpp
-    src/configs/outbounds/vmess.cpp
-    src/configs/outbounds/wireguard.cpp
-    src/configs/outbounds/masque.cpp
-    src/configs/outbounds/mieru.cpp
-    src/configs/outbounds/openvpn.cpp
-    src/configs/outbounds/openconnect.cpp
-    src/configs/outbounds/custom.cpp
-    src/configs/generate.cpp
-    src/configs/sub/GroupUpdater.cpp
-    src/configs/sub/SubscriptionParser.cpp
-    src/configs/sub/SubscriptionReconcile.cpp
-    src/configs/sub/RouteUpdater.cpp
-    src/configs/sub/clash.cpp
-    src/configs/sub/vpnFileImport.cpp
-    src/configs/sub/warp.cpp
+    configs/AutoSelectorPlan.cpp
+    configs/common/DialFields.cpp
+    configs/common/QUICFields.cpp
+    configs/common/TLS.cpp
+    configs/common/multiplex.cpp
+    configs/common/transport.cpp
+    configs/common/Outbound.cpp
+    configs/common/OutboundFactory.cpp
+    configs/common/utils.cpp
+    configs/common/xrayMultiplex.cpp
+    configs/common/xrayStreamSetting.cpp
+    configs/outbounds/anyTLS.cpp
+    configs/outbounds/autoselector.cpp
+    configs/outbounds/http.cpp
+    configs/outbounds/hysteria.cpp
+    configs/outbounds/shadowsocks.cpp
+    configs/outbounds/socks.cpp
+    configs/outbounds/ssh.cpp
+    configs/outbounds/tailscale.cpp
+    configs/outbounds/trojan.cpp
+    configs/outbounds/tuic.cpp
+    configs/outbounds/trusttunnel.cpp
+    configs/outbounds/naive.cpp
+    configs/outbounds/shadowtls.cpp
+    configs/outbounds/vless.cpp
+    configs/outbounds/vmess.cpp
+    configs/outbounds/wireguard.cpp
+    configs/outbounds/masque.cpp
+    configs/outbounds/mieru.cpp
+    configs/outbounds/openvpn.cpp
+    configs/outbounds/openconnect.cpp
+    configs/outbounds/custom.cpp
+    configs/generate.cpp
+    configs/sub/GroupUpdater.cpp
+    configs/sub/SubscriptionParser.cpp
+    configs/sub/SubscriptionReconcile.cpp
+    configs/sub/RouteUpdater.cpp
+    configs/sub/clash.cpp
+    configs/sub/vpnFileImport.cpp
+    configs/sub/warp.cpp
 )
 
 # API
 set(API_SOURCES
-    src/api/RPC.cpp
-    src/api/remote/Protocol.cpp
-    src/api/remote/Message.cpp
-    src/api/remote/Server.cpp
-    src/api/remote/Config.cpp
-    src/api/remote/Router.cpp
-    src/api/remote/RouterTests.cpp
+    api/RPC.cpp
+    api/remote/Protocol.cpp
+    api/remote/Message.cpp
+    api/remote/Server.cpp
+    api/remote/Config.cpp
+    api/remote/Router.cpp
+    api/remote/RouterTests.cpp
 )
 
 # Scanner
 set(SCANNER_SOURCES
-    src/scanner/DefaultIpLists.cpp
-    src/scanner/IpListParse.cpp
-    src/scanner/IpListUpdater.cpp
-    src/scanner/ScanManager.cpp
-    src/scanner/ScanProfiles.cpp
-    src/scanner/ScanWorker.cpp
+    scanner/DefaultIpLists.cpp
+    scanner/IpListParse.cpp
+    scanner/IpListUpdater.cpp
+    scanner/ScanManager.cpp
+    scanner/ScanProfiles.cpp
+    scanner/ScanWorker.cpp
 )
 
 # Stats
 set(STATS_SOURCES
-    src/stats/traffic/TrafficLooper.cpp
-    src/stats/traffic/TrafficStatsManager.cpp
-    src/stats/autoselector/AutoSelectorMonitor.cpp
-    src/stats/connectionLister/connectionLister.cpp
+    stats/traffic/TrafficLooper.cpp
+    stats/traffic/TrafficStatsManager.cpp
+    stats/autoselector/AutoSelectorMonitor.cpp
+    stats/connectionLister/connectionLister.cpp
 )
 
 # Sys
 if (WIN32)
     set(SYS_SOURCES
-        src/sys/Process.cpp
-        src/sys/KillSwitch.cpp
-        src/sys/ProcessMetrics.cpp
-        src/sys/CoreDiagnostics.cpp
-        src/sys/UrlScheme.cpp
-        src/sys/SystemProxy.cpp
-        src/sys/GlobalHotkeys.cpp
-        src/sys/coreDump.cpp
-        src/sys/LinuxCap.cpp
-        src/sys/windows/AutoRun.cpp
-        src/sys/windows/eventHandler.cpp
-        src/sys/windows/GlobalHotkeys.cpp
-        src/sys/windows/guihelper.cpp
-        src/sys/windows/MiniDump.cpp
-        src/sys/windows/SystemProxy.cpp
-        src/sys/windows/UrlScheme.cpp
-        src/sys/windows/WinVersion.cpp
+        sys/Process.cpp
+        sys/KillSwitch.cpp
+        sys/ProcessMetrics.cpp
+        sys/CoreDiagnostics.cpp
+        sys/UrlScheme.cpp
+        sys/SystemProxy.cpp
+        sys/GlobalHotkeys.cpp
+        sys/coreDump.cpp
+        sys/LinuxCap.cpp
+        sys/windows/AutoRun.cpp
+        sys/windows/eventHandler.cpp
+        sys/windows/GlobalHotkeys.cpp
+        sys/windows/guihelper.cpp
+        sys/windows/MiniDump.cpp
+        sys/windows/SystemProxy.cpp
+        sys/windows/UrlScheme.cpp
+        sys/windows/WinVersion.cpp
     )
 else ()
     set(SYS_SOURCES
-        src/sys/Process.cpp
-        src/sys/KillSwitch.cpp
-        src/sys/ProcessMetrics.cpp
-        src/sys/CoreDiagnostics.cpp
-        src/sys/UrlScheme.cpp
-        src/sys/SystemProxy.cpp
-        src/sys/GlobalHotkeys.cpp
-        src/sys/coreDump.cpp
-        src/sys/LinuxCap.cpp
-        src/sys/linux/AutoRun.cpp
-        src/sys/linux/GlobalHotkeysKde.cpp
-        src/sys/linux/GlobalHotkeysX11.cpp
-        src/sys/linux/SystemProxy.cpp
-        src/sys/linux/UrlScheme.cpp
-        src/sys/linux/systemChecks.cpp
+        sys/Process.cpp
+        sys/KillSwitch.cpp
+        sys/ProcessMetrics.cpp
+        sys/CoreDiagnostics.cpp
+        sys/UrlScheme.cpp
+        sys/SystemProxy.cpp
+        sys/GlobalHotkeys.cpp
+        sys/coreDump.cpp
+        sys/LinuxCap.cpp
+        sys/linux/AutoRun.cpp
+        sys/linux/GlobalHotkeysKde.cpp
+        sys/linux/GlobalHotkeysX11.cpp
+        sys/linux/SystemProxy.cpp
+        sys/linux/UrlScheme.cpp
+        sys/linux/systemChecks.cpp
     )
 endif ()
 
 # UI
 set(UI_SOURCES
-    src/ui/mainWindow/mainwindow_setup.cpp
-    src/ui/mainWindow/mainwindow_events.cpp
-    src/ui/mainWindow/mainwindow_groups.cpp
-    src/ui/mainWindow/mainwindow_view.cpp
-    src/ui/mainWindow/mainwindow_connections.cpp
-    src/ui/mainWindow/mainwindow_profiles.cpp
-    src/ui/mainWindow/mainwindow_deeplink.cpp
-    src/ui/mainWindow/mainwindow_system.cpp
-    src/ui/mainWindow/mainwindow_log.cpp
-    src/ui/mainWindow/mainwindow_hotkeys.cpp
-    src/ui/mainWindow/mainwindow_profile_lifecycle.cpp
-    src/ui/mainWindow/mainwindow_autoselector.cpp
-    src/ui/mainWindow/mainwindow_scanner.cpp
-    src/ui/mainWindow/TestRunner.cpp
-    src/ui/widget/StartStopButton.cpp
-    src/ui/widget/TrayIcon.cpp
-    src/ui/widget/TrayPopupFrame.cpp
-    src/ui/widget/TrayProfileSelector.cpp
-    src/ui/widget/TrayOtpCodes.cpp
-    src/ui/widget/SubscriptionInfoCard.cpp
-    src/ui/widget/json/JsonTree.cpp
-    src/ui/widget/json/JsonCodeEdit.cpp
-    src/ui/widget/json/JsonValidator.cpp
-    src/ui/widget/json/JsonSchemaValidator.cpp
-    src/ui/widget/json/JsonIssueList.cpp
-    src/ui/widget/json/JsonEditorDialog.cpp
-    src/ui/widget/json/SchemaStore.cpp
-    src/ui/profile/dialog_edit_profile.cpp
-    src/ui/profile/dialog_edit_profile_singbox.cpp
-    src/ui/profile/dialog_edit_profile_xhttp.cpp
-    src/ui/profile/dialog_edit_profile_xray.cpp
-    src/ui/profile/dialog_vpn_auth.cpp
-    src/ui/profile/edit_chain.cpp
-    src/ui/profile/edit_advanced.cpp
-    src/ui/profile/edit_anytls.cpp
-    src/ui/profile/edit_autoselector.cpp
-    src/ui/profile/edit_custom.cpp
-    src/ui/profile/edit_direct.cpp
-    src/ui/profile/edit_extra_core.cpp
-    src/ui/profile/edit_http.cpp
-    src/ui/profile/edit_hysteria.cpp
-    src/ui/profile/edit_hysteria_realm.cpp
-    src/ui/profile/edit_juicity.cpp
-    src/ui/profile/edit_masque.cpp
-    src/ui/profile/edit_mieru.cpp
-    src/ui/profile/edit_naive.cpp
-    src/ui/profile/edit_openconnect.cpp
-    src/ui/profile/edit_openconnect_advanced.cpp
-    src/ui/profile/edit_openvpn.cpp
-    src/ui/profile/edit_openvpn_advanced.cpp
-    src/ui/profile/edit_shadowsocks.cpp
-    src/ui/profile/edit_shadowtls.cpp
-    src/ui/profile/edit_snell.cpp
-    src/ui/profile/edit_socks.cpp
-    src/ui/profile/edit_ssh.cpp
-    src/ui/profile/edit_tailscale.cpp
-    src/ui/profile/edit_trojan.cpp
-    src/ui/profile/edit_trusttunnel.cpp
-    src/ui/profile/edit_tuic.cpp
-    src/ui/profile/edit_vless.cpp
-    src/ui/profile/edit_vmess.cpp
-    src/ui/profile/edit_wireguard.cpp
-    src/ui/profile/edit_wireguard_amnezia.cpp
-    src/ui/profile/edit_xrayvless.cpp
-    src/ui/profile/ProxyItem.cpp
-    src/ui/group/GroupItem.cpp
-    src/ui/group/dialog_edit_group.cpp
-    src/ui/group/dialog_edit_group_advanced.cpp
-    src/ui/group/dialog_manage_groups.cpp
-    src/ui/scanner/dialog_scanner.cpp
-    src/ui/scanner/dialog_new_scan.cpp
-    src/ui/scanner/dialog_ip_lists.cpp
-    src/ui/scanner/dialog_edit_ip_list.cpp
-    src/ui/scanner/dialog_scan_instance.cpp
-    src/ui/scanner/ScanItem.cpp
-    src/ui/scanner/IpEntriesModel.cpp
-    src/ui/scanner/IpListItem.cpp
-    src/ui/setting/dialog_basic_settings.cpp
-    src/ui/setting/DiagnosticsTab.cpp
-    src/ui/setting/dialog_edit_otp.cpp
-    src/ui/setting/dialog_integration.cpp
-    src/ui/setting/dialog_manage_routes.cpp
-    src/ui/setting/dialog_otp_manager.cpp
-    src/ui/setting/dialog_preset_settings.cpp
-    src/ui/setting/dialog_vpn_settings.cpp
-    src/ui/setting/ThemeManager.cpp
-    src/ui/setting/Icon.cpp
-    src/ui/setting/OtpItem.cpp
-    src/ui/setting/OtpListWidget.cpp
-    src/ui/setting/RawRouteItem.cpp
-    src/ui/setting/RouteItem.cpp
-    src/ui/stats/dialog_auto_selector.cpp
-    src/ui/stats/dialog_endpoint_details.cpp
-    src/ui/stats/dialog_traffic_stats.cpp
-    src/ui/stats/MiniChartWidget.cpp
-    src/ui/stats/RuntimeStatsWidget.cpp
-    src/ui/stats/TrafficChartWidget.cpp
-    src/ui/utils/ConnectionsTreeModel.cpp
-    src/ui/utils/ConnectionsTreeFilterProxyModel.cpp
-    src/ui/utils/ConnectionsFilterHeader.cpp
-    src/ui/utils/DataViewHtmlGenerator.cpp
-    src/ui/utils/ProfilesTableModel.cpp
-    src/ui/utils/ProfilesFilterProxyModel.cpp
-    src/ui/utils/ProfilesTableView.cpp
-    src/ui/utils/ProfilesTableVerticalHeader.cpp
-    src/ui/utils/ProfilesTableFilterHeader.cpp
-    src/ui/utils/ReorderListWidget.cpp
-    src/ui/utils/ScreenQrScanner.cpp
+    ui/mainWindow/mainwindow_setup.cpp
+    ui/mainWindow/mainwindow_events.cpp
+    ui/mainWindow/mainwindow_groups.cpp
+    ui/mainWindow/mainwindow_view.cpp
+    ui/mainWindow/mainwindow_connections.cpp
+    ui/mainWindow/mainwindow_profiles.cpp
+    ui/mainWindow/mainwindow_deeplink.cpp
+    ui/mainWindow/mainwindow_system.cpp
+    ui/mainWindow/mainwindow_log.cpp
+    ui/mainWindow/mainwindow_hotkeys.cpp
+    ui/mainWindow/mainwindow_profile_lifecycle.cpp
+    ui/mainWindow/mainwindow_autoselector.cpp
+    ui/mainWindow/mainwindow_scanner.cpp
+    ui/mainWindow/TestRunner.cpp
+    ui/widget/StartStopButton.cpp
+    ui/widget/TrayIcon.cpp
+    ui/widget/TrayPopupFrame.cpp
+    ui/widget/TrayProfileSelector.cpp
+    ui/widget/SubscriptionInfoCard.cpp
+    ui/widget/json/JsonTree.cpp
+    ui/widget/json/JsonCodeEdit.cpp
+    ui/widget/json/JsonValidator.cpp
+    ui/widget/json/JsonSchemaValidator.cpp
+    ui/widget/json/JsonIssueList.cpp
+    ui/widget/json/JsonEditorDialog.cpp
+    ui/widget/json/SchemaStore.cpp
+    ui/profile/dialog_edit_profile.cpp
+    ui/profile/dialog_edit_profile_singbox.cpp
+    ui/profile/dialog_edit_profile_xhttp.cpp
+    ui/profile/dialog_edit_profile_xray.cpp
+    ui/profile/dialog_vpn_auth.cpp
+    ui/profile/edit_chain.cpp
+    ui/profile/edit_advanced.cpp
+    ui/profile/edit_anytls.cpp
+    ui/profile/edit_autoselector.cpp
+    ui/profile/edit_custom.cpp
+    ui/profile/edit_direct.cpp
+    ui/profile/edit_extra_core.cpp
+    ui/profile/edit_http.cpp
+    ui/profile/edit_hysteria.cpp
+    ui/profile/edit_hysteria_realm.cpp
+    ui/profile/edit_juicity.cpp
+    ui/profile/edit_masque.cpp
+    ui/profile/edit_mieru.cpp
+    ui/profile/edit_naive.cpp
+    ui/profile/edit_openconnect.cpp
+    ui/profile/edit_openconnect_advanced.cpp
+    ui/profile/edit_openvpn.cpp
+    ui/profile/edit_openvpn_advanced.cpp
+    ui/profile/edit_shadowsocks.cpp
+    ui/profile/edit_shadowtls.cpp
+    ui/profile/edit_snell.cpp
+    ui/profile/edit_socks.cpp
+    ui/profile/edit_ssh.cpp
+    ui/profile/edit_tailscale.cpp
+    ui/profile/edit_trojan.cpp
+    ui/profile/edit_trusttunnel.cpp
+    ui/profile/edit_tuic.cpp
+    ui/profile/edit_vless.cpp
+    ui/profile/edit_vmess.cpp
+    ui/profile/edit_wireguard.cpp
+    ui/profile/edit_wireguard_amnezia.cpp
+    ui/profile/edit_xrayvless.cpp
+    ui/profile/ProxyItem.cpp
+    ui/group/GroupItem.cpp
+    ui/group/dialog_edit_group.cpp
+    ui/group/dialog_edit_group_advanced.cpp
+    ui/group/dialog_manage_groups.cpp
+    ui/scanner/dialog_scanner.cpp
+    ui/scanner/dialog_new_scan.cpp
+    ui/scanner/dialog_ip_lists.cpp
+    ui/scanner/dialog_edit_ip_list.cpp
+    ui/scanner/dialog_scan_instance.cpp
+    ui/scanner/ScanItem.cpp
+    ui/scanner/IpEntriesModel.cpp
+    ui/scanner/IpListItem.cpp
+    ui/setting/dialog_basic_settings.cpp
+    ui/setting/DiagnosticsTab.cpp
+    ui/setting/dialog_edit_otp.cpp
+    ui/setting/dialog_integration.cpp
+    ui/setting/dialog_manage_routes.cpp
+    ui/setting/dialog_otp_manager.cpp
+    ui/setting/dialog_preset_settings.cpp
+    ui/setting/dialog_vpn_settings.cpp
+    ui/setting/ThemeManager.cpp
+    ui/setting/Icon.cpp
+    ui/setting/OtpItem.cpp
+    ui/setting/OtpListWidget.cpp
+    ui/setting/RawRouteItem.cpp
+    ui/setting/RouteItem.cpp
+    ui/stats/dialog_auto_selector.cpp
+    ui/stats/dialog_endpoint_details.cpp
+    ui/stats/dialog_traffic_stats.cpp
+    ui/stats/MiniChartWidget.cpp
+    ui/stats/RuntimeStatsWidget.cpp
+    ui/stats/TrafficChartWidget.cpp
+    ui/utils/ConnectionsTreeModel.cpp
+    ui/utils/ConnectionsTreeFilterProxyModel.cpp
+    ui/utils/ConnectionsFilterHeader.cpp
+    ui/utils/DataViewHtmlGenerator.cpp
+    ui/utils/ProfilesTableModel.cpp
+    ui/utils/ProfilesFilterProxyModel.cpp
+    ui/utils/ProfilesTableView.cpp
+    ui/utils/ProfilesTableVerticalHeader.cpp
+    ui/utils/ProfilesTableFilterHeader.cpp
+    ui/utils/ReorderListWidget.cpp
+    ui/utils/ScreenQrScanner.cpp
 )
 
 # 3rdparty
 set(THIRDPARTY_SOURCES
-    3rdparty/qrcodegen.cpp
-    3rdparty/QtExtKeySequenceEdit.cpp
-    3rdparty/QrDecoder.cpp
-    3rdparty/WinCommander.cpp
-    3rdparty/quirc/decode.c
-    3rdparty/quirc/identify.c
-    3rdparty/quirc/quirc.c
-    3rdparty/quirc/version_db.c
-    3rdparty/monocypher/monocypher.c
-    3rdparty/qv2ray/v2/ui/LogHighlighter.cpp
-    3rdparty/qv2ray/v2/ui/QvAutoCompleteTextEdit.cpp
-    3rdparty/qv2ray/v2/ui/widgets/speedchart/SpeedWidget.cpp
+    ../3rdparty/qrcodegen.cpp
+    ../3rdparty/QtExtKeySequenceEdit.cpp
+    ../3rdparty/QrDecoder.cpp
+    ../3rdparty/WinCommander.cpp
+    ../3rdparty/quirc/decode.c
+    ../3rdparty/quirc/identify.c
+    ../3rdparty/quirc/quirc.c
+    ../3rdparty/quirc/version_db.c
+    ../3rdparty/monocypher/monocypher.c
+    ../3rdparty/qv2ray/v2/ui/LogHighlighter.cpp
+    ../3rdparty/qv2ray/v2/ui/QvAutoCompleteTextEdit.cpp
+    ../3rdparty/qv2ray/v2/ui/widgets/speedchart/SpeedWidget.cpp
     # SQLiteCpp sources (compiled directly to avoid submodule dependency on sqlite3)
-    3rdparty/SQLiteCpp/src/Backup.cpp
-    3rdparty/SQLiteCpp/src/Column.cpp
-    3rdparty/SQLiteCpp/src/Database.cpp
-    3rdparty/SQLiteCpp/src/Exception.cpp
-    3rdparty/SQLiteCpp/src/Savepoint.cpp
-    3rdparty/SQLiteCpp/src/sqlite3.c
-    3rdparty/SQLiteCpp/src/Statement.cpp
-    3rdparty/SQLiteCpp/src/Transaction.cpp
+    ../3rdparty/SQLiteCpp/src/Backup.cpp
+    ../3rdparty/SQLiteCpp/src/Column.cpp
+    ../3rdparty/SQLiteCpp/src/Database.cpp
+    ../3rdparty/SQLiteCpp/src/Exception.cpp
+    ../3rdparty/SQLiteCpp/src/Savepoint.cpp
+    ../3rdparty/SQLiteCpp/src/sqlite3.c
+    ../3rdparty/SQLiteCpp/src/Statement.cpp
+    ../3rdparty/SQLiteCpp/src/Transaction.cpp
 )
 
 # Main executable
@@ -347,8 +345,8 @@ if (WIN32 AND MSVC)
     set_target_properties(CoreDeck PROPERTIES UNITY_BUILD ON)
 endif ()
 
-set_property(SOURCE "3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
-set_property(SOURCE "3rdparty/monocypher/monocypher.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+set_property(SOURCE "../3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+set_property(SOURCE "../3rdparty/monocypher/monocypher.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_compile_definitions(CoreDeck PRIVATE
     SQLITE_DQS=0
@@ -366,7 +364,6 @@ target_compile_definitions(CoreDeck PRIVATE
 target_link_libraries(CoreDeck PRIVATE
     Qt6::Widgets
     Qt6::Network
-    Qt6::LinguistTools
     ${QT_DBUS_LIBRARY}
     SQLiteCpp
     spb-proto

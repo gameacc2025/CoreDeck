@@ -4,14 +4,14 @@ enable_testing()
 
 # SQLiteCpp sources for tests (compiled directly to avoid submodule dependency on sqlite3)
 set(SQLITECPP_TEST_SOURCES
-    3rdparty/SQLiteCpp/src/Backup.cpp
-    3rdparty/SQLiteCpp/src/Column.cpp
-    3rdparty/SQLiteCpp/src/Database.cpp
-    3rdparty/SQLiteCpp/src/Exception.cpp
-    3rdparty/SQLiteCpp/src/Savepoint.cpp
-    3rdparty/SQLiteCpp/src/sqlite3.c
-    3rdparty/SQLiteCpp/src/Statement.cpp
-    3rdparty/SQLiteCpp/src/Transaction.cpp
+    ../3rdparty/SQLiteCpp/src/Backup.cpp
+    ../3rdparty/SQLiteCpp/src/Column.cpp
+    ../3rdparty/SQLiteCpp/src/Database.cpp
+    ../3rdparty/SQLiteCpp/src/Exception.cpp
+    ../3rdparty/SQLiteCpp/src/Savepoint.cpp
+    ../3rdparty/SQLiteCpp/src/sqlite3.c
+    ../3rdparty/SQLiteCpp/src/Statement.cpp
+    ../3rdparty/SQLiteCpp/src/Transaction.cpp
 )
 
 # Test: Instance entity
