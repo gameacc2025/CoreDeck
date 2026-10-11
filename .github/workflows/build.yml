@@ -43,9 +43,14 @@ jobs:
           choco install cmake ninja sqlite --no-progress -y
           refreshenv
 
-      - name: Install Protobuf (vcpkg with binary cache)
+      - name: Install Protobuf (vcpkg)
         run: |
-          vcpkg install protobuf:x64-windows --triplet=x64-windows --binarysource=clear;nuget,https://github.com/microsoft/vcpkg-ce-catalog/archive/refs/heads/main.zip,readwrite
+          vcpkg install protobuf:x64-windows --triplet=x64-windows
+
+      - name: Download srslist.h
+        run: |
+          curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
+          copy srslist.h src\configs\srslist.h
 
       - name: Configure (MSVC)
         shell: cmd
@@ -94,6 +99,11 @@ jobs:
             libsqlite3-dev \
             protobuf-compiler libprotobuf-dev \
             libssl-dev
+
+      - name: Download srslist.h
+        run: |
+          curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
+          cp srslist.h src/configs/srslist.h
 
       - name: Install Qt (aqtinstall)
         run: |
@@ -144,6 +154,11 @@ jobs:
             libsqlite3-dev \
             protobuf-compiler libprotobuf-dev \
             libssl-dev
+
+      - name: Download srslist.h
+        run: |
+          curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
+          cp srslist.h src/configs/srslist.h
 
       - name: Install Qt (aqtinstall)
         run: |
