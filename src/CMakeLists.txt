@@ -317,7 +317,7 @@ set(THIRDPARTY_SOURCES
 # Main executable
 qt_add_executable(CoreDeck
     MANUAL_FINALIZATION
-    src/main.cpp
+    main.cpp
     ${ENTITY_SOURCES}
     ${REPO_SOURCES}
     ${GLOBAL_SOURCES}

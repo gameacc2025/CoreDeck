@@ -41,7 +41,7 @@ endif ()
 # Version and compile definitions (NKR_VERSION, NKR_CPP_DEBUG, NKR_CPP_USE_APPDATA)
 include(cmake/nkr.cmake)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets Network LinguistTools ${QT_DBUS_COMPONENT})
+find_package(Qt6 REQUIRED COMPONENTS Widgets Network LinguistTools Test ${QT_DBUS_COMPONENT})
 find_package(SQLite3 REQUIRED)
 
 # Protobuf generation via myproto.cmake
