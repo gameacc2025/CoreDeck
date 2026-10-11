@@ -280,7 +280,6 @@ set(UI_SOURCES
     ui/utils/ProfilesFilterProxyModel.cpp
     ui/utils/ProfilesTableView.cpp
     ui/utils/ProfilesTableVerticalHeader.cpp
-    ui/utils/ProfilesTableFilterHeader.cpp
     ui/utils/ReorderListWidget.cpp
     ui/utils/ScreenQrScanner.cpp
 )
