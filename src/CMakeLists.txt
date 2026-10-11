@@ -199,7 +199,6 @@ set(UI_SOURCES
     ui/widget/SubscriptionInfoCard.cpp
     ui/widget/json/JsonTree.cpp
     ui/widget/json/JsonCodeEdit.cpp
-    ui/widget/json/JsonValidator.cpp
     ui/widget/json/JsonSchemaValidator.cpp
     ui/widget/json/JsonIssueList.cpp
     ui/widget/json/JsonEditorDialog.cpp

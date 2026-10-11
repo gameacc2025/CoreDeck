@@ -43,6 +43,7 @@ include(cmake/nkr.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network Test ${QT_DBUS_COMPONENT})
 find_package(SQLite3 REQUIRED)
+find_package(protobuf REQUIRED)
 
 # Protobuf generation via myproto.cmake
 include(cmake/myproto.cmake)
