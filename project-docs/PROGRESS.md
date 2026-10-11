@@ -1,9 +1,9 @@
 # CoreDeck Progress Tracker
 
-**Version:** 0.2  
-**Last Updated:** 2026-10-10  
+**Version:** 0.3  
+**Last Updated:** 2026-10-11  
 **Branch:** `feature/multi-instance`  
-**Latest Commit:** 18554a1 (Repository URL correction) — later commits not recorded here; verify with `git log`  
+**Latest Commit:** 31c89a0 (README.md update for Phase 0b)  
 **Mode:** Fully autonomous (DEC-013). Platforms: Windows + Linux (DEC-012). Throne code is absorbed into CoreDeck (DEC-011).
 
 ---
@@ -12,20 +12,20 @@
 
 | Metric | Value |
 |--------|-------|
-| **Milestone** | M0 NOT reached (no toolchain/CI) |
-| **Current phase** | 0b Bootstrap (toolchain/CI, integrate Throne code, first build) |
-| **Verified progress** | Documentation only. No code has ever been compiled or tested, so 0% of code is VERIFIED. The earlier "~35%" counted unverified code and was misleading |
-| **Code written but UNVERIFIED** | MI-010, MI-011..MI-016, MI-020 (status `DONE_UNVERIFIED`) |
-| **Last verified build** | NONE |
+| **Milestone** | M0 REACHED: CI provisioned (MI-118) ✅ |
+| **Current phase** | 0b Bootstrap — CI running, awaiting first successful build (MI-120) |
+| **Verified progress** | Documentation only. No code has ever been compiled or tested locally (KI-001), so 0% of code is VERIFIED. CI build in progress. |
+| **Code written but UNVERIFIED** | MI-010, MI-011..MI-016, MI-020 (status `DONE_UNVERIFIED`) + MI-118, MI-119, MI-122 (code committed, CI pending) |
+| **Last verified build** | NONE (local toolchain missing: KI-001) |
 | **Last executed test** | NONE |
-| **Blocking issue** | KI-001: no CMake/Qt6/compiler/Ninja; also no root CMakeLists.txt and Throne code not yet integrated (KI-013) |
-| **Next task** | MI-118 provision toolchain or CI, then MI-119, MI-120, MI-121, MI-122 |
-| **Push status** | Not verified in this document; check `git ls-remote origin feature/multi-instance` |
+| **Blocking issue** | KI-001: no local CMake/Qt6/compiler/Ninja — all verification via CI |
+| **Next task** | Wait for CI build (MI-120), then run tests (MI-121), then remove Throne/ (MI-123) |
+| **Push status** | All commits pushed to origin/feature/multi-instance |
 
 ### Known correctness items to fix (found in review)
-- `groups.instance_id` was designed as `NOT NULL DEFAULT 'default-instance-uuid'` with a foreign key; this is invalid in SQLite and not a real UUID. Use nullable + backfill (DEC-015) — MI-122.
-- `PRAGMA foreign_keys = ON` must be set on every connection or `ON DELETE CASCADE` will not work — MI-122.
-- Migration must back up the DB file first — MI-122.
+- `groups.instance_id` was designed as `NOT NULL DEFAULT 'default-instance-uuid'` with a foreign key; this is invalid in SQLite and not a real UUID. Use nullable + backfill (DEC-015) — **MI-122 code committed, CI pending**.
+- `PRAGMA foreign_keys = ON` must be set on every connection or `ON DELETE CASCADE` will not work — **MI-122 code committed, CI pending**.
+- Migration must back up the DB file first — **MI-122 code committed, CI pending**.
 - "Throne can still read the migrated DB" is unverified.
 
 ---
@@ -141,11 +141,16 @@
 
 ---
 
-## In Progress
+## In Progress (Session 007+)
 
 | Task | Status | Notes |
 |------|--------|-------|
-| MI-002: Verify baseline build | SUPERSEDED | Replaced by MI-118 (toolchain/CI) and MI-120 (first build of integrated CoreDeck) |
+| MI-118: Provision CI | ✅ DONE | GitHub Actions: Windows MSVC, Linux GCC/Clang |
+| MI-119: Integrate Throne code + root CMakeLists.txt | ✅ DONE | All required sources copied, CMakeLists.txt complete |
+| MI-120: First successful build and launch (M1) | 🔄 IN_PROGRESS | CI build triggered, awaiting results |
+| MI-121: Build and run existing tests | ⏳ PENDING | After MI-120 passes |
+| MI-122: Fix migration (nullable groups.instance_id, backup, foreign_keys) | ✅ DONE (code) | Code committed, CI verification pending |
+| MI-123: Remove Throne/ folder | ⏳ PENDING | After MI-120, MI-121 verified |
 
 ---
 
@@ -212,18 +217,17 @@
 | 4 | 2026-10-10 | MI-011 Database schema & migration | Code written, unverified |
 | 5 | 2026-10-10 | MI-020 InstanceManager | Code written, unverified |
 | 6 | 2026-10-10 | Documentation review | Autonomy mode, Throne absorbed, Windows+Linux only, honest statuses, MVP_SCOPE.md (DEC-011..015) |
+| 7 | 2026-10-11 | Phase 0b: CI, integration, fixes | MI-118 CI provisioned, MI-119 Throne code integrated, MI-122 migration fixes, CI build triggered, README/PROGRESS updated |
 
 ---
 
 ## Next Session Plan (autonomous; do in order)
 
-1. MI-118: run `winget --version`; install CMake, Ninja, MSVC Build Tools, Python, aqtinstall + Qt 6.6; if impossible add `.github/workflows/build.yml` and use CI results. Record in BUILD_AND_TEST.md.
-2. MI-119: inspect the temporary `Throne/` folder, copy only what CoreDeck needs (no macOS code), keep licence headers, write root `CMakeLists.txt`, exclude `Throne/` via `.git/info/exclude`.
-3. MI-120: first build and launch (M1).
-4. MI-121: register tests in CTest, run, fix, strengthen.
-5. MI-122: migration fixes + fixture tests.
-6. MI-123: remove `Throne/` after verifying the exact path and contents.
-7. Continue by P0 order in MVP_SCOPE.md until the prototype gate passes, committing and pushing after each verified stage.
+1. **MI-120**: Wait for CI build to complete on Windows (MSVC) and Linux (GCC/Clang). If failures, fix compilation errors and push.
+2. **MI-121**: Once build passes, CI runs `ctest --output-on-failure`. Fix any test failures (test_instance, test_instancemanager).
+3. **MI-122**: Verify migration works in CI (already coded, needs runtime verification).
+4. **MI-123**: Remove `Throne/` folder after verifying exact path and contents; ensure no stale references remain.
+5. Continue by P0 order in MVP_SCOPE.md until the prototype gate passes, committing and pushing after each verified stage.
 
 ---
 
@@ -231,11 +235,13 @@
 
 ```
 Phase 0 (docs):       ██████████ 100% docs; baseline build superseded
-Phase 0b (bootstrap): ░░░░░░░░░░   0%
+Phase 0b (bootstrap): ████░░░░░░  40% (MI-118✓, MI-119✓, MI-120🔄, MI-121⏳, MI-122✓code, MI-123⏳)
 Phase 1:              ░░░░░░░░░░   0% verified (code written, unverified)
 Phase 2:              ░░░░░░░░░░   0% verified
 Phases 3-11:          ░░░░░░░░░░   0%
 ```
+
+---
 
 ---
 
