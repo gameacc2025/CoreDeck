@@ -275,7 +275,6 @@ set(UI_SOURCES
     ui/stats/TrafficChartWidget.cpp
     ui/utils/ConnectionsTreeModel.cpp
     ui/utils/ConnectionsTreeFilterProxyModel.cpp
-    ui/utils/ConnectionsFilterHeader.cpp
     ui/utils/DataViewHtmlGenerator.cpp
     ui/utils/ProfilesTableModel.cpp
     ui/utils/ProfilesFilterProxyModel.cpp
@@ -366,7 +365,7 @@ target_link_libraries(CoreDeck PRIVATE
     ${QT_DBUS_LIBRARY}
     SQLiteCpp
     spb-proto
-    Protobuf::libprotobuf
+    protobuf::libprotobuf
     Threads::Threads
     ${CMAKE_DL_LIBS}
 )
