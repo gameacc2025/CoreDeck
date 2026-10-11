@@ -42,7 +42,8 @@ endif ()
 include(cmake/nkr.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network Test ${QT_DBUS_COMPONENT})
-find_package(SQLite3 REQUIRED)
+# SQLite3: we compile sqlite3.c directly via SQLiteCpp sources, so system package not required
+find_package(SQLite3 QUIET)
 find_package(Protobuf REQUIRED)
 
 # Protobuf generation via myproto.cmake

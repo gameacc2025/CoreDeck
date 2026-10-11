@@ -3,6 +3,7 @@
 enable_testing()
 
 include_directories(
+    ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/3rdparty/SQLiteCpp/include
     ${CMAKE_SOURCE_DIR}/3rdparty/simple-protobuf
