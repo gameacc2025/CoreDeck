@@ -15,7 +15,7 @@
 #include <QLocalServer>
 #include <QThread>
 #include <QDateTime>
-#include "3rdparty/WinCommander.hpp"
+#include "WinCommander.hpp"
 
 
 #include "include/global/Configs.hpp"
@@ -43,7 +43,7 @@
 #ifdef Q_OS_MACOS
 #include <QFileOpenEvent>
 
-// macOS reuses the running app and delivers throne:// URLs and opened files as a QFileOpenEvent, never via argv.
+// macOS reuses the running app and delivers coredeck:// URLs and opened files as a QFileOpenEvent, never via argv.
 class MacOpenEventFilter : public QObject {
 public:
     using QObject::QObject;
@@ -53,7 +53,7 @@ protected:
         if (event->type() == QEvent::FileOpen) {
             const auto openEvent = static_cast<QFileOpenEvent *>(event);
             const QString url = openEvent->url().toString();
-            if (url.startsWith("throne://")) {
+            if (url.startsWith("coredeck://")) {
                 Deeplink_Submit(url);
                 return true;
             }
@@ -168,7 +168,7 @@ namespace {
     // QFileInfo::isWritable reports the read-only attribute, not what a UAC-filtered token can actually do.
     bool DirIsWritable(const QDir &dir) {
         if (!dir.exists() && !QDir().mkpath(dir.absolutePath())) return false;
-        QFile probe(dir.absoluteFilePath(".throne-write-test"));
+        QFile probe(dir.absoluteFilePath(".coredeck-write-test"));
         if (!probe.open(QIODevice::WriteOnly)) return false;
         probe.close();
         probe.remove();
@@ -177,7 +177,7 @@ namespace {
 
     bool ConfigDirIsUsable(const QDir &configDir) {
         if (!DirIsWritable(configDir)) return false;
-        const QString db = configDir.absoluteFilePath("throne.db");
+        const QString db = configDir.absoluteFilePath("coredeck.db");
         if (!QFile::exists(db)) return true;
         QFile file(db);
         return file.open(QIODevice::ReadWrite);
@@ -208,7 +208,7 @@ namespace {
 
         const QString userConfig = userWd.absoluteFilePath("config");
         QDir().mkpath(userConfig);
-        if (!QFile::exists(userConfig + "/throne.db") && QFile::exists(installConfig + "/throne.db")) {
+        if (!QFile::exists(userConfig + "/coredeck.db") && QFile::exists(installConfig + "/coredeck.db")) {
             CopyDirContents(installConfig, userConfig);
             LOG_WARN(QString("copied existing config from %1").arg(installConfig));
         }
@@ -306,7 +306,7 @@ int main(int argc, char* argv[]) {
 
     appStartEpoch = QDateTime::currentSecsSinceEpoch();
 
-    Configs::initDB(QString(QDir::currentPath() + QDir::separator() + "throne.db").toStdString());
+    Configs::initDB(QString(QDir::currentPath() + QDir::separator() + "coredeck.db").toStdString());
 
     Logging::SetLevel(Logging::LevelFromString(Configs::dataManager->settingsRepo->log_file_level));
 
@@ -415,7 +415,7 @@ int main(int argc, char* argv[]) {
         // One url per line; the tail carries no trailing newline, so it is only flushed on disconnect.
         auto pending = std::make_shared<QByteArray>();
         auto handleLine = [](const QString &line) {
-            if (line.startsWith("throne://")) {
+            if (line.startsWith("coredeck://")) {
                 Deeplink_Submit(line);
             } else if (line.startsWith("file://")) {
                 LaunchFiles_Submit({QUrl(line).toLocalFile()});
