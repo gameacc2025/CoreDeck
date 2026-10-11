@@ -85,7 +85,7 @@ include_directories(
 )
 
 # 3rdparty: simple-protobuf (SQLiteCpp sources added directly in src/CMakeLists.txt)
-add_subdirectory(3rdparty/simple-protobuf)
+# Handled by cmake/myproto.cmake
 
 # CoreDeck source
 add_subdirectory(src)

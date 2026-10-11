@@ -18,6 +18,9 @@ jobs:
     name: Windows (MSVC)
     runs-on: windows-latest
     timeout-minutes: 45
+    defaults:
+      run:
+        shell: cmd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,25 +36,33 @@ jobs:
           arch: win64_msvc2019_64
           cache: true
 
-      - name: Install CMake and Ninja
+      - name: Install CMake, Ninja, and SQLite3
         run: |
-          choco install cmake ninja --no-progress -y
+          choco install cmake ninja sqlite --no-progress -y
           refreshenv
 
       - name: Configure (MSVC)
-        shell: pwsh
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
         env:
-          QT_INSTALL_PATH: ${{ steps.install-qt.outputs.qt-install-path }}
+          QT6_DIR: ${{ steps.install-qt.outputs.qt-install-path }}
         run: |
-          cmake -G "${{ env.CMAKE_GENERATOR }}" `
-            -DCMAKE_BUILD_TYPE=Release `
-            -DCMAKE_PREFIX_PATH="${{ env.QT_INSTALL_PATH }}" `
+          cmake -G "%CMAKE_GENERATOR%" ^
+            -DCMAKE_BUILD_TYPE=Release ^
+            -DCMAKE_PREFIX_PATH="%QT6_DIR%" ^
             -B build
 
       - name: Build
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
         run: cmake --build build --config Release --parallel
 
       - name: Run Tests
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
         run: |
           cd build
           ctest --output-on-failure --parallel 2
