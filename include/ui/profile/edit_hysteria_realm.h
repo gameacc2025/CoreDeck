@@ -2,7 +2,7 @@
 
 #include <QDialog>
 #include "ui_edit_hysteria_realm.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 namespace Ui {
 class EditHysteriaRealm;

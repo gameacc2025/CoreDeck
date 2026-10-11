@@ -1,14 +1,14 @@
-#include "include/database/entities/Group.h"
-#include "include/database/GroupsRepo.h"
-#include "include/global/Utils.hpp"
+#include "database/entities/Group.h"
+#include "database/GroupsRepo.h"
+#include "global/Utils.hpp"
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QMutexLocker>
 #include <QSet>
 
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/ui/mainwindow.h"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
+#include "ui/mainwindow.h"
 
 
 namespace Configs {

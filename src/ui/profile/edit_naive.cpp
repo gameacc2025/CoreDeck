@@ -1,6 +1,6 @@
-#include "include/ui/profile/edit_naive.h"
+#include "ui/profile/edit_naive.h"
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 EditNaive::EditNaive(QWidget *parent)
     : QWidget(parent),

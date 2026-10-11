@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-#include "include/stats/connections/connectionLister.hpp"
+#include "stats/connections/connectionLister.hpp"
 
 namespace ConnectionsTree {
 

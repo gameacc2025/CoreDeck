@@ -1,8 +1,8 @@
-#include "include/configs/common/xrayStreamSetting.h"
+#include "configs/common/xrayStreamSetting.h"
 #include <QUrlQuery>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     namespace {

@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_ssh.h"
+#include "ui/profile/edit_ssh.h"
 #include <QFileDialog>
 
 EditSSH::EditSSH(QWidget *parent) : QWidget(parent), ui(new Ui::EditSSH) {

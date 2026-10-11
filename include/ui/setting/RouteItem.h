@@ -8,7 +8,7 @@
 
 #include "3rdparty/qv2ray/v2/ui/QvAutoCompleteTextEdit.hpp"
 #include "ui_RouteItem.h"
-#include "include/database/entities/RouteProfile.h"
+#include "database/entities/RouteProfile.h"
 
 class QListWidget;
 

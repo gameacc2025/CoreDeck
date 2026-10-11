@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_trojan.h"
+#include "ui/profile/edit_trojan.h"
 
 EditTrojan::EditTrojan(QWidget *parent)
     : QWidget(parent),

@@ -1,4 +1,4 @@
-#include "include/ui/widget/SubscriptionInfoCard.hpp"
+#include "ui/widget/SubscriptionInfoCard.hpp"
 
 #include <QApplication>
 #include <QDateTime>
@@ -18,11 +18,11 @@
 #include <QTimer>
 #include <algorithm>
 
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/database/entities/Group.h"
-#include "include/global/Utils.hpp"
-#include "include/ui/setting/ThemeManager.hpp"
-#include "include/ui/stats/dialog_endpoint_details.h"
+#include "configs/sub/GroupUpdater.hpp"
+#include "database/entities/Group.h"
+#include "global/Utils.hpp"
+#include "ui/setting/ThemeManager.hpp"
+#include "ui/stats/dialog_endpoint_details.h"
 
 namespace {
     enum class Glyph {

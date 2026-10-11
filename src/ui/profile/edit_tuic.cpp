@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_tuic.h"
+#include "ui/profile/edit_tuic.h"
 
 EditTuic::EditTuic(QWidget *parent)
     : QWidget(parent),

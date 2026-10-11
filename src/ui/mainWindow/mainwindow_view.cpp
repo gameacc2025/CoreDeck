@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 #include "NkrVersion.h"
 
 #include <QApplication>
@@ -7,19 +7,19 @@
 #include <QTimer>
 #include <QToolButton>
 
-#include "include/api/RPC.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/database/SettingsRepo.h"
-#include "include/global/LocalNetwork.hpp"
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
-#include "include/sys/KillSwitch.hpp"
-#include "include/ui/setting/Icon.hpp"
-#include "include/ui/stats/dialog_auto_selector.h"
-#include "include/ui/utils/ProfilesTableFilterHeader.h"
-#include "include/ui/utils/ProfilesTableModel.h"
-#include "include/ui/widget/StartStopButton.hpp"
+#include "api/RPC.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
+#include "database/SettingsRepo.h"
+#include "global/LocalNetwork.hpp"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
+#include "sys/KillSwitch.hpp"
+#include "ui/setting/Icon.hpp"
+#include "ui/stats/dialog_auto_selector.h"
+#include "ui/utils/ProfilesTableFilterHeader.h"
+#include "ui/utils/ProfilesTableModel.h"
+#include "ui/widget/StartStopButton.hpp"
 
 // Mirrors the language switch in main.cpp; QLocale() alone follows the system, not an explicit setting.
 bool MainWindow::usesTightLabels() const {

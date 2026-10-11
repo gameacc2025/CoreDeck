@@ -1,7 +1,7 @@
-#include "include/global/OtpPlaceholder.hpp"
+#include "global/OtpPlaceholder.hpp"
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/OtpProfilesRepo.h"
+#include "database/DatabaseManager.h"
+#include "database/OtpProfilesRepo.h"
 
 namespace Configs {
     QString ResolveOtpCode(int otpProfileId)

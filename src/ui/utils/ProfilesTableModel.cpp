@@ -1,14 +1,14 @@
-#include "include/ui/utils/ProfilesTableModel.h"
-#include "include/global/Configs.hpp"
-#include "include/database/entities/Profile.h"
-#include "include/configs/common/Outbound.h"
+#include "ui/utils/ProfilesTableModel.h"
+#include "global/Configs.hpp"
+#include "database/entities/Profile.h"
+#include "configs/common/Outbound.h"
 #include <QApplication>
 #include <QMimeData>
 #include <QPalette>
 
-#include "include/configs/generate.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
+#include "configs/generate.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
 
 ProfilesTableModel::ProfilesTableModel(QObject *parent)
     : QAbstractTableModel(parent) {}

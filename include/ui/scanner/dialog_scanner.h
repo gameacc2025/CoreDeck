@@ -5,7 +5,7 @@
 #include <QSet>
 #include <memory>
 
-#include "include/database/entities/IpScan.h"
+#include "database/entities/IpScan.h"
 #include "ui_dialog_scanner.h"
 
 QT_BEGIN_NAMESPACE

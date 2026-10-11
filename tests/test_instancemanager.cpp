@@ -1,7 +1,7 @@
-#include "include/instance/InstanceManager.h"
-#include "include/database/Database.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/entities/Instance.h"
+#include "instance/InstanceManager.h"
+#include "database/Database.h"
+#include "database/DatabaseManager.h"
+#include "database/entities/Instance.h"
 
 #include <QCoreApplication>
 #include <QDebug>

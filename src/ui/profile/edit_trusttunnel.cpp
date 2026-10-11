@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_trusttunnel.h"
+#include "ui/profile/edit_trusttunnel.h"
 
 EditTrustTunnel::EditTrustTunnel(QWidget *parent)
     : QWidget(parent),

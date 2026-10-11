@@ -1,4 +1,4 @@
-#include "include/ui/widget/json/JsonTree.h"
+#include "ui/widget/json/JsonTree.h"
 
 #include <QObject>
 

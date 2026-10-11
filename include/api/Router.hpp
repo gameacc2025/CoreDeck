@@ -10,7 +10,7 @@
 #include <memory>
 #include <optional>
 
-#include "include/api/remote/Message.hpp"
+#include "api/remote/Message.hpp"
 
 class MainWindow;
 class QRegularExpression;

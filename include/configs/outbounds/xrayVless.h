@@ -1,7 +1,7 @@
 #pragma once
-#include "include/configs/common/Outbound.h"
-#include "include/configs/common/xrayMultiplex.h"
-#include "include/configs/common/xrayStreamSetting.h"
+#include "configs/common/Outbound.h"
+#include "configs/common/xrayMultiplex.h"
+#include "configs/common/xrayStreamSetting.h"
 
 namespace Configs {
     inline QStringList xrayFlows = {"xtls-rprx-vision", "xtls-rprx-vision-udp443"};

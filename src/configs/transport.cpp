@@ -1,9 +1,9 @@
-#include "include/configs/common/transport.h"
+#include "configs/common/transport.h"
 
 #include <QJsonArray>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool Transport::ParseFromLink(const QString& link)

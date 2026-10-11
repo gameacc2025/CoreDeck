@@ -3,7 +3,7 @@
 #include "profile_editor.h"
 
 #include "ui_dialog_edit_profile.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 namespace Ui {
     class DialogEditProfile;

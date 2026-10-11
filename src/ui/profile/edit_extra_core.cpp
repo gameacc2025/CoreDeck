@@ -1,10 +1,10 @@
-#include "include/ui/profile/edit_extra_core.h"
+#include "ui/profile/edit_extra_core.h"
 
 #include <QFileDialog>
 
 
 
-#include "include/ui/profile/dialog_edit_profile.h"
+#include "ui/profile/dialog_edit_profile.h"
 
 EditExtraCore::EditExtraCore(QWidget *parent) : QWidget(parent),
                                                 ui(new Ui::EditExtraCore) {

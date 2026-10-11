@@ -1,8 +1,8 @@
-#include "include/configs/outbounds/xrayVless.h"
+#include "configs/outbounds/xrayVless.h"
 
 #include <QUrlQuery>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     namespace {

@@ -1,18 +1,18 @@
-#include "include/stats/traffic/TrafficLooper.hpp"
+#include "stats/traffic/TrafficLooper.hpp"
 
-#include "include/api/RPC.h"
-#include "include/ui/mainwindow_interface.h"
+#include "api/RPC.h"
+#include "ui/mainwindow_interface.h"
 
 #include <QThread>
 #include <QJsonDocument>
 #include <QElapsedTimer>
 #include <QSet>
 
-#include "include/configs/generate.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/DatabaseManager.h"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
+#include "configs/generate.h"
+#include "database/ProfilesRepo.h"
+#include "database/GroupsRepo.h"
+#include "database/DatabaseManager.h"
+#include "stats/traffic/TrafficStatsManager.hpp"
 
 
 namespace Stats {

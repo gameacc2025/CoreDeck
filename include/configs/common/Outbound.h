@@ -8,7 +8,7 @@
 #include "transport.h"
 #include "xrayMultiplex.h"
 #include "xrayStreamSetting.h"
-#include "include/configs/baseConfig.h"
+#include "configs/baseConfig.h"
 
 namespace Configs
 {

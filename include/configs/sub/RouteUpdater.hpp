@@ -3,7 +3,7 @@
 #include <QString>
 #include <memory>
 
-#include "include/database/entities/RouteProfile.h"
+#include "database/entities/RouteProfile.h"
 
 namespace RouteUpdate {
     // Blocks on the network (worker thread only); returns an error string, empty on success.

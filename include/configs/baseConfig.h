@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QJsonObject>
-#include "include/global/Configs.hpp"
-#include "include/configs/sub/clash.hpp"
+#include "global/Configs.hpp"
+#include "configs/sub/clash.hpp"
 
 namespace Configs
 {

@@ -1,6 +1,6 @@
-#include "include/ui/setting/Icon.hpp"
+#include "ui/setting/Icon.hpp"
 
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 #include <QHash>
 #include <QPixmap>

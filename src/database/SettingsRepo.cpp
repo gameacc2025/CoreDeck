@@ -1,11 +1,11 @@
-#include "include/database/SettingsRepo.h"
+#include "database/SettingsRepo.h"
 #include "NkrVersion.h"
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QDebug>
 #include <QUuid>
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 namespace Configs {
     SettingsRepo::SettingsRepo(Database& database) : db(database) {

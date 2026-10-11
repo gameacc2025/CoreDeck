@@ -1,9 +1,9 @@
-#include "include/ui/widget/json/JsonIssueList.h"
+#include "ui/widget/json/JsonIssueList.h"
 
 #include <QStyle>
 
-#include "include/ui/widget/json/JsonCodeEdit.h"
-#include "include/ui/widget/json/JsonTree.h"
+#include "ui/widget/json/JsonCodeEdit.h"
+#include "ui/widget/json/JsonTree.h"
 
 namespace JsonEdit {
     JsonIssueList::JsonIssueList(QWidget* parent) : QListWidget(parent) {

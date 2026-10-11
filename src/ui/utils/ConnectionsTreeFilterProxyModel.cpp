@@ -1,5 +1,5 @@
-#include "include/ui/utils/ConnectionsTreeFilterProxyModel.h"
-#include "include/ui/utils/ConnectionsTreeModel.h"
+#include "ui/utils/ConnectionsTreeFilterProxyModel.h"
+#include "ui/utils/ConnectionsTreeModel.h"
 
 #include <algorithm>
 

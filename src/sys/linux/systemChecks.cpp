@@ -1,4 +1,4 @@
-#include "include/sys/linux/systemChecks.h"
+#include "sys/linux/systemChecks.h"
 
 #include <QFile>
 

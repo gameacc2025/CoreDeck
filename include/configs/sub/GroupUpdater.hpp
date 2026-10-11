@@ -10,8 +10,8 @@
 
 #include <functional>
 
-#include "include/database/entities/Group.h"
-#include "include/global/DeviceDetailsHelper.hpp"
+#include "database/entities/Group.h"
+#include "global/DeviceDetailsHelper.hpp"
 
 namespace Subscription {
     struct RequestIdentity {

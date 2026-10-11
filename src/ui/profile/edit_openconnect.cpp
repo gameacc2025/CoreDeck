@@ -1,12 +1,12 @@
-#include "include/ui/profile/edit_openconnect.h"
+#include "ui/profile/edit_openconnect.h"
 
 #include <QInputDialog>
 
-#include "include/ui/profile/edit_openconnect_advanced.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/global/OtpPlaceholder.hpp"
-#include "include/global/Utils.hpp"
+#include "ui/profile/edit_openconnect_advanced.h"
+#include "database/DatabaseManager.h"
+#include "database/OtpProfilesRepo.h"
+#include "global/OtpPlaceholder.hpp"
+#include "global/Utils.hpp"
 
 EditOpenConnect::EditOpenConnect(QWidget *parent) : QWidget(parent), ui(new Ui::EditOpenConnect) {
     ui->setupUi(this);

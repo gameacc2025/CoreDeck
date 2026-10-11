@@ -1,7 +1,7 @@
-#include "include/sys/KillSwitch.hpp"
+#include "sys/KillSwitch.hpp"
 
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
 #include <QDeadlineTimer>
 #include <QDir>

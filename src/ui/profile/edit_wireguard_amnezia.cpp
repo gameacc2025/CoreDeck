@@ -1,12 +1,12 @@
-#include "include/ui/profile/edit_wireguard_amnezia.h"
+#include "ui/profile/edit_wireguard_amnezia.h"
 
 #include <QGuiApplication>
 #include <QLayout>
 #include <QScreen>
 #include <QScrollBar>
 
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Utils.hpp"
+#include "global/GuiUtils.hpp"
+#include "global/Utils.hpp"
 
 EditWireguardAmnezia::EditWireguardAmnezia(QWidget *parent, const std::shared_ptr<Configs::Profile> &_ent)
     : QDialog(parent)

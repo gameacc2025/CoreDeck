@@ -1,6 +1,6 @@
-#include "include/ui/profile/edit_mieru.h"
+#include "ui/profile/edit_mieru.h"
 
-#include "include/global/GuiUtils.hpp"
+#include "global/GuiUtils.hpp"
 
 EditMieru::EditMieru(QWidget *parent) : QWidget(parent), ui(new Ui::EditMieru) {
     ui->setupUi(this);

@@ -10,7 +10,7 @@
 #include <utility>
 #include <type_traits>
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 namespace Configs {
     struct ProfileInsertRow {

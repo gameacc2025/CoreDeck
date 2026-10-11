@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/vless.h"
+#include "configs/outbounds/vless.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool vless::ParseFromLink(const QString& link)

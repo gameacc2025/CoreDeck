@@ -1,12 +1,12 @@
-#include "include/database/ProfilesRepo.h"
+#include "database/ProfilesRepo.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <map>
 
-#include "include/database/GroupsRepo.h"
-#include "include/configs/common/OutboundFactory.h"
-#include "include/ui/mainwindow.h"
+#include "database/GroupsRepo.h"
+#include "configs/common/OutboundFactory.h"
+#include "ui/mainwindow.h"
 
 
 namespace Configs {

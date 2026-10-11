@@ -1,9 +1,9 @@
-#include "include/ui/setting/dialog_edit_otp.h"
+#include "ui/setting/dialog_edit_otp.h"
 
 #include <QMessageBox>
 #include <QPainter>
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 namespace {
     QIcon RecolorIcon(const QString &path, const QColor &color) {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Database.h"
-#include "include/global/Const.hpp"
-#include "include/sys/UrlScheme.hpp"
+#include "global/Const.hpp"
+#include "sys/UrlScheme.hpp"
 #include <QMutexLocker>
 #include <QJsonObject>
 #include <QMap>
@@ -10,7 +10,7 @@
 #include <atomic>
 
 #ifdef Q_OS_WIN
-#include "include/sys/windows/WinVersion.h"
+#include "sys/windows/WinVersion.h"
 #endif
 
 namespace Configs {

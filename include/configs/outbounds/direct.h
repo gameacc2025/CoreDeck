@@ -1,6 +1,6 @@
 #pragma once
-#include "include/configs/common/Outbound.h"
-#include "include/configs/common/utils.h"
+#include "configs/common/Outbound.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     class direct : public outbound {

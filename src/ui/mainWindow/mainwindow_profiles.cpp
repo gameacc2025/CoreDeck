@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #include <QApplication>
 #include <QCheckBox>
@@ -26,15 +26,15 @@
 #include "3rdparty/QrDecoder.h"
 #include "3rdparty/qrcodegen.hpp"
 
-#include "include/ui/utils/ScreenQrScanner.h"
+#include "ui/utils/ScreenQrScanner.h"
 
-#include "include/configs/generate.h"
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/ui/mainWindow/MainWindowInternal.h"
-#include "include/ui/profile/dialog_edit_profile.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "configs/generate.h"
+#include "configs/sub/GroupUpdater.hpp"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "ui/mainWindow/MainWindowInternal.h"
+#include "ui/profile/dialog_edit_profile.h"
+#include "ui/utils/ProfilesTableModel.h"
 
 namespace {
     constexpr int removeListPreviewLimit = 20;

@@ -5,7 +5,7 @@
 #include <QMutex>
 #include <atomic>
 
-#include "include/database/TrafficStatsRepo.h"
+#include "database/TrafficStatsRepo.h"
 
 namespace Stats {
     // Direct (non-proxied) egress; negative so it cannot collide with a real profile id.

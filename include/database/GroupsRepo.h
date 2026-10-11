@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Database.h"
-#include "include/database/entities/Group.h"
+#include "database/entities/Group.h"
 #include <memory>
 #include <mutex>
 #include <map>

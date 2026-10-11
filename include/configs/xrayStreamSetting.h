@@ -1,5 +1,5 @@
 #pragma once
-#include "include/configs/baseConfig.h"
+#include "configs/baseConfig.h"
 
 namespace Configs {
     inline QStringList XrayNetworks = {"raw", "xhttp", "ws", "httpupgrade", "grpc"};

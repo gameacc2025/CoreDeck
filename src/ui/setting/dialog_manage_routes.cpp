@@ -1,8 +1,8 @@
-#include "include/ui/setting/dialog_manage_routes.h"
+#include "ui/setting/dialog_manage_routes.h"
 
 #include <QClipboard>
 
-#include "include/global/GuiUtils.hpp"
+#include "global/GuiUtils.hpp"
 
 #include <QFile>
 #include <QMessageBox>
@@ -24,12 +24,12 @@
 
 #include <algorithm>
 
-#include "include/configs/generate.h"
-#include "include/configs/sub/warp.h"
-#include "include/configs/sub/RouteUpdater.hpp"
+#include "configs/generate.h"
+#include "configs/sub/warp.h"
+#include "configs/sub/RouteUpdater.hpp"
 
-#include "include/database/RoutesRepo.h"
-#include "include/ui/setting/RawRouteItem.h"
+#include "database/RoutesRepo.h"
+#include "ui/setting/RawRouteItem.h"
 
 namespace {
     constexpr auto defaultWarpApiHost = "api.cloudflareclient.com";

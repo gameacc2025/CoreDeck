@@ -1,6 +1,6 @@
-#include "include/database/InstanceRepository.h"
-#include "include/global/Logger.hpp"
-#include "include/global/Utils.hpp"
+#include "database/InstanceRepository.h"
+#include "global/Logger.hpp"
+#include "global/Utils.hpp"
 #include <QUuid>
 #include <QJsonDocument>
 #include <QJsonObject>

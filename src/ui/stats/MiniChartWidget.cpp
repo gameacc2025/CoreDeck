@@ -1,4 +1,4 @@
-#include "include/ui/stats/MiniChartWidget.h"
+#include "ui/stats/MiniChartWidget.h"
 
 #include <QPainter>
 #include <QPaintEvent>

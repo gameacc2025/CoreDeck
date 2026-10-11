@@ -5,7 +5,7 @@
 #include <QList>
 #include <memory>
 
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 #include "ui_dialog_ip_lists.h"
 
 QT_BEGIN_NAMESPACE

@@ -1,6 +1,6 @@
 # CoreDeck Project Specification
 
-**Version:** 0.1 (Draft)  
+**Version:** 0.2 (Draft)  
 **Status:** PLANNED  
 **Last Updated:** 2026-10-10
 
@@ -8,7 +8,7 @@
 
 ## 1. Product Vision
 
-CoreDeck is a **multi-instance proxy client** forked from [Throne](https://github.com/throneproj/Throne). It enables a single UI to manage multiple independent proxy environments ("Instances") simultaneously, replacing the need to run multiple separate GUI applications (like multiple v2rayN instances) for different proxy configurations.
+CoreDeck is a **multi-instance proxy client** derived from [Throne](https://github.com/throneproj/Throne). The required Throne code lives inside CoreDeck's own repository and CoreDeck is developed independently (DEC-011). It enables a single UI to manage multiple independent proxy environments ("Instances") simultaneously, replacing the need to run multiple separate GUI applications (like multiple v2rayN instances) for different proxy configurations.
 
 ### Core Value Proposition
 - **One UI, Many Instances** — Manage 5-10+ independent proxy environments from a single window
@@ -50,6 +50,9 @@ Each Instance **must** have the following persistent attributes:
 | `api_port` | Integer | No | Management API port (if applicable) |
 | `bind_address` | String | Yes | Default: `127.0.0.1` |
 | `auto_start` | Boolean | Yes | Start Core on application launch |
+| `restart_on_crash` | Boolean | Yes | Default `false` (see section 8) |
+| `restore_last_profile` | Boolean | Yes | Default `true` (see section 8) |
+| `startup_delay_ms` | Integer | Yes | Default `0` (see section 8) |
 | `last_profile_id` | Integer | No | Last selected profile ID |
 | `last_active_profile_id` | Integer | No | Last successfully connected profile |
 | `dns_settings` | Object | No | DNS/routing overrides for this Instance |
@@ -58,7 +61,7 @@ Each Instance **must** have the following persistent attributes:
 
 ### Persistence Requirements
 - All Instance data **must survive** application restart
-- Data stored in SQLite database (extending Throne's `throne.db`)
+- Data stored in SQLite database (extending the Throne-format `throne.db` in place; see DEC-006, DEC-015)
 - Instance `id` (UUID) is the **primary key** for all relationships — never use display name
 
 ---
@@ -69,8 +72,8 @@ Each Instance **must** have the following persistent attributes:
 1. Create a **Default Instance** with:
    - `id`: Generated UUID
    - `name`: "Default"
-   - `core_type`: `xray` (if Xray binary available), else `singbox`
-   - `core_path`: Auto-detected from Throne's core management
+   - `core_type`: `xray`; if no Xray binary is found, fall back to `singbox` (decided in application logic, not in the DB default)
+   - `core_path`: Auto-detected by CoreDeck's core management (inherited from Throne)
    - `socks_port`: 10808 (or next available)
    - `http_port`: 10809 (or next available)
    - `bind_address`: `127.0.0.1`
@@ -260,7 +263,7 @@ v2rayN allows selecting Core (Xray vs sing-box) per Chain/profile. Throne curren
 
 ### TUN
 - **Deferred to Phase 10+** — Do not block Phase 1-5
-- Platform differences: Windows (Wintun), Linux (tun/tap + root), macOS (NetworkExtension)
+- Platform differences: Windows (Wintun), Linux (tun/tap + root)
 - When implemented: per-Instance TUN with explicit user selection
 - No automatic TUN activation without user action
 
@@ -271,8 +274,8 @@ v2rayN allows selecting Core (Xray vs sing-box) per Chain/profile. Throne curren
 | Platform | Status | Notes |
 |----------|--------|-------|
 | Windows 10/11 | Primary | Full support, Wintun for TUN |
-| Linux | Supported | AppImage, deb, rpm; TUN requires root/capabilities |
-| macOS | Supported | .app bundle; quarantine removal needed; TUN via NetworkExtension |
+| Linux | Supported | AppImage / deb / rpm; TUN requires root/capabilities |
+| macOS | **Out of scope** | Dropped by owner decision (DEC-012) |
 
 ### Build Requirements
 - Qt 6.x (Widgets, Network, LinguistTools, DBus on Linux)
@@ -298,7 +301,7 @@ v2rayN allows selecting Core (Xray vs sing-box) per Chain/profile. Throne curren
 
 ### Licenses
 - CoreDeck: GPL-3.0 (inherits from Throne)
-- Xray-core: GPL-3.0 / MPL-2.0
+- Xray-core: MPL-2.0 (verify against the official repository before shipping)
 - sing-box: GPL-3.0
 - Qt: LGPL-3.0 / Commercial
 - SQLiteCpp: MIT
@@ -351,6 +354,7 @@ v2rayN allows selecting Core (Xray vs sing-box) per Chain/profile. Throne curren
 - Advanced traffic shaping / QoS
 - Plugin marketplace
 - Mobile / Android / iOS
+- macOS
 
 ---
 
@@ -372,3 +376,4 @@ v2rayN allows selecting Core (Xray vs sing-box) per Chain/profile. Throne curren
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-10-10 | Initial | Draft specification from master prompt |
+| 0.2 | 2026-10-10 | Review | Missing Instance fields added, macOS dropped, Throne absorbed, Xray licence corrected |

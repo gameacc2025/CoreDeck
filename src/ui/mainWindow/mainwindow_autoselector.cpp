@@ -1,9 +1,9 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainWindow/TestRunner.h"
 
-#include "include/configs/AutoSelectorPlan.h"
-#include "include/database/ProfilesRepo.h"
+#include "configs/AutoSelectorPlan.h"
+#include "database/ProfilesRepo.h"
 
 #include <QSemaphore>
 

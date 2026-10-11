@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "Database.h"
-#include "include/database/entities/IpScan.h"
+#include "database/entities/IpScan.h"
 
 namespace Configs {
     // Stateless; safe from any thread.

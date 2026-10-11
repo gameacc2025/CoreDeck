@@ -16,7 +16,7 @@
 #include <core/gen/libcore.pb.h>
 #endif
 
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 class MainWindow;
 

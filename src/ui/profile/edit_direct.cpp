@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_direct.h"
+#include "ui/profile/edit_direct.h"
 
 EditDirect::EditDirect(QWidget *parent)
     : QWidget(parent),

@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/snell.h"
+#include "configs/outbounds/snell.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     namespace {

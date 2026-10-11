@@ -1,11 +1,11 @@
-#include "include/ui/setting/RouteItem.h"
+#include "ui/setting/RouteItem.h"
 
-#include "include/configs/generate.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/GroupsRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/configs/sub/RouteUpdater.hpp"
-#include "include/ui/setting/ThemeManager.hpp"
+#include "configs/generate.h"
+#include "database/ProfilesRepo.h"
+#include "database/GroupsRepo.h"
+#include "global/Configs.hpp"
+#include "configs/sub/RouteUpdater.hpp"
+#include "ui/setting/ThemeManager.hpp"
 
 #include <srslist.h>
 

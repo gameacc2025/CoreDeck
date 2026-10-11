@@ -1,14 +1,14 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainWindow/TestRunner.h"
 
-#include "include/stats/traffic/TrafficLooper.hpp"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
-#include "include/configs/AutoSelectorPlan.h"
-#include "include/api/RPC.h"
-#include "include/ui/utils/RestartPrompt.h"
-#include "include/ui/stats/dialog_endpoint_details.h"
+#include "stats/traffic/TrafficLooper.hpp"
+#include "stats/traffic/TrafficStatsManager.hpp"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
+#include "configs/AutoSelectorPlan.h"
+#include "api/RPC.h"
+#include "ui/utils/RestartPrompt.h"
+#include "ui/stats/dialog_endpoint_details.h"
 
 #include <QPushButton>
 #include <QMessageBox>
@@ -16,18 +16,18 @@
 #include <QFile>
 #include <QRegularExpression>
 
-#include "include/configs/generate.h"
-#include "include/configs/common/xrayStreamSetting.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/OtpPlaceholder.hpp"
-#include "include/global/RunningProfiles.hpp"
-#include "include/global/VpnCredentialOverride.hpp"
-#include "include/ui/profile/dialog_vpn_auth.h"
+#include "configs/generate.h"
+#include "configs/common/xrayStreamSetting.h"
+#include "database/GroupsRepo.h"
+#include "database/OtpProfilesRepo.h"
+#include "database/ProfilesRepo.h"
+#include "global/OtpPlaceholder.hpp"
+#include "global/RunningProfiles.hpp"
+#include "global/VpnCredentialOverride.hpp"
+#include "ui/profile/dialog_vpn_auth.h"
 
-#include "include/sys/KillSwitch.hpp"
-#include "include/sys/Process.hpp"
+#include "sys/KillSwitch.hpp"
+#include "sys/Process.hpp"
 
 #include <algorithm>
 #include <memory>

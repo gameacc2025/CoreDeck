@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #include <algorithm>
 #include <utility>
@@ -12,17 +12,17 @@
 #include <QUrl>
 
 #include "3rdparty/QrDecoder.h"
-#include "include/api/remote/Server.hpp"
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/configs/sub/RouteUpdater.hpp"
-#include "include/database/GroupsRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/global/PeriodicRunner.hpp"
-#include "include/sys/AutoRun.hpp"
-#include "include/sys/KillSwitch.hpp"
-#include "include/ui/mainWindow/MainWindowInternal.h"
-#include "include/ui/setting/Icon.hpp"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "api/remote/Server.hpp"
+#include "configs/sub/GroupUpdater.hpp"
+#include "configs/sub/RouteUpdater.hpp"
+#include "database/GroupsRepo.h"
+#include "database/RoutesRepo.h"
+#include "global/PeriodicRunner.hpp"
+#include "sys/AutoRun.hpp"
+#include "sys/KillSwitch.hpp"
+#include "ui/mainWindow/MainWindowInternal.h"
+#include "ui/setting/Icon.hpp"
+#include "ui/utils/ProfilesTableModel.h"
 
 namespace {
 

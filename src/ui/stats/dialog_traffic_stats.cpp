@@ -1,13 +1,13 @@
-#include "include/ui/stats/dialog_traffic_stats.h"
+#include "ui/stats/dialog_traffic_stats.h"
 
-#include "include/ui/stats/TrafficChartWidget.h"
+#include "ui/stats/TrafficChartWidget.h"
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/TrafficStatsRepo.h"
-#include "include/database/entities/Profile.h"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
-#include "include/global/Utils.hpp"
+#include "database/DatabaseManager.h"
+#include "database/ProfilesRepo.h"
+#include "database/TrafficStatsRepo.h"
+#include "database/entities/Profile.h"
+#include "stats/traffic/TrafficStatsManager.hpp"
+#include "global/Utils.hpp"
 
 #include <QComboBox>
 #include <QDateTime>
@@ -20,7 +20,7 @@
 
 #include <algorithm>
 
-#include "include/configs/generate.h"
+#include "configs/generate.h"
 
 namespace {
     // Named rows per breakdown table; the rest is folded into one "Other" row.

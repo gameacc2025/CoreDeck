@@ -1,4 +1,4 @@
-#include "include/ui/widget/TrayIcon.hpp"
+#include "ui/widget/TrayIcon.hpp"
 
 #ifndef Q_OS_MAC
 TrayIcon::TrayIcon(QObject *parent) : QObject(parent), m_tray(new QSystemTrayIcon(this)) {

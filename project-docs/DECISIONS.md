@@ -1,6 +1,6 @@
 # CoreDeck Architectural Decisions
 
-**Version:** 0.1  
+**Version:** 0.2  
 **Last Updated:** 2026-10-10
 
 ---
@@ -207,7 +207,8 @@ Option 2: **In-place migration with backward compatibility**
 - Create Default Instance UUID
 - Move all Groups → Default Instance
 - Copy Settings → InstanceSettings (Default Instance) + Global Settings
-- Add `instance_id` column to `groups` table
+- Add `instance_id` column to `groups` table (nullable + backfill, see DEC-015)
+- Back up the DB file before migrating (`*.pre-coredeck.bak`)
 - Mark migration complete (version table or flag)
 
 ---
@@ -326,6 +327,118 @@ v2rayN allows selecting Core per Chain. Throne's Chain outbound has no Core fiel
 
 ---
 
+## DEC-011: Throne Code Is Absorbed Into CoreDeck
+
+**Date:** 2026-10-10  
+**Status:** ACCEPTED
+
+### Context
+CoreDeck started as a fork with Throne cloned in a sibling folder (`Throne/`) as a read-only reference. The owner will develop CoreDeck alone from now on.
+
+### Options
+1. **Keep Throne as permanent reference/submodule** - tracks upstream, but CoreDeck can't build alone
+2. **Absorb required Throne code into CoreDeck's tree** - one self-contained repo
+3. **Rewrite from scratch** - high cost, violates MVP-first
+
+### Decision
+Option 2: **Integrate the Throne code CoreDeck needs into CoreDeck's own source tree.** The `Throne/` folder is temporary and is deleted after integration is verified.
+
+### Rationale
+- Owner takes over development; no ongoing upstream coupling wanted
+- CoreDeck must build, test and package from its own repository
+- Reuse of working code is faster and safer than a rewrite
+
+### Consequences
+- Root `CMakeLists.txt` owned by CoreDeck; no path to any `Throne/` folder
+- Upstream licence headers and attribution preserved (GPL-3.0)
+- macOS-only code and unneeded upstream CI are not copied (see DEC-012)
+- `Throne/` kept out of commits via `.git/info/exclude` while it exists; deleted only after path and contents are verified
+- Throne-DB compatibility remains required (DEC-006); upstream fixes are cherry-picked deliberately, not via rebase
+- Supersedes the "Throne is read-only reference" rule of AI_WORKFLOW v1.0
+
+---
+
+## DEC-012: Supported Platforms Are Windows and Linux Only
+
+**Date:** 2026-10-10  
+**Status:** ACCEPTED
+
+### Context
+Owner stated CoreDeck will be developed for Linux and Windows. Earlier docs also planned macOS.
+
+### Decision
+**Windows 10/11 (primary) and Linux are supported. macOS is out of scope.**
+
+### Consequences
+- Remove macOS tasks (MI-102, MI-116), macOS build/packaging and notarization from the roadmap
+- Do not copy macOS-only code during integration
+- CI matrix: `windows-latest`, `ubuntu-latest`
+- ARCHITECTURE/SPEC/BUILD docs drop macOS sections
+- Can be revisited later with a new decision
+
+---
+
+## DEC-013: Fully Autonomous AI Execution With Automatic Commit and Push
+
+**Date:** 2026-10-10  
+**Status:** ACCEPTED
+
+### Context
+AI_WORKFLOW v1.0 forbade commit/push without user approval, while AI_MASTER_PLAN required automatic commit/push after every stage. The owner wants the AI to work with no involvement until a testable prototype is ready.
+
+### Decision
+**The AI works autonomously, commits and pushes after each verified stage, installs missing tools itself, resolves ordinary ambiguities itself, and stops only for genuine blockers.**
+
+### Rationale
+- Explicit owner instruction in the current conversation (highest priority in the source-of-truth order)
+- Removes the contradiction between the two documents
+
+### Consequences
+- AI_WORKFLOW rewritten as v2.0; AI_MASTER_PLAN section 0 added
+- Auto-push on `feature/multi-instance`; auto-merge to `main` at verified milestones with normal (non-force) push
+- Still forbidden: force-push, history rewriting, committing secrets, changing account security settings
+- Honesty rules are stricter, not weaker: nothing may be reported as built, tested or pushed unless observed
+- The owner reviews results at the prototype gate (Master Plan section 11)
+
+---
+
+## DEC-014: Task Status Vocabulary and Single Task-ID Source
+
+**Date:** 2026-10-10  
+**Status:** ACCEPTED
+
+### Context
+MI-010 to MI-020 were marked `DONE` although nothing was ever compiled, and ROADMAP.md used task IDs that collided with TASKS.md.
+
+### Decision
+1. Status values: `TODO`, `IN_PROGRESS`, `DONE_UNVERIFIED`, `VERIFIED`, `BLOCKED`.
+2. `TASKS.md` is the only source of task IDs; ROADMAP.md refers to phases and those IDs only.
+
+### Consequences
+- All previously `DONE` code tasks became `DONE_UNVERIFIED`
+- Progress percentages count only `VERIFIED` work
+- ROADMAP per-phase ID tables removed
+
+---
+
+## DEC-015: groups.instance_id Is Added Nullable and Backfilled
+
+**Date:** 2026-10-10  
+**Status:** ACCEPTED
+
+### Context
+SQLite refuses `ALTER TABLE ADD COLUMN ... NOT NULL DEFAULT <const> REFERENCES ...` when a foreign key is declared with a non-NULL default, and the placeholder `'default-instance-uuid'` is not a real UUID.
+
+### Decision
+Add `groups.instance_id TEXT` (nullable), backfill it with the real Default Instance UUID inside the migration transaction, add an index, and enforce non-null/ownership in `GroupRepository`/code. If strict NOT NULL + FK is required later, rebuild the table (create new, copy, drop, rename) in a separate versioned migration.
+
+### Consequences
+- `PRAGMA foreign_keys = ON` set on every connection
+- Migration tests cover: fresh DB, Throne-format DB, partially migrated DB, rollback on failure
+- ARCHITECTURE.md schema snippet updated
+
+---
+
 ## Decision Index
 
 | ID | Title | Status |
@@ -340,6 +453,11 @@ v2rayN allows selecting Core per Chain. Throne's Chain outbound has no Core fiel
 | DEC-008 | No Dynamic Config Switching | ACCEPTED (Rejected Alternative) |
 | DEC-009 | Separate Instance Settings Table | ACCEPTED |
 | DEC-010 | Chain Core Selection in Chain Config | ACCEPTED |
+| DEC-011 | Throne Code Absorbed Into CoreDeck | ACCEPTED |
+| DEC-012 | Windows and Linux Only | ACCEPTED |
+| DEC-013 | Fully Autonomous Execution, Auto Commit/Push | ACCEPTED |
+| DEC-014 | Task Status Vocabulary, Single Task-ID Source | ACCEPTED |
+| DEC-015 | groups.instance_id Nullable + Backfill | ACCEPTED |
 
 ---
 

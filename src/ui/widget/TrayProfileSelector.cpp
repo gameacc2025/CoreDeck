@@ -1,4 +1,4 @@
-#include "include/ui/widget/TrayProfileSelector.hpp"
+#include "ui/widget/TrayProfileSelector.hpp"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -10,12 +10,12 @@
 #include <QTimer>
 #include <QKeyEvent>
 
-#include "include/global/Configs.hpp"
-#include "include/global/Common.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/database/SettingsRepo.h"
+#include "global/Configs.hpp"
+#include "global/Common.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
+#include "database/SettingsRepo.h"
 
 namespace {
     constexpr int kPerPage = 12;

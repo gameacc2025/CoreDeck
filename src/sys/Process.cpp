@@ -1,6 +1,6 @@
-#include "include/sys/Process.hpp"
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "sys/Process.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
 #include <QTimer>
 #include <QDir>
@@ -8,7 +8,7 @@
 
 
 
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 namespace {
     // Must match egressForwardingMarker in core/internal/rpc/forwarding_windows.go.

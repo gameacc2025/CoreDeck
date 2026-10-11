@@ -1,12 +1,12 @@
-#include "include/configs/outbounds/openvpn.h"
+#include "configs/outbounds/openvpn.h"
 
 #include <QJsonArray>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
-#include "include/configs/sub/vpnFileImport.hpp"
-#include "include/global/OtpPlaceholder.hpp"
-#include "include/global/VpnCredentialOverride.hpp"
+#include "configs/common/utils.h"
+#include "configs/sub/vpnFileImport.hpp"
+#include "global/OtpPlaceholder.hpp"
+#include "global/VpnCredentialOverride.hpp"
 
 namespace Configs {
     namespace {

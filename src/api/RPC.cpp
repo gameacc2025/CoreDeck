@@ -1,7 +1,7 @@
-#include "include/api/RPC.h"
+#include "api/RPC.h"
 #include <utility>
 
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 #include <QLocalSocket>
 #include <QDataStream>

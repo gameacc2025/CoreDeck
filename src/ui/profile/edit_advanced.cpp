@@ -1,6 +1,6 @@
-#include "include/ui/profile/edit_advanced.h"
+#include "ui/profile/edit_advanced.h"
 
-#include "include/global/GuiUtils.hpp"
+#include "global/GuiUtils.hpp"
 
 #include <QGuiApplication>
 #include <QInputDialog>
@@ -8,11 +8,11 @@
 #include <QScreen>
 #include <QStandardItemModel>
 #include <QAbstractSocket>
-#include "include/configs/generate.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/IpListsRepo.h"
-#include "include/ui/profile/editor_table_utils.h"
+#include "configs/generate.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
+#include "database/IpListsRepo.h"
+#include "ui/profile/editor_table_utils.h"
 
 EditAdvanced::InterfaceFields EditAdvanced::GetInterfaceFields() const {
     if (auto *openvpn = ent->OpenVPN(); openvpn != nullptr) {

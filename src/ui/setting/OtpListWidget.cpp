@@ -1,4 +1,4 @@
-#include "include/ui/setting/OtpListWidget.h"
+#include "ui/setting/OtpListWidget.h"
 
 #include <QApplication>
 #include <QDrag>

@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_socks.h"
+#include "ui/profile/edit_socks.h"
 
 EditSocks::EditSocks(QWidget *parent)
     : QWidget(parent),

@@ -1,11 +1,11 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #include <QAction>
 #include <QCursor>
 #include <QMenu>
 #include <QShortcut>
 
-#include "include/sys/GlobalHotkeys.hpp"
+#include "sys/GlobalHotkeys.hpp"
 
 QStringList MainWindow::RegisterHotkey(bool unregister) {
     if (!globalHotkeys) {

@@ -1,9 +1,9 @@
-#include "include/ui/profile/edit_chain.h"
+#include "ui/profile/edit_chain.h"
 
 
-#include "include/database/ProfilesRepo.h"
-#include "include/ui/mainwindow_interface.h"
-#include "include/ui/profile/ProxyItem.h"
+#include "database/ProfilesRepo.h"
+#include "ui/mainwindow_interface.h"
+#include "ui/profile/ProxyItem.h"
 
 EditChain::EditChain(QWidget *parent) : QWidget(parent), ui(new Ui::EditChain) {
     ui->setupUi(this);

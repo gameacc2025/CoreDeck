@@ -12,8 +12,8 @@
 #include <QScrollBar>
 #include <QToolButton>
 
-#include "include/ui/utils/ProfilesTableModel.h"
-#include "include/ui/widget/SubscriptionInfoCard.hpp"
+#include "ui/utils/ProfilesTableModel.h"
+#include "ui/widget/SubscriptionInfoCard.hpp"
 
 namespace Configs {
     class Group;

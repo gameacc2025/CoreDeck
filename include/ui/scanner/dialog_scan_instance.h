@@ -8,8 +8,8 @@
 #include <functional>
 #include <memory>
 
-#include "include/database/entities/IpList.h"
-#include "include/database/entities/IpScan.h"
+#include "database/entities/IpList.h"
+#include "database/entities/IpScan.h"
 #include "ui_dialog_scan_instance.h"
 
 QT_BEGIN_NAMESPACE

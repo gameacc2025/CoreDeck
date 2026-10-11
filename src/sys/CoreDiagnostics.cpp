@@ -1,11 +1,11 @@
-#include "include/sys/CoreDiagnostics.hpp"
+#include "sys/CoreDiagnostics.hpp"
 #include "NkrVersion.h"
 
-#include "include/api/RPC.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
-#include "include/ui/mainwindow.h"
+#include "api/RPC.h"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
+#include "ui/mainwindow.h"
 
 #include <QCoreApplication>
 #include <QDateTime>

@@ -1,9 +1,9 @@
-#include "include/scanner/DefaultIpLists.h"
+#include "scanner/DefaultIpLists.h"
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpListsRepo.h"
-#include "include/scanner/IpListParse.h"
-#include "include/scanner/WarpPresets.h"
+#include "database/DatabaseManager.h"
+#include "database/IpListsRepo.h"
+#include "scanner/IpListParse.h"
+#include "scanner/WarpPresets.h"
 
 #include <QFile>
 

@@ -4,7 +4,7 @@
 #include <QList>
 #include <QString>
 
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 
 class IpEntriesModel : public QAbstractTableModel {
     Q_OBJECT

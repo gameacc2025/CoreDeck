@@ -1,4 +1,4 @@
-#include "include/database/entities/Instance.h"
+#include "database/entities/Instance.h"
 
 #include <QCoreApplication>
 #include <QDebug>

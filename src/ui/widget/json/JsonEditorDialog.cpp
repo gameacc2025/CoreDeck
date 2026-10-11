@@ -1,4 +1,4 @@
-#include "include/ui/widget/json/JsonEditorDialog.h"
+#include "ui/widget/json/JsonEditorDialog.h"
 
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
@@ -8,9 +8,9 @@
 #include <QScreen>
 #include <QVBoxLayout>
 
-#include "include/global/Utils.hpp"
-#include "include/ui/widget/json/JsonCodeEdit.h"
-#include "include/ui/widget/json/JsonIssueList.h"
+#include "global/Utils.hpp"
+#include "ui/widget/json/JsonCodeEdit.h"
+#include "ui/widget/json/JsonIssueList.h"
 
 namespace JsonEdit {
     JsonEditorDialog::JsonEditorDialog(const QJsonObject& root, QWidget* parent) : QDialog(parent), m_original(root) {

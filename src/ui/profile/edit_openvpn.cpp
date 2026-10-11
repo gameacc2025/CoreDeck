@@ -1,12 +1,12 @@
-#include "include/ui/profile/edit_openvpn.h"
+#include "ui/profile/edit_openvpn.h"
 
 #include <QInputDialog>
 
-#include "include/ui/profile/edit_openvpn_advanced.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/global/OtpPlaceholder.hpp"
-#include "include/global/Utils.hpp"
+#include "ui/profile/edit_openvpn_advanced.h"
+#include "database/DatabaseManager.h"
+#include "database/OtpProfilesRepo.h"
+#include "global/OtpPlaceholder.hpp"
+#include "global/Utils.hpp"
 
 EditOpenVPN::EditOpenVPN(QWidget *parent) : QWidget(parent), ui(new Ui::EditOpenVPN) {
     ui->setupUi(this);

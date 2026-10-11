@@ -1,13 +1,13 @@
-#include "include/configs/sub/GroupUpdater.hpp"
+#include "configs/sub/GroupUpdater.hpp"
 
-#include "include/configs/generate.h"
-#include "include/configs/sub/SubscriptionParser.hpp"
-#include "include/configs/sub/SubscriptionReconcile.hpp"
-#include "include/configs/sub/SubscriptionScan.hpp"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/HTTPRequestHelper.hpp"
-#include "include/global/Utils.hpp"
+#include "configs/generate.h"
+#include "configs/sub/SubscriptionParser.hpp"
+#include "configs/sub/SubscriptionReconcile.hpp"
+#include "configs/sub/SubscriptionScan.hpp"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "global/HTTPRequestHelper.hpp"
+#include "global/Utils.hpp"
 
 #include <QCryptographicHash>
 #include <QDateTime>

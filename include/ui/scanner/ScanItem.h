@@ -4,8 +4,8 @@
 #include <QWidget>
 #include <memory>
 
-#include "include/database/entities/IpScan.h"
-#include "include/scanner/ScanManager.h"
+#include "database/entities/IpScan.h"
+#include "scanner/ScanManager.h"
 
 class QLabel;
 class QProgressBar;

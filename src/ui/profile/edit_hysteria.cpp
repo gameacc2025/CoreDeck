@@ -1,7 +1,7 @@
-#include "include/ui/profile/edit_hysteria.h"
+#include "ui/profile/edit_hysteria.h"
 
-#include "include/global/Utils.hpp"
-#include "include/ui/profile/edit_hysteria_realm.h"
+#include "global/Utils.hpp"
+#include "ui/profile/edit_hysteria_realm.h"
 
 EditHysteria::EditHysteria(QWidget *parent)
     : QWidget(parent),

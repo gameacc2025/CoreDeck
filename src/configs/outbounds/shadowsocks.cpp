@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/shadowsocks.h"
+#include "configs/outbounds/shadowsocks.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool shadowsocks::ParseFromLink(const QString& link)

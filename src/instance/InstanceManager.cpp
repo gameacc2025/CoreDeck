@@ -1,8 +1,8 @@
-#include "include/instance/InstanceManager.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/InstanceRepository.h"
-#include "include/global/Logger.hpp"
-#include "include/global/Utils.hpp"
+#include "instance/InstanceManager.h"
+#include "database/DatabaseManager.h"
+#include "database/InstanceRepository.h"
+#include "global/Logger.hpp"
+#include "global/Utils.hpp"
 #include <QUuid>
 #include <QDateTime>
 #include <QSettings>

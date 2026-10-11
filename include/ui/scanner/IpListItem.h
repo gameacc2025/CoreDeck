@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <memory>
 
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 
 class QLabel;
 class QToolButton;

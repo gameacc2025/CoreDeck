@@ -1,6 +1,6 @@
-#include "include/sys/GlobalHotkeys.hpp"
+#include "sys/GlobalHotkeys.hpp"
 
-#include "include/sys/GlobalHotkeyBackend.hpp"
+#include "sys/GlobalHotkeyBackend.hpp"
 
 #include <QHash>
 

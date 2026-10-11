@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_juicity.h"
+#include "ui/profile/edit_juicity.h"
 
 EditJuicity::EditJuicity(QWidget *parent)
     : QWidget(parent),

@@ -1,10 +1,10 @@
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 #include <algorithm>
 #include <QHostAddress>
 #include <QRegularExpression>
 
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 namespace Configs
 {

@@ -2,10 +2,10 @@
 #include <QDateTime>
 #include <core/gen/libcore.pb.h>
 #include <include/api/RPC.h>
-#include "include/ui/mainwindow_interface.h"
+#include "ui/mainwindow_interface.h"
 #include <include/stats/connections/connectionLister.hpp>
-#include "include/stats/traffic/TrafficStatsManager.hpp"
-#include "include/global/LocalNetwork.hpp"
+#include "stats/traffic/TrafficStatsManager.hpp"
+#include "global/LocalNetwork.hpp"
 
 #include <algorithm>
 

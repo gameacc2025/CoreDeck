@@ -1,8 +1,8 @@
-#include "include/ui/profile/edit_anytls.h"
+#include "ui/profile/edit_anytls.h"
 
 #include <QUuid>
 #include <QRegularExpressionValidator>
-#include "include/global/GuiUtils.hpp"
+#include "global/GuiUtils.hpp"
 
 EditAnyTLS::EditAnyTLS(QWidget *parent) : QWidget(parent), ui(new Ui::EditAnyTLS) {
     ui->setupUi(this);

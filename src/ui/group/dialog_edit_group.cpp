@@ -1,6 +1,6 @@
-#include "include/ui/group/dialog_edit_group.h"
+#include "ui/group/dialog_edit_group.h"
 
-#include "include/ui/mainwindow_interface.h"
+#include "ui/mainwindow_interface.h"
 
 #include <QClipboard>
 #include <QHash>
@@ -9,10 +9,10 @@
 #include <QTimer>
 #include <QAbstractItemView>
 
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/RunningProfiles.hpp"
-#include "include/ui/group/dialog_edit_group_advanced.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "global/RunningProfiles.hpp"
+#include "ui/group/dialog_edit_group_advanced.h"
 
 
 #define ADJUST_SIZE runOnThread([=,this] { adjustSize(); adjustPosition(mainwindow); }, this);

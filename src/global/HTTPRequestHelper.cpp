@@ -1,4 +1,4 @@
-#include "include/global/HTTPRequestHelper.hpp"
+#include "global/HTTPRequestHelper.hpp"
 
 #include <QNetworkProxy>
 #include <QNetworkAccessManager>
@@ -12,9 +12,9 @@
 
 
 
-#include "include/global/Configs.hpp"
-#include "include/global/LocalNetwork.hpp"
-#include "include/ui/mainwindow.h"
+#include "global/Configs.hpp"
+#include "global/LocalNetwork.hpp"
+#include "ui/mainwindow.h"
 
 namespace Configs_network {
 

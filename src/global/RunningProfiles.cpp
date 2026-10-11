@@ -1,4 +1,4 @@
-#include "include/global/RunningProfiles.hpp"
+#include "global/RunningProfiles.hpp"
 
 #include <QMutex>
 #include <QMutexLocker>

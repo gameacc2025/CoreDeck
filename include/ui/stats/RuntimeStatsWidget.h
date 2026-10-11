@@ -9,8 +9,8 @@
 
 #include "ui_RuntimeStatsWidget.h"
 
-#include "include/sys/ProcessMetrics.hpp"
-#include "include/ui/stats/dialog_endpoint_details.h"
+#include "sys/ProcessMetrics.hpp"
+#include "ui/stats/dialog_endpoint_details.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,5 +1,5 @@
-#include "include/database/entities/IpScan.h"
-#include "include/scanner/WarpPresets.h"
+#include "database/entities/IpScan.h"
+#include "scanner/WarpPresets.h"
 
 #include <QCryptographicHash>
 #include <QJsonArray>

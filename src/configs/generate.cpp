@@ -1,8 +1,8 @@
-#include "include/configs/generate.h"
-#include "include/api/RPC.h"
-#include "include/configs/AutoSelectorPlan.h"
-#include "include/configs/common/utils.h"
-#include "include/global/Configs.hpp"
+#include "configs/generate.h"
+#include "api/RPC.h"
+#include "configs/AutoSelectorPlan.h"
+#include "configs/common/utils.h"
+#include "global/Configs.hpp"
 
 #include <QApplication>
 #include <QFileInfo>
@@ -13,16 +13,16 @@
 #include <QThreadPool>
 
 
-#include "include/database/GroupsRepo.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
+#include "database/GroupsRepo.h"
+#include "database/IpListsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
 
 
-#include "include/database/entities/Profile.h"
-#include "include/global/VpnCredentialOverride.hpp"
+#include "database/entities/Profile.h"
+#include "global/VpnCredentialOverride.hpp"
 #ifdef Q_OS_LINUX
-#include "include/sys/linux/systemChecks.h"
+#include "sys/linux/systemChecks.h"
 #endif
 
 #include <algorithm>

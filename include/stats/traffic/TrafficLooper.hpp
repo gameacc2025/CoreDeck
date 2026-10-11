@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include "include/database/entities/Profile.h"
-#include "include/configs/generate.h"
+#include "database/entities/Profile.h"
+#include "configs/generate.h"
 
 namespace Stats {
     struct TrafficLooperEntry {

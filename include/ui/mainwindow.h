@@ -6,10 +6,10 @@
 #include <core/gen/libcore.pb.h>
 #endif
 
-#include "include/global/Configs.hpp"
-#include "include/stats/connections/connectionLister.hpp"
+#include "global/Configs.hpp"
+#include "stats/connections/connectionLister.hpp"
 #include "3rdparty/qv2ray/v2/ui/widgets/speedchart/SpeedWidget.hpp"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 #ifdef Q_OS_LINUX
 #include <QtDBus>
 #endif
@@ -19,7 +19,7 @@
 #include <deque>
 #include <optional>
 #include <QKeyEvent>
-#include "include/ui/widget/TrayIcon.hpp"
+#include "ui/widget/TrayIcon.hpp"
 #include <QPointer>
 #include <QTimer>
 #include <QElapsedTimer>
@@ -42,11 +42,11 @@
 #include <QLocalSocket>
 
 #include "group/GroupSort.hpp"
-#include "include/global/GuiUtils.hpp"
-#include "include/ui/setting/Icon.hpp"
-#include "include/ui/utils/DataViewHtmlGenerator.h"
-#include "include/ui/utils/ProfilesFilterProxyModel.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "global/GuiUtils.hpp"
+#include "ui/setting/Icon.hpp"
+#include "ui/utils/DataViewHtmlGenerator.h"
+#include "ui/utils/ProfilesFilterProxyModel.h"
+#include "ui/utils/ProfilesTableModel.h"
 #include "ui_mainwindow.h"
 
 #endif

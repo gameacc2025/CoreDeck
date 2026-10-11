@@ -1,4 +1,4 @@
-#include "include/ui/widget/json/JsonCodeEdit.h"
+#include "ui/widget/json/JsonCodeEdit.h"
 
 #include <QFontDatabase>
 #include <QHelpEvent>
@@ -11,7 +11,7 @@
 #include <QTimer>
 #include <QToolTip>
 
-#include "include/ui/widget/json/JsonTree.h"
+#include "ui/widget/json/JsonTree.h"
 
 namespace JsonEdit {
     namespace {

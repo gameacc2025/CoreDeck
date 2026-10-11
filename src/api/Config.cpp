@@ -1,8 +1,8 @@
-#include "include/api/remote/Server.hpp"
+#include "api/remote/Server.hpp"
 
 #include <QRegularExpression>
 
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 namespace RemoteApi {
     Config ConfigFromSettings() {

@@ -1,6 +1,6 @@
-#include "include/database/Migration.h"
-#include "include/global/Logger.hpp"
-#include "include/global/Configs.hpp"
+#include "database/Migration.h"
+#include "global/Logger.hpp"
+#include "global/Configs.hpp"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>

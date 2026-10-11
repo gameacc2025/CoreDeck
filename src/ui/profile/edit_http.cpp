@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_http.h"
+#include "ui/profile/edit_http.h"
 
 EditHttp::EditHttp(QWidget *parent) : QWidget(parent),
       ui(new Ui::EditHttp) {

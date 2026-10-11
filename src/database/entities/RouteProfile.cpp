@@ -2,16 +2,16 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QUrlQuery>
-#include "include/database/entities/RouteProfile.h"
+#include "database/entities/RouteProfile.h"
 #include <array>
 #include <iostream>
 #include <optional>
 
-#include "include/database/ProfilesRepo.h"
+#include "database/ProfilesRepo.h"
 
-#include "include/configs/common/OutboundFactory.h"
-#include "include/configs/generate.h"
-#include "include/global/Configs.hpp"
+#include "configs/common/OutboundFactory.h"
+#include "configs/generate.h"
+#include "global/Configs.hpp"
 
 namespace Configs {
     bool isOutboundIDValid(int id) {

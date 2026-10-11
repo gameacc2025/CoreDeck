@@ -1,5 +1,5 @@
-#include "include/ui/utils/ProfilesFilterProxyModel.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "ui/utils/ProfilesFilterProxyModel.h"
+#include "ui/utils/ProfilesTableModel.h"
 
 namespace {
     const QString portPrefix = QStringLiteral("port=");

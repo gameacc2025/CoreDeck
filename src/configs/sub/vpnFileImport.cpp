@@ -1,4 +1,4 @@
-#include "include/configs/sub/vpnFileImport.hpp"
+#include "configs/sub/vpnFileImport.hpp"
 
 #include <QHostAddress>
 #include <QObject>
@@ -6,9 +6,9 @@
 #include <QSet>
 #include <QXmlStreamReader>
 
-#include "include/configs/generate.h"
-#include "include/configs/outbounds/openconnect.h"
-#include "include/configs/outbounds/openvpn.h"
+#include "configs/generate.h"
+#include "configs/outbounds/openconnect.h"
+#include "configs/outbounds/openvpn.h"
 
 namespace Configs {
     // Unity build: an anonymous namespace shares one TU with its neighbours, hence the prefix.

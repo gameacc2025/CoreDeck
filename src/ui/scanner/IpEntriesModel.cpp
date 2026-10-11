@@ -1,4 +1,4 @@
-#include "include/ui/scanner/IpEntriesModel.h"
+#include "ui/scanner/IpEntriesModel.h"
 
 #include <QHostAddress>
 #include <limits>

@@ -5,7 +5,7 @@
 #include <QStringList>
 #include <memory>
 
-#include "include/ui/widget/json/JsonSchemaValidator.h"
+#include "ui/widget/json/JsonSchemaValidator.h"
 
 namespace JsonEdit {
     namespace SingBox {

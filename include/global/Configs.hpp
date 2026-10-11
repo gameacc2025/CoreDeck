@@ -2,7 +2,7 @@
 
 #include "Const.hpp"
 #include "Utils.hpp"
-#include "include/database/DatabaseManager.h"
+#include "database/DatabaseManager.h"
 
 #include <array>
 #include <string_view>

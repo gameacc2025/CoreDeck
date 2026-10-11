@@ -1,214 +1,171 @@
 # CoreDeck AI Development Workflow
 
-**Version:** 1.0  
+**Version:** 2.0  
 **Status:** MANDATORY  
-**Last Updated:** 2026-10-10
+**Last Updated:** 2026-10-10  
+**Supersedes:** v1.0 (which required user approval for every commit/push; replaced by DEC-013)
 
 ---
 
 ## Purpose
 
-This document defines **mandatory rules** for all AI coding sessions working on CoreDeck. It ensures continuity, quality, and safety across sessions and agents.
+Mandatory rules for every AI coding session on CoreDeck. They guarantee continuity, quality and safety across sessions and agents.
 
-**Non-negotiable:** Every session must follow these rules. Deviations require explicit user approval.
+**Operating mode (DEC-013): fully autonomous.** The owner does not want to be involved until a testable prototype exists. The AI decides, builds, tests, commits and pushes by itself. `AI_MASTER_PLAN.md` is the execution contract; this file holds the day-to-day rules. If they ever disagree, `AI_MASTER_PLAN.md` wins.
 
 ---
 
 ## 1. Session Start Protocol
 
-**Before writing any code, you MUST:**
+Before writing code:
 
-1. **Read these files in order:**
-   - `README.md` (project root)
-   - `project-docs/AI_WORKFLOW.md` (this file)
-   - `project-docs/PROGRESS.md`
-   - `project-docs/TASKS.md`
-   - `project-docs/ROADMAP.md`
-   - `project-docs/KNOWN_ISSUES.md`
-
-2. **Inspect repository state:**
+1. Read, in order: `README.md`, `project-docs/AI_MASTER_PLAN.md`, this file, `PROGRESS.md`, `TASKS.md`, `ROADMAP.md`, `KNOWN_ISSUES.md`, `MVP_SCOPE.md`, and the newest file in `project-docs/sessions/`.
+2. Inspect the repository:
    ```bash
-   git status
+   git status --short
    git log --oneline -10
    git branch --show-current
+   git remote -v
    ```
-
-3. **Review relevant architecture/docs:**
-   - `project-docs/ARCHITECTURE.md` for component design
-   - `project-docs/PROJECT_SPEC.md` for requirements
-   - `project-docs/DECISIONS.md` for prior choices
-
-4. **Identify next task:**
-   - Check `TASKS.md` for highest priority `TODO`/`IN_PROGRESS`
-   - Verify dependencies are met
-   - Confirm no `BLOCKED` status without resolution
-
-5. **Announce plan:**
-   - State which task(s) you'll work on
-   - Reference task IDs (e.g., "Starting MI-010: Instance C++ class design")
+3. Read `ARCHITECTURE.md`, `PROJECT_SPEC.md`, `DECISIONS.md` as needed.
+4. Check the toolchain (CMake, Ninja, compiler, Qt, Python). Install what is missing or use CI (Master Plan section 7).
+5. Pick the next eligible task: highest priority (P0 first), dependencies met, not `BLOCKED`.
+6. State the plan in one or two lines with task IDs, then start. Do not wait for a reply.
 
 ---
 
 ## 2. Development Rules
 
-### Code Changes
-- **Read before write:** Never edit a file without reading it first
-- **Minimal changes:** Touch only what's necessary for the task
-- **Preserve existing code:** Don't reformat, rename, or refactor without reason
-- **Follow existing patterns:** Match Throne's code style, naming, error handling
-- **No dead code:** Don't leave commented-out code or unused imports
+### Code
+- Read a file before editing it.
+- Make the smallest complete change that satisfies the task.
+- Follow the existing code style and patterns of the (now integrated) Throne code.
+- No dead code, commented-out code, or unused imports.
+- No placeholders, fake success paths, or test-only behavior in production code.
 
-### Architecture Compliance
-- **Respect DECISIONS.md:** All architectural decisions are binding
-- **Core Adapter pattern:** New Core support via `CoreAdapter` interface (DEC-003)
-- **Instance isolation:** Each Instance = separate Core process (DEC-001)
-- **UUID primary keys:** Use `QUuid` for Instance identifiers (DEC-002)
-- **PortAllocator:** All port management through central service (DEC-004)
+### Architecture (see DECISIONS.md, all binding)
+- One GUI process, one Core process per Instance (DEC-001, DEC-008).
+- Instance primary key is a UUID (`QUuid`) (DEC-002).
+- Core support goes through the `CoreAdapter` interface (DEC-003).
+- All ports go through `PortAllocator` (DEC-004).
+- Local Proxy Mode first; Central Router later (DEC-005).
+- Throne code is part of CoreDeck's own tree (DEC-011). Never depend on a `Throne/` folder.
+- Targets are Windows and Linux only (DEC-012).
 
-### Database Changes
-- **Migration-first:** Schema changes require migration plan in `DECISIONS.md`
-- **Backward compatibility:** Throne must still read migrated DB
-- **Foreign keys:** Use `ON DELETE CASCADE` for Instance-owned data
-- **No raw SQL in UI:** Use Repository classes
+### Database
+- Schema changes need an explicit, versioned, transaction-wrapped migration.
+- Back up the DB file before migrating (`*.pre-coredeck.bak`).
+- Enable `PRAGMA foreign_keys = ON` on every connection.
+- SQLite `ALTER TABLE ... ADD COLUMN ... REFERENCES` needs a `NULL` default: add nullable, backfill, enforce in code and via index.
+- Keep the migrated DB readable by Throne where practical; verify it, don't assume it.
+- No raw SQL in UI code; use repositories.
 
-### UI Changes
-- **Qt Designer .ui files:** Prefer for new dialogs/widgets
-- **Signal/Slot:** Use Qt's mechanism, not manual callbacks
-- **Model/View:** Use `QAbstractItemModel` for lists
-- **No blocking calls:** Long operations on worker threads
+### UI
+- Qt Designer `.ui` files for new dialogs/widgets where practical.
+- Signals/slots, `QAbstractItemModel` for lists, no blocking calls on the GUI thread.
 
 ---
 
 ## 3. Task Management
 
-### Task Lifecycle
+### Lifecycle
 ```
-TODO → IN_PROGRESS → DONE → VERIFIED
-              ↘ BLOCKED (if dependency missing)
+TODO -> IN_PROGRESS -> DONE_UNVERIFIED -> VERIFIED
+                 \-> BLOCKED (reason required)
 ```
+- `DONE_UNVERIFIED`: code written, but it was not built, or its tests were not executed.
+- `VERIFIED`: built, and the relevant tests were actually executed and passed (local run or cited CI run).
+- Static review never counts as verification.
 
-### Updating TASKS.md
-**After each task:**
-1. Change status to `DONE` (implementation complete)
-2. Fill in:
-   - Test method used
-   - Actual test result
-   - Any blockers or notes
-3. If tests pass → `VERIFIED`
-4. If blocked → `BLOCKED` with reason
-
-### Creating New Tasks
-- Add to `TASKS.md` in appropriate phase
-- Assign unique ID: `MI-XXX` (sequential)
-- Include all fields: acceptance criteria, test method, dependencies
-- Get user approval before starting unplanned work
+### TASKS.md
+`TASKS.md` is the single source of task IDs. After each task record status, exact test command, actual result, notes. Add new tasks with the next sequential `MI-XXX` ID and all fields; the AI may add tasks needed for the MVP without asking.
 
 ---
 
-## 4. Testing Requirements
+## 4. Testing
 
-### Mandatory Testing
-- **Unit tests** for new classes (Repository, Adapter, Manager)
-- **Integration tests** for multi-component flows
-- **Manual verification** for UI changes
-- **Build verification** after any CMake/source change
+- Unit tests are mandatory for every new/changed class, validation rule, migration and bug fix: normal, boundary, invalid and error paths.
+- Integration tests when behavior crosses component, DB, process or UI/service boundaries.
+- Tests run through CTest: `ctest --output-on-failure`.
+- Use temporary databases and fixtures; never touch real user data.
+- Build verification after any CMake or source change.
+- Record exact commands and actual output in `BUILD_AND_TEST.md` and `TASKS.md`.
 
-### Test Documentation
-Record in `TASKS.md` and `BUILD_AND_TEST.md`:
-- Exact commands run
-- Actual output (success/failure)
-- Screenshots for UI (if applicable)
-- Performance numbers for benchmarks
-
-### No False Claims
-- **Never claim** a test passed if not actually run
-- **Never claim** build succeeded without output evidence
-- **Report failures honestly** — they're valuable data
+### No false claims
+Never claim a build, test, commit, push, or remote state that was not observed. Report failures honestly.
 
 ---
 
-## 5. Documentation Updates
+## 5. Documentation
 
-**After every meaningful task, update:**
+After every meaningful stage update what applies:
 
 | File | When |
 |------|------|
-| `TASKS.md` | Task status, test results, notes |
-| `PROGRESS.md` | Current status, blockers, next steps |
-| `CHANGELOG.md` | User-visible changes |
-| `DECISIONS.md` | New architectural decisions |
-| `BUILD_AND_TEST.md` | Verified commands, results |
-| `KNOWN_ISSUES.md` | New issues discovered |
-| `ARCHITECTURE.md` | If architecture changed |
+| `TASKS.md` | status, test results |
+| `PROGRESS.md` | status, blockers, next task, milestone, latest commit |
+| `CHANGELOG.md` | user-visible changes |
+| `DECISIONS.md` | new decisions (record them yourself, do not ask) |
+| `BUILD_AND_TEST.md` | verified commands and results |
+| `KNOWN_ISSUES.md` | issues found/resolved |
+| `ARCHITECTURE.md` | architecture changes |
+| `DEPENDENCIES_AND_LICENSES.md` | dependency or licence changes |
+| `MVP_SCOPE.md` | P0/P1/P2 changes |
 
-### Session Report
-**At session end, create:**
-`project-docs/sessions/YYYY-MM-DD-session-NNN.md`
-
-Include:
-- Session goal
-- Tasks completed (with IDs)
-- Files changed
-- Decisions made
-- Tests run + results
-- Blockers remaining
-- Exact next steps for next session
+Session report at the end of each session: `project-docs/sessions/YYYY-MM-DD-session-NNN.md` with goal, tasks (IDs), files changed, decisions, tests run and results, blockers, exact next steps.
 
 ---
 
-## 6. Git & Repository Safety
+## 6. Git (automatic)
 
-### Commits
-- **No auto-commit:** Only commit when user explicitly requests
-- **Atomic commits:** One logical change per commit
-- **Conventional messages:** `feat:`, `fix:`, `refactor:`, `docs:`, `test:`
-- **No secrets:** Never commit keys, tokens, passwords, subscription URLs
+### Commits and pushes: automatic
+- After each verified stage the AI commits and pushes **without asking**.
+- Atomic commits, conventional messages: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `build:`, `ci:`.
+- Stage explicit paths only; no blind `git add -A`.
+- Check `git status --short` and the diff before committing. No secrets, tokens, subscription URLs, user data, build output, or caches.
+- Verify every push: exit status and `git ls-remote origin <branch>` equals local HEAD.
+- If a push fails, keep the local commit, record the exact error, retry, continue with safe local work, and never claim remote backup.
 
 ### Branches
-- Work on `feature/multi-instance` or task-specific branches
-- `main` = stable, `dev` = integration (future)
-- Never force-push without approval
+- Day-to-day work on `feature/multi-instance`.
+- Merge to `main` automatically (normal, non-force push) when milestone M1, M2 or M3 is verified, or when the prototype gate passes.
+- `dev` is not used until needed.
 
-### Upstream (Throne)
-- Throne in `Throne/` is **read-only reference**
-- Don't modify Throne directly
-- Rebase CoreDeck on Throne updates only with approval
+### Never, even autonomously
+- Force-push, `reset --hard` on shared history, history rewriting.
+- Committing secrets or real user data.
+- Changing GitHub account security settings or creating tokens.
+
+### Throne source
+- A temporary `Throne/` folder is only a source to copy from. Keep it out of commits (`.git/info/exclude`).
+- Integrate what CoreDeck needs into CoreDeck's own tree (Master Plan section 4), then delete the folder after verifying its exact path and that it holds no owner work.
+- CoreDeck is developed independently from now on; there is no ongoing upstream rebase obligation. Upstream fixes may be cherry-picked deliberately and recorded in `DECISIONS.md`.
 
 ---
 
 ## 7. Safety & Compliance
 
-### Licenses
-- **GPL-3.0:** CoreDeck inherits from Throne
-- **Track all dependencies:** `DEPENDENCIES_AND_LICENSES.md`
-- **No proprietary code** without license verification
-- **Third-party code:** Document source, license, version
+### Licences
+- CoreDeck is GPL-3.0-or-later (derived from Throne). Preserve upstream licence headers and attribution.
+- Track every dependency in `DEPENDENCIES_AND_LICENSES.md` and verify each licence against official sources before shipping.
+- No proprietary code. Document third-party source, licence and version.
 
-### Data Privacy
-- **Never log** subscription URLs, tokens, passwords
-- **Never commit** real user data or configs
-- **Use placeholders** in examples: `YOUR_SUBSCRIPTION_URL`
-- **Local DB:** SQLite unencrypted (assume disk encryption)
+### Data privacy
+- Never log subscription URLs, tokens, passwords, private keys.
+- Never commit real configs or user data; use placeholders like `YOUR_SUBSCRIPTION_URL`.
 
 ### Network
-- **Default bind:** `127.0.0.1` only
-- **No `0.0.0.0`** without explicit user action + warning
-- **Validate all inputs:** Paths, URLs, ports, CLI args
+- Bind to `127.0.0.1` by default; `0.0.0.0` only by explicit user action with a warning.
+- Validate paths, URLs, ports, CLI arguments. Use argument lists, not shell strings.
 
 ---
 
-## 8. Communication Protocol
+## 8. Autonomy and Communication
 
-### With User
-- **Concise updates:** What done, what next, blockers
-- **Ask before assuming:** Clarify ambiguity before implementing
-- **Show evidence:** Test output, build logs, screenshots
-- **Admit uncertainty:** "I need to verify X before proceeding"
-
-### With Other AIs (via Board/Session Reports)
-- **Document decisions** in `DECISIONS.md` and session reports
-- **Flag blockers** in `PROGRESS.md` and `KNOWN_ISSUES.md`
-- **Handoff quality:** Next AI should need zero context from chat
+- Decide ordinary matters yourself; record significant ones in `DECISIONS.md`.
+- Ask the owner only for a genuine blocker (Master Plan section 10).
+- Updates are concise: what was done, evidence, what is next.
+- Handoff quality: the next session must need zero chat context. Everything lives in the repo docs.
 
 ---
 
@@ -216,71 +173,52 @@ Include:
 
 | Action | Reason |
 |--------|--------|
-| Delete/modify Throne/ upstream | Read-only reference |
-| Commit without user approval | Safety, review |
-| Push without approval | Remote safety |
+| Depend on a `Throne/` folder or absolute external path | Self-contained repo (DEC-011) |
+| Delete a directory based on a guessed path | Data loss |
+| Force-push / rewrite published history | Remote safety |
+| Commit secrets or real user data | Security |
+| Claim unverified build/test/push results | Integrity |
+| Mark `VERIFIED` without an executed test | Integrity |
+| Weaken or delete tests to get green | Quality |
 | Hardcode paths/ports | Portability |
-| Skip tests | Quality |
-| Claim unverified results | Integrity |
-| Store secrets in code/docs | Security |
-| Reformat unrelated code | Noise, risk |
-| Add dependencies without docs | Compliance |
+| Add dependencies without documenting licence | Compliance |
+| Build P1/P2 features while P0 is broken | Scope control |
+| Add macOS-specific work | Out of scope (DEC-012) |
 
 ---
 
 ## 10. Emergency Procedures
 
-### Build Broken
-1. Revert last change (`git checkout -- .`)
-2. Verify baseline builds
-3. Re-apply incrementally with tests
+### Build broken
+1. Identify the commit that broke it (`git log`, `git bisect` if needed).
+2. Fix forward; if not quickly fixable, `git revert` that commit (a new commit, no history rewrite).
+3. Re-verify the baseline, then re-apply incrementally with tests.
 
-### Data Corruption
-1. Stop all Core processes
-2. Backup `throne.db`
-3. Run migration repair (if implemented)
-4. Report in `KNOWN_ISSUES.md`
+### Data corruption
+1. Stop all Core processes.
+2. Restore from `*.pre-coredeck.bak`.
+3. Fix the migration, add a regression test, record in `KNOWN_ISSUES.md`.
 
-### Upstream Conflict
-1. Document in `DECISIONS.md`
-2. Create `BLOCKED` task
-3. Await user direction
+### Remote divergence
+1. `git fetch`; inspect the remote-only commits.
+2. Merge or rebase your own unpushed work on top (never discard theirs).
+3. If impossible without losing work, record a blocker and continue locally.
 
 ---
 
-## 11. Quick Reference Checklist
+## 11. Quick Checklist
 
-**Session Start:**
-- [ ] Read all 6 core docs
-- [ ] `git status` clean
-- [ ] Next task identified
-- [ ] Plan announced
-
-**During Work:**
-- [ ] Read file before edit
-- [ ] Follow existing patterns
-- [ ] Update TASKS.md per task
-- [ ] Run tests after changes
-- [ ] Document results honestly
-
-**Session End:**
-- [ ] All docs updated
-- [ ] Session report written
-- [ ] PROGRESS.md current
-- [ ] Next task clear
-- [ ] No uncommitted secrets
+**Session start:** docs read, `git status` understood, toolchain checked, next task picked.  
+**During work:** read before edit, tests with code, build after changes, docs updated.  
+**Stage end:** tests run, docs updated, commit, push, remote verified, next task started.  
+**Session end:** session report written, `PROGRESS.md` current, repo pushed.
 
 ---
 
 ## 12. Enforcement
 
-This workflow is **binding**. Violations:
-- First: Warning in session report
-- Repeated: Task reverted, user notified
-- Critical (secrets, data loss): Immediate stop, user alerted
-
-**User has final authority** on all decisions not covered here.
+Violations of the integrity rules (false claims, secrets, destructive git operations) must be recorded in the session report and corrected immediately. The owner's explicit instructions in the current conversation always take precedence.
 
 ---
 
-*This workflow enables reliable multi-session, multi-agent development. Follow it rigorously.*
+*Revision history: v1.0 (2026-10-10) initial; v2.0 (2026-10-10) autonomous commit/push, integrated Throne, Windows+Linux only, DONE_UNVERIFIED status.*

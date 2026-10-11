@@ -1,11 +1,11 @@
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
 
-#include "include/api/RPC.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/configs/outbounds/autoselector.h"
-#include "include/database/entities/Profile.h"
-#include "include/ui/mainwindow_interface.h"
+#include "api/RPC.h"
+#include "database/DatabaseManager.h"
+#include "database/ProfilesRepo.h"
+#include "configs/outbounds/autoselector.h"
+#include "database/entities/Profile.h"
+#include "ui/mainwindow_interface.h"
 
 #include <QDateTime>
 #include <QThread>

@@ -1,5 +1,5 @@
-#include "include/database/RoutesRepo.h"
-#include "include/global/Configs.hpp"
+#include "database/RoutesRepo.h"
+#include "global/Configs.hpp"
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QMutexLocker>

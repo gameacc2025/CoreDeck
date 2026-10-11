@@ -1,8 +1,8 @@
-#include "include/ui/utils/ProfilesTableView.h"
-#include "include/ui/utils/ProfilesTableVerticalHeader.h"
-#include "include/ui/utils/ProfilesTableFilterHeader.h"
-#include "include/ui/utils/ProfilesFilterProxyModel.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "ui/utils/ProfilesTableView.h"
+#include "ui/utils/ProfilesTableVerticalHeader.h"
+#include "ui/utils/ProfilesTableFilterHeader.h"
+#include "ui/utils/ProfilesFilterProxyModel.h"
+#include "ui/utils/ProfilesTableModel.h"
 #include <QDragMoveEvent>
 #include <QHeaderView>
 #include <QKeyEvent>

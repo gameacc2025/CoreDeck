@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "Database.h"
-#include "include/database/entities/OtpProfile.h"
+#include "database/entities/OtpProfile.h"
 
 namespace Configs {
     class OtpProfilesRepo {

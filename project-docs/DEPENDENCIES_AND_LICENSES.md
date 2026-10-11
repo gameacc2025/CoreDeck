@@ -1,7 +1,7 @@
 # CoreDeck Dependencies and Licenses
 
-**Version:** 0.1  
-**Status:** DRAFT - Based on Throne Analysis  
+**Version:** 0.2  
+**Status:** DRAFT - verify every licence against the official source before shipping  
 **Last Updated:** 2026-10-10
 
 ---
@@ -10,8 +10,7 @@
 
 **GPL-3.0-or-later** — Inherited from [Throne](https://github.com/throneproj/Throne/blob/dev/LICENSE)
 
-> CoreDeck is a fork of Throne. All modifications and additions are licensed under GPL-3.0-or-later.
-> See [Throne's LICENSE](Throne/LICENSE) for full text.
+> CoreDeck is derived from Throne and absorbs the required Throne source into its own tree (DEC-011). All modifications and additions are GPL-3.0-or-later. Upstream copyright and licence headers are preserved. The full licence text ships as `LICENSE` in the CoreDeck repository root (copied from the upstream Throne repository at integration time). Attribution to Throne and its upstream authors is kept in `README.md` and in this file.
 
 ---
 
@@ -24,7 +23,7 @@
 | Qt Widgets | LGPL-3.0 | GUI |
 | Qt Network | LGPL-3.0 | Networking, RPC sockets |
 | Qt LinguistTools | LGPL-3.0 | Translations |
-| Qt DBus | LGPL-3.0 | Linux system integration |
+| Qt DBus | LGPL-3.0 (verify module licence in Qt docs) | Linux system integration |
 | **Compliance** | | Dynamic linking, provide Qt libraries, allow user swap |
 
 ### SQLiteCpp (MIT)
@@ -87,12 +86,12 @@
 | **Distribution** | | Downloaded at runtime, not bundled |
 | **Compliance** | | Source available, license conveyed |
 
-### Xray-core (GPL-3.0 / MPL-2.0)
+### Xray-core (MPL-2.0)
 | Source | License | Use |
 |--------|---------|-----|
-| https://github.com/XTLS/Xray-core | GPL-3.0 / MPL-2.0 | Xray-specific protocols |
+| https://github.com/XTLS/Xray-core | MPL-2.0 (earlier draft said GPL-3.0/MPL-2.0 — corrected; re-verify on the official repo) | Default core |
 | **Distribution** | | Downloaded at runtime, not bundled |
-| **Compliance** | | Dual license: GPL-3.0 compatible |
+| **Compliance** | | MPL-2.0 is GPL-3.0 compatible; keep source link and licence notice |
 
 ### GeoIP / GeoSite Data
 | Source | License | Use |
@@ -108,7 +107,7 @@
 ### Windows
 | Dependency | License | Notes |
 |------------|---------|-------|
-| Wintun | GPL-3.0 | TUN driver (future) |
+| Wintun | Wintun prebuilt-binaries licence (NOT GPL; redistribution terms differ) | TUN driver (P2). Read the licence before bundling |
 | WinPcap/Npcap | BSD / Proprietary | Packet capture (optional) |
 | Visual C++ Redistributable | Microsoft | Runtime |
 
@@ -120,12 +119,6 @@
 | polkit | LGPL-2.1+ | Privilege escalation |
 | systemd | LGPL-2.1+ | Service integration |
 | dbus | GPL-2.0+ / AFL | IPC |
-
-### macOS
-| Dependency | License | Notes |
-|------------|---------|-------|
-| NetworkExtension | Apple | TUN (future, requires entitlements) |
-| AppKit / Foundation | Apple | System frameworks |
 
 ---
 
@@ -149,6 +142,7 @@
 - [ ] Ensure Qt dynamically linked (or provide object files for static)
 - [ ] Document Core binary sources (sing-box, Xray-core URLs)
 - [ ] Verify no GPL-incompatible code linked
+- [ ] Throne attribution and upstream LICENSE present in the repository root
 
 ### For Source Distribution
 - [ ] All bundled third-party code includes licenses
@@ -167,12 +161,12 @@
 
 | Dependency | Version (Throne) | CoreDeck Target | Notes |
 |------------|------------------|-----------------|-------|
-| Qt | 6.5+ | 6.6+ | Pin in CI |
+| Qt | 6.5+ | 6.6+ | Pin in CI (Windows + Linux) |
 | sing-box | Latest stable | Latest stable | Auto-update |
 | Xray-core | Latest stable | Latest stable | Auto-update |
-| SQLiteCpp | Bundled | Bundled | Update with Throne |
-| simple-protobuf | Bundled | Bundled | Update with Throne |
-| fkYAML | Bundled | Bundled | Update with Throne |
+| SQLiteCpp | Bundled | Bundled | Copied into CoreDeck `3rdparty/` |
+| simple-protobuf | Bundled | Bundled | Copied into CoreDeck `3rdparty/` |
+| fkYAML | Bundled | Bundled | Copied into CoreDeck `3rdparty/` |
 
 ---
 
@@ -210,6 +204,7 @@
 | Date | Action | By | Notes |
 |------|--------|----|-------|
 | 2026-10-10 | Initial audit from Throne source | AI | Based on Throne CMakeLists.txt and 3rdparty/ |
+| 2026-10-10 | Review | AI | Xray-core corrected to MPL-2.0, Wintun licence corrected, macOS removed, Throne absorbed. Still to do at integration (MI-119): re-read each bundled `3rdparty/*/LICENSE`, list actually copied components, add attribution |
 
 ---
 

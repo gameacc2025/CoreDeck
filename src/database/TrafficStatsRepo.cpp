@@ -1,5 +1,5 @@
-#include "include/database/TrafficStatsRepo.h"
-#include "include/global/Logger.hpp"
+#include "database/TrafficStatsRepo.h"
+#include "global/Logger.hpp"
 
 #include <QFile>
 #include <QObject>

@@ -1,11 +1,11 @@
-#include "include/ui/setting/RawRouteItem.h"
+#include "ui/setting/RawRouteItem.h"
 
-#include "include/global/Configs.hpp"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/GroupsRepo.h"
-#include "include/ui/widget/json/JsonIssueList.h"
-#include "include/ui/widget/json/SchemaStore.h"
-#include "include/ui/setting/ThemeManager.hpp"
+#include "global/Configs.hpp"
+#include "database/ProfilesRepo.h"
+#include "database/GroupsRepo.h"
+#include "ui/widget/json/JsonIssueList.h"
+#include "ui/widget/json/SchemaStore.h"
+#include "ui/setting/ThemeManager.hpp"
 
 #include <QAbstractItemView>
 #include <QCheckBox>

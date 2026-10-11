@@ -10,7 +10,7 @@
 
 #include <functional>
 
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 
 namespace Scanner {
     struct ImportOutcome {

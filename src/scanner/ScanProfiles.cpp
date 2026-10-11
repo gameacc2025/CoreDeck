@@ -1,10 +1,10 @@
-#include "include/scanner/ScanProfiles.h"
+#include "scanner/ScanProfiles.h"
 
 #include <QObject>
 
-#include "include/configs/generate.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
+#include "configs/generate.h"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
 
 namespace Scanner {
     namespace {

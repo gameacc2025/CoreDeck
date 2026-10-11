@@ -1,10 +1,10 @@
-#include "include/configs/outbounds/vmess.h"
+#include "configs/outbounds/vmess.h"
 
 #include <QJsonDocument>
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool vmess::ParseFromLink(const QString& link)

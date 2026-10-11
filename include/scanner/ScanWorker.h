@@ -12,10 +12,10 @@
 #include <core/gen/libcore.pb.h>
 #endif
 
-#include "include/database/entities/IpList.h"
-#include "include/database/entities/IpScan.h"
-#include "include/database/entities/Profile.h"
-#include "include/scanner/ScanManager.h"
+#include "database/entities/IpList.h"
+#include "database/entities/IpScan.h"
+#include "database/entities/Profile.h"
+#include "scanner/ScanManager.h"
 
 namespace Scanner {
     class ScanWorker : public std::enable_shared_from_this<ScanWorker> {

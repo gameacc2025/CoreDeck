@@ -1,4 +1,4 @@
-#include "include/ui/scanner/dialog_new_scan.h"
+#include "ui/scanner/dialog_new_scan.h"
 
 #include <QButtonGroup>
 #include <QDialogButtonBox>
@@ -12,12 +12,12 @@
 #include <QStyle>
 #include <QVBoxLayout>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpScansRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/scanner/DefaultIpLists.h"
-#include "include/scanner/IpListUpdater.h"
-#include "include/scanner/ScanManager.h"
+#include "database/DatabaseManager.h"
+#include "database/IpScansRepo.h"
+#include "global/Utils.hpp"
+#include "scanner/DefaultIpLists.h"
+#include "scanner/IpListUpdater.h"
+#include "scanner/ScanManager.h"
 
 namespace {
     QString newScanDefaultName() {

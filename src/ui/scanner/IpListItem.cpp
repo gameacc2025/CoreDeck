@@ -1,4 +1,4 @@
-#include "include/ui/scanner/IpListItem.h"
+#include "ui/scanner/IpListItem.h"
 
 #include <QDateTime>
 #include <QEvent>
@@ -12,7 +12,7 @@
 #include <QVBoxLayout>
 #include <algorithm>
 
-#include "include/ui/setting/ThemeManager.hpp"
+#include "ui/setting/ThemeManager.hpp"
 
 namespace {
     QIcon RecolorIpListItemIcon(const QString &path, const QColor &color) {

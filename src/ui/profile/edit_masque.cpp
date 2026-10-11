@@ -1,9 +1,9 @@
-#include "include/ui/profile/edit_masque.h"
+#include "ui/profile/edit_masque.h"
 
 #include <QPointer>
 
-#include "include/configs/sub/warp.h"
-#include "include/global/Utils.hpp"
+#include "configs/sub/warp.h"
+#include "global/Utils.hpp"
 
 namespace {
     constexpr int kHttp3Fallback = 0;

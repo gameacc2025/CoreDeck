@@ -1,6 +1,6 @@
-#include "include/ui/utils/ProfilesTableVerticalHeader.h"
-#include "include/ui/utils/ProfilesFilterProxyModel.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "ui/utils/ProfilesTableVerticalHeader.h"
+#include "ui/utils/ProfilesFilterProxyModel.h"
+#include "ui/utils/ProfilesTableModel.h"
 #include <QPainter>
 #include <QTableView>
 #include <QFontMetrics>

@@ -1,10 +1,10 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpScansRepo.h"
-#include "include/scanner/ScanManager.h"
-#include "include/ui/scanner/dialog_ip_lists.h"
-#include "include/ui/scanner/dialog_scanner.h"
+#include "database/DatabaseManager.h"
+#include "database/IpScansRepo.h"
+#include "scanner/ScanManager.h"
+#include "ui/scanner/dialog_ip_lists.h"
+#include "ui/scanner/dialog_scanner.h"
 
 void MainWindow::on_menu_scanner_triggered() {
     showScannerDialog();

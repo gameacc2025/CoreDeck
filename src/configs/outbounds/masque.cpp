@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/masque.h"
+#include "configs/outbounds/masque.h"
 
 #include <QJsonArray>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     static QString withPrefix(const std::string& address, const char* prefix)

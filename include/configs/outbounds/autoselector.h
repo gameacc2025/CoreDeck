@@ -1,5 +1,5 @@
 #pragma once
-#include "include/configs/common/Outbound.h"
+#include "configs/common/Outbound.h"
 
 #include <QJsonArray>
 

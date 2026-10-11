@@ -1,4 +1,4 @@
-#include "include/database/entities/OtpProfile.h"
+#include "database/entities/OtpProfile.h"
 
 namespace Configs {
     QString OtpProfile::DisplayName() const {

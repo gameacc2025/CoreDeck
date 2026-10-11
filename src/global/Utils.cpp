@@ -1,4 +1,4 @@
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 #include "3rdparty/QThreadCreateThread.hpp"
 
@@ -28,7 +28,7 @@
 #include <QFontInfo>
 
 #ifdef Q_OS_WIN
-#include "include/sys/windows/guihelper.h"
+#include "sys/windows/guihelper.h"
 #endif
 #ifdef Q_OS_MAC
 #include <ApplicationServices/ApplicationServices.h>

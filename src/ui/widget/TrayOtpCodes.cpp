@@ -1,4 +1,4 @@
-#include "include/ui/widget/TrayOtpCodes.hpp"
+#include "ui/widget/TrayOtpCodes.hpp"
 
 #include <QClipboard>
 #include <QCursor>
@@ -10,9 +10,9 @@
 #include <QToolTip>
 #include <QVBoxLayout>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/ui/setting/OtpItem.h"
+#include "database/DatabaseManager.h"
+#include "database/OtpProfilesRepo.h"
+#include "ui/setting/OtpItem.h"
 
 namespace {
     constexpr int TICK_MS = 1000;

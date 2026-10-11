@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_tailscale.h"
+#include "ui/profile/edit_tailscale.h"
 
 EditTailScale::EditTailScale(QWidget *parent) : QWidget(parent), ui(new Ui::EditTailScale) {
     ui->setupUi(this);

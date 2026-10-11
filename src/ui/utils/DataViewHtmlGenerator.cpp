@@ -1,8 +1,8 @@
-#include "include/ui/utils/DataViewHtmlGenerator.h"
+#include "ui/utils/DataViewHtmlGenerator.h"
 
-#include "include/global/CountryHelper.hpp"
-#include "include/global/Configs.hpp"
-#include "include/ui/setting/ThemeManager.hpp"
+#include "global/CountryHelper.hpp"
+#include "global/Configs.hpp"
+#include "ui/setting/ThemeManager.hpp"
 
 #include <array>
 

@@ -4,7 +4,7 @@
 #include <QSet>
 #include <memory>
 
-#include "include/ui/widget/json/JsonValidator.h"
+#include "ui/widget/json/JsonValidator.h"
 
 class QSyntaxHighlighter;
 class QTimer;

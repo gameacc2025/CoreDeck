@@ -1,4 +1,4 @@
-#include "include/api/remote/Server.hpp"
+#include "api/remote/Server.hpp"
 
 #include <QCoreApplication>
 #include <QElapsedTimer>
@@ -15,7 +15,7 @@
 #include <limits>
 #include <memory>
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 namespace RemoteApi {
     class Server::Worker : public QObject {

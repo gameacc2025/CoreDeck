@@ -1,4 +1,4 @@
-#include "include/ui/scanner/dialog_scan_instance.h"
+#include "ui/scanner/dialog_scan_instance.h"
 
 #include <QAbstractItemView>
 #include <QCheckBox>
@@ -36,25 +36,25 @@
 #include <type_traits>
 #include <vector>
 
-#include "include/configs/common/TLS.h"
-#include "include/configs/sub/warp.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/scanner/DefaultIpLists.h"
-#include "include/scanner/IpListParse.h"
-#include "include/scanner/IpListUpdater.h"
-#include "include/scanner/ScanManager.h"
-#include "include/scanner/ScanProfiles.h"
-#include "include/scanner/WarpPresets.h"
-#include "include/ui/mainwindow.h"
-#include "include/ui/scanner/IpEntriesModel.h"
-#include "include/ui/scanner/ScanItem.h"
-#include "include/ui/setting/ThemeManager.hpp"
-#include "include/ui/utils/NoWheelComboBox.h"
+#include "configs/common/TLS.h"
+#include "configs/sub/warp.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "database/ProfilesRepo.h"
+#include "global/Utils.hpp"
+#include "scanner/DefaultIpLists.h"
+#include "scanner/IpListParse.h"
+#include "scanner/IpListUpdater.h"
+#include "scanner/ScanManager.h"
+#include "scanner/ScanProfiles.h"
+#include "scanner/WarpPresets.h"
+#include "ui/mainwindow.h"
+#include "ui/scanner/IpEntriesModel.h"
+#include "ui/scanner/ScanItem.h"
+#include "ui/setting/ThemeManager.hpp"
+#include "ui/utils/NoWheelComboBox.h"
 
 namespace {
     constexpr int kScanInstanceResultsPreview = 50000;

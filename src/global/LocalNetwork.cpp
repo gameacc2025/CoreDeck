@@ -1,4 +1,4 @@
-#include "include/global/LocalNetwork.hpp"
+#include "global/LocalNetwork.hpp"
 
 #include <algorithm>
 
@@ -11,7 +11,7 @@
 #include <QStringList>
 #include <QUdpSocket>
 
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 namespace LocalNetwork {
     namespace {

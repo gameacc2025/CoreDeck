@@ -1,4 +1,4 @@
-#include "include/ui/utils/ScreenQrScanner.h"
+#include "ui/utils/ScreenQrScanner.h"
 
 #include <QEventLoop>
 #include <QFile>
@@ -14,7 +14,7 @@
 #endif
 
 #include "3rdparty/QrDecoder.h"
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #ifdef Q_OS_LINUX
 OrgFreedesktopPortalRequestInterface::OrgFreedesktopPortalRequestInterface(

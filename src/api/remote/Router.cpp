@@ -1,8 +1,8 @@
-#include "include/api/remote/Router.hpp"
+#include "api/remote/Router.hpp"
 
 #include "NkrVersion.h"
-#include "include/ui/mainwindow.h"
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainwindow.h"
+#include "ui/mainWindow/TestRunner.h"
 
 #include <QDateTime>
 #include <QJsonArray>
@@ -15,13 +15,13 @@
 #include <limits>
 #include <utility>
 
-#include "include/configs/generate.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/database/TrafficStatsRepo.h"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
-#include "include/sys/KillSwitch.hpp"
+#include "configs/generate.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
+#include "database/TrafficStatsRepo.h"
+#include "stats/traffic/TrafficStatsManager.hpp"
+#include "sys/KillSwitch.hpp"
 
 namespace RemoteApi::RouterImpl {
     constexpr int kDefaultWaitSec = 30;

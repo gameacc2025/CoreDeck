@@ -5,7 +5,7 @@
 #include <QSet>
 #include <memory>
 
-#include "include/ui/widget/json/JsonValidator.h"
+#include "ui/widget/json/JsonValidator.h"
 
 namespace JsonEdit {
     // oneOf is resolved through the discriminating constant (type/action), so errors name the variant.

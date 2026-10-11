@@ -1,16 +1,16 @@
-#include "include/ui/group/dialog_manage_groups.h"
+#include "ui/group/dialog_manage_groups.h"
 
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/global/GuiUtils.hpp"
-#include "include/ui/group/GroupItem.h"
-#include "include/ui/group/dialog_edit_group.h"
+#include "configs/sub/GroupUpdater.hpp"
+#include "global/GuiUtils.hpp"
+#include "ui/group/GroupItem.h"
+#include "ui/group/dialog_edit_group.h"
 
 #include <QInputDialog>
 #include <QListWidgetItem>
 #include <QMessageBox>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
 
 
 #define AddGroupToListIfExist(_id)                       \

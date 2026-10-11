@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #include <QApplication>
 #include <QCursor>
@@ -7,8 +7,8 @@
 #include <QResizeEvent>
 #include <QTimer>
 
-#include "include/ui/widget/TrayOtpCodes.hpp"
-#include "include/ui/widget/TrayProfileSelector.hpp"
+#include "ui/widget/TrayOtpCodes.hpp"
+#include "ui/widget/TrayProfileSelector.hpp"
 
 void MainWindow::trayClickEvent() {
     constexpr qint64 recentlyActiveMs = 350;

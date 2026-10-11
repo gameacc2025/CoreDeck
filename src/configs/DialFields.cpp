@@ -1,4 +1,4 @@
-#include "include/configs/common/DialFields.h"
+#include "configs/common/DialFields.h"
 
 #include <QUrlQuery>
 

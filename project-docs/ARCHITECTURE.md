@@ -1,12 +1,14 @@
 # CoreDeck Architecture
 
-**Version:** 0.1 (Draft)  
+**Version:** 0.2 (Draft)  
 **Status:** PLANNED  
 **Last Updated:** 2026-10-10
 
 ---
 
-## 1. Current Throne Architecture (Baseline)
+## 1. Inherited Throne Architecture (Baseline)
+
+> The Throne code is being absorbed into CoreDeck's own tree (DEC-011). This section describes the code CoreDeck starts from, not an external dependency.
 
 ### Technology Stack
 | Layer | Technology |
@@ -42,7 +44,7 @@ Throne Application (Single Process)
 │   ├── System proxy / TUN toggles
 │   ├── Settings panels
 │   └── Log viewer
-└── Platform Abstraction — sys/{windows,linux,macos}/
+└── Platform Abstraction — sys/{windows,linux}/   (macOS dropped, DEC-012)
     ├── Process management
     ├── System proxy
     ├── TUN interface
@@ -166,8 +168,13 @@ CREATE TABLE instances (
     updated_at INTEGER NOT NULL
 );
 
--- Groups: ADD instance_id FK
-ALTER TABLE groups ADD COLUMN instance_id TEXT NOT NULL DEFAULT 'default-instance-uuid';
+-- Groups: ADD instance_id (DEC-015)
+-- SQLite cannot add a NOT NULL column with a REFERENCES clause and a non-NULL default,
+-- and a placeholder string is not a real UUID. So: add nullable, backfill in the
+-- migration transaction with the real Default Instance UUID, index it, and enforce
+-- ownership in GroupRepository. PRAGMA foreign_keys=ON on every connection.
+ALTER TABLE groups ADD COLUMN instance_id TEXT;
+UPDATE groups SET instance_id = :default_instance_uuid WHERE instance_id IS NULL;
 CREATE INDEX idx_groups_instance ON groups(instance_id);
 
 -- Settings: Instance-scoped settings (NEW table)
@@ -336,6 +343,7 @@ ConfigGenerator::generate(instance, profile)
 ### Throne → CoreDeck (Single → Multi-Instance)
 
 1. **On first CoreDeck run:**
+   - Back up the DB file (`throne.db.pre-coredeck.bak`) before touching it
    - Detect Throne database (`throne.db`) without `instances` table
    - Create Default Instance with UUID, name="Default"
    - Migrate all existing Groups → Default Instance
@@ -343,8 +351,8 @@ ConfigGenerator::generate(instance, profile)
    - Update `Groups.instance_id` = Default Instance UUID
    - Mark migration complete in DB
 
-2. **Backward Compatibility:**
-   - Throne can still open migrated DB (ignores new tables)
+2. **Backward Compatibility (must be verified by test, not assumed):**
+   - Throne should still open the migrated DB (ignores new tables); the nullable `groups.instance_id` column must not break Throne's `SELECT *`/`INSERT` statements — verify against Throne-format fixtures
    - CoreDeck reads Throne settings as fallback for Default Instance
 
 ---
@@ -370,7 +378,8 @@ add_library(instance_manager STATIC
 )
 
 target_link_libraries(instance_manager PRIVATE core_adapters database configs)
-target_link_libraries(Throne PRIVATE instance_manager core_adapters)
+target_link_libraries(CoreDeck PRIVATE instance_manager core_adapters)
+# CoreDeck owns its root CMakeLists.txt; nothing references a Throne/ folder (DEC-011)
 ```
 
 ---
@@ -407,7 +416,7 @@ target_link_libraries(Throne PRIVATE instance_manager core_adapters)
 | Local SOCKS/HTTP | socks5, HTTP/1.1 | Browsers, CLI tools, other apps |
 | RPC (Internal) | Protobuf over Unix/Windows socket | CoreDeck UI only |
 | Remote API (Optional) | HTTP/JSON | External tools (if enabled) |
-| Deeplink | `throne://` | Browser, other apps |
+| Deeplink | `throne://` (kept for compatibility; a `coredeck://` alias may be added) | Browser, other apps |
 
 ---
 
@@ -425,12 +434,6 @@ target_link_libraries(Throne PRIVATE instance_manager core_adapters)
 - Desktop entry, MIME types
 - TUN via `tun` device + `CAP_NET_ADMIN`
 
-### macOS
-- NetworkExtension for TUN (future)
-- Code signing / notarization for distribution
-- Quarantine attribute handling
-- Launch at login via SMAppService
-
 ---
 
 ## 11. Known Architecture Decisions
@@ -442,7 +445,9 @@ target_link_libraries(Throne PRIVATE instance_manager core_adapters)
 | Core Adapter pattern for extensibility | CONFIRMED | DECISIONS.md |
 | PortAllocator central service | CONFIRMED | DECISIONS.md |
 | Local Proxy Mode first, Central Router later | CONFIRMED | ROADMAP.md |
-| Throne DB migration on first run | CONFIRMED | DECISIONS.md |
+| Throne DB migration on first run (backup first) | CONFIRMED | DEC-006, DEC-015 |
+| Throne code absorbed into CoreDeck, no external Throne folder | CONFIRMED | DEC-011 |
+| Windows + Linux only | CONFIRMED | DEC-012 |
 | Xray as default Core (user preference) | CONFIRMED | PROJECT_SPEC.md |
 | No dynamic config switching on single Core | CONFIRMED | PROJECT_SPEC.md |
 
@@ -453,3 +458,4 @@ target_link_libraries(Throne PRIVATE instance_manager core_adapters)
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
 | 0.1 | 2026-10-10 | Initial | Baseline Throne analysis + target architecture |
+| 0.2 | 2026-10-10 | Review | Nullable groups.instance_id, backup step, dropped macOS, self-contained build (DEC-011/012/015) |

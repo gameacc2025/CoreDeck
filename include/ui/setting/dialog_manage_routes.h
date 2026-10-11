@@ -5,10 +5,10 @@
 
 #include <atomic>
 
-#include "include/global/Configs.hpp"
-#include "include/ui/setting/RouteItem.h"
+#include "global/Configs.hpp"
+#include "ui/setting/RouteItem.h"
 #include "ui_dialog_manage_routes.h"
-#include "include/database/entities/RouteProfile.h"
+#include "database/entities/RouteProfile.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,0 +1,7 @@
+Fix include paths: remove 'include/' prefix from all source files
+
+All source files in src/, include/, and tests/ were using #include "include/..."
+but CMake include directories are set to src/ and include/. This caused
+'fatal error: include/...: No such file or directory' on Linux CI.
+
+Mass replaced '#include "include/' -> '#include "' across all .cpp, .h, .hpp files.

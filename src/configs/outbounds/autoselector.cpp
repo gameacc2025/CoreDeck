@@ -1,8 +1,8 @@
-#include "include/configs/outbounds/autoselector.h"
+#include "configs/outbounds/autoselector.h"
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/entities/Group.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
+#include "database/entities/Group.h"
 
 namespace Configs
 {

@@ -2,8 +2,8 @@
 
 #include <QPushButton>
 
-#include "include/database/entities/Profile.h"
-#include "include/global/GuiUtils.hpp"
+#include "database/entities/Profile.h"
+#include "global/GuiUtils.hpp"
 
 class ProfileEditor {
 public:

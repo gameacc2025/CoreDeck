@@ -3,8 +3,8 @@
 #include <QJsonDocument>
 #include <QSet>
 
-#include "include/database/GroupsRepo.h"
-#include "include/global/Configs.hpp"
+#include "database/GroupsRepo.h"
+#include "global/Configs.hpp"
 
 namespace Configs
 {

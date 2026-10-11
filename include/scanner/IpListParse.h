@@ -5,7 +5,7 @@
 #include <QString>
 #include <QStringList>
 
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 
 namespace Scanner {
     struct ParseResult {

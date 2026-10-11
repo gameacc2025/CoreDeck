@@ -1,4 +1,4 @@
-#include "include/ui/setting/dialog_otp_manager.h"
+#include "ui/setting/dialog_otp_manager.h"
 
 #include <QBuffer>
 #include <QClipboard>
@@ -21,13 +21,13 @@
 
 #include "3rdparty/QrDecoder.h"
 #include "3rdparty/qrcodegen.hpp"
-#include "include/database/DatabaseManager.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/ui/setting/OtpItem.h"
-#include "include/ui/setting/OtpListWidget.h"
-#include "include/ui/setting/dialog_edit_otp.h"
-#include "include/ui/utils/ScreenQrScanner.h"
+#include "database/DatabaseManager.h"
+#include "database/OtpProfilesRepo.h"
+#include "global/Utils.hpp"
+#include "ui/setting/OtpItem.h"
+#include "ui/setting/OtpListWidget.h"
+#include "ui/setting/dialog_edit_otp.h"
+#include "ui/utils/ScreenQrScanner.h"
 
 namespace {
     constexpr qint64 MAX_IMPORT_FILE_SIZE = 50 * 1024 * 1024;

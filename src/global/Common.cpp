@@ -1,7 +1,7 @@
 #include <include/global/Common.h>
 
-#include "include/global/Configs.hpp"
-#include "include/database/ProfilesRepo.h"
+#include "global/Configs.hpp"
+#include "database/ProfilesRepo.h"
 #include <QMap>
 
 QList <std::pair <int, QString>> FixProfileDisplayName(QList <std::pair <int, QString>>& raw) {

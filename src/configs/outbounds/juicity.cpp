@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/juicity.h"
+#include "configs/outbounds/juicity.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool juicity::ParseFromLink(const QString& link)

@@ -1,7 +1,7 @@
-#include "include/api/remote/Router.hpp"
+#include "api/remote/Router.hpp"
 
-#include "include/ui/mainwindow.h"
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainwindow.h"
+#include "ui/mainWindow/TestRunner.h"
 
 #include <QDateTime>
 #include <QJsonArray>
@@ -9,7 +9,7 @@
 
 #include <utility>
 
-#include "include/database/ProfilesRepo.h"
+#include "database/ProfilesRepo.h"
 
 namespace RemoteApi::RouterJobs {
     constexpr int kDefaultWaitSec = 300;

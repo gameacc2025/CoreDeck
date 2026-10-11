@@ -1,7 +1,7 @@
 #pragma once
 
-#include "include/configs/common/Outbound.h"
-#include "include/configs/common/TLS.h"
+#include "configs/common/Outbound.h"
+#include "configs/common/TLS.h"
 
 namespace Configs
 {

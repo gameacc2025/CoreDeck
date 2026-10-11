@@ -1,4 +1,4 @@
-#include "include/database/IpListsRepo.h"
+#include "database/IpListsRepo.h"
 
 #include <QSet>
 

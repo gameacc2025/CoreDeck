@@ -1,15 +1,15 @@
-#include "include/ui/setting/dialog_basic_settings.h"
+#include "ui/setting/dialog_basic_settings.h"
 
-#include "include/ui/widget/json/JsonEditorDialog.h"
-#include "include/ui/widget/json/SchemaStore.h"
-#include "include/ui/setting/ThemeManager.hpp"
-#include "include/ui/setting/Icon.hpp"
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Configs.hpp"
-#include "include/global/HTTPRequestHelper.hpp"
-#include "include/global/DeviceDetailsHelper.hpp"
-#include "include/database/entities/Group.h"
-#include "include/scanner/ScanManager.h"
+#include "ui/widget/json/JsonEditorDialog.h"
+#include "ui/widget/json/SchemaStore.h"
+#include "ui/setting/ThemeManager.hpp"
+#include "ui/setting/Icon.hpp"
+#include "global/GuiUtils.hpp"
+#include "global/Configs.hpp"
+#include "global/HTTPRequestHelper.hpp"
+#include "global/DeviceDetailsHelper.hpp"
+#include "database/entities/Group.h"
+#include "scanner/ScanManager.h"
 
 #include <QStyleFactory>
 #include <QFileDialog>
@@ -41,9 +41,9 @@
 
 #include <algorithm>
 
-#include "include/sys/UrlScheme.hpp"
-#include "include/ui/mainwindow.h"
-#include "include/ui/setting/DiagnosticsTab.h"
+#include "sys/UrlScheme.hpp"
+#include "ui/mainwindow.h"
+#include "ui/setting/DiagnosticsTab.h"
 
 DialogBasicSettings::DialogBasicSettings(QWidget *parent)
     : QDialog(parent), ui(new Ui::DialogBasicSettings) {

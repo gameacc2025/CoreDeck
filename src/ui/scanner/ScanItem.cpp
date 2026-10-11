@@ -1,4 +1,4 @@
-#include "include/ui/scanner/ScanItem.h"
+#include "ui/scanner/ScanItem.h"
 
 #include <QHBoxLayout>
 #include <QHash>
@@ -11,12 +11,12 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/ui/mainwindow.h"
-#include "include/ui/setting/ThemeManager.hpp"
+#include "database/DatabaseManager.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "global/Utils.hpp"
+#include "ui/mainwindow.h"
+#include "ui/setting/ThemeManager.hpp"
 
 namespace {
     constexpr int kScanItemPillPaddingX = 6;

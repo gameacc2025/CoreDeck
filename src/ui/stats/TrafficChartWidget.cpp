@@ -1,6 +1,6 @@
-#include "include/ui/stats/TrafficChartWidget.h"
+#include "ui/stats/TrafficChartWidget.h"
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 #include <QPainter>
 #include <QPaintEvent>

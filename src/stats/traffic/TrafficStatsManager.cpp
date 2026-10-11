@@ -1,7 +1,7 @@
-#include "include/stats/traffic/TrafficStatsManager.hpp"
+#include "stats/traffic/TrafficStatsManager.hpp"
 
-#include "include/database/DatabaseManager.h"
-#include "include/global/Utils.hpp"
+#include "database/DatabaseManager.h"
+#include "global/Utils.hpp"
 
 #include <QDateTime>
 #include <QThread>

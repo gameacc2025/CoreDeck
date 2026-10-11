@@ -8,8 +8,8 @@
 
 #include <optional>
 
-#include "include/database/entities/EndpointSource.h"
-#include "include/ui/group/GroupSort.hpp"
+#include "database/entities/EndpointSource.h"
+#include "ui/group/GroupSort.hpp"
 
 namespace Configs
 {

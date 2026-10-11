@@ -1,8 +1,8 @@
-#include "include/ui/profile/dialog_edit_profile.h"
+#include "ui/profile/dialog_edit_profile.h"
 
-#include "include/configs/common/utils.h"
-#include "include/global/Utils.hpp"
-#include "include/ui/widget/json/JsonEditorDialog.h"
+#include "configs/common/utils.h"
+#include "global/Utils.hpp"
+#include "ui/widget/json/JsonEditorDialog.h"
 
 #include <QSignalBlocker>
 

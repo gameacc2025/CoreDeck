@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_xrayvless.h"
+#include "ui/profile/edit_xrayvless.h"
 
 EditXrayVless::EditXrayVless(QWidget *parent)
     : QWidget(parent),

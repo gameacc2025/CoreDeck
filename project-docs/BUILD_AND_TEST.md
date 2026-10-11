@@ -1,405 +1,216 @@
 # CoreDeck Build and Test Guide
 
-**Version:** 0.1  
-**Status:** BLOCKED - Missing Toolchain  
-**Last Updated:** 2026-10-10
+**Version:** 0.2  
+**Status:** BLOCKED - toolchain not yet provisioned (M0 not reached)  
+**Last Updated:** 2026-10-10  
+**Platforms:** Windows 10/11 (primary), Linux. macOS is out of scope (DEC-012).
+
+> Builds must work from a clean checkout of the CoreDeck repository alone. No `Throne/` folder or external path is required (DEC-011).
 
 ---
 
-## Prerequisites
+## 1. Prerequisites
 
 ### Windows
-| Tool | Version | Notes | Available |
-|------|---------|-------|-----------|
-| Git | 2.40+ | | ✅ 2.49.0 |
-| CMake | 3.20+ | | ❌ Not installed |
-| Qt | 6.5+ (6.6+ recommended) | MSVC 2022 64-bit or MinGW-w64 | ❌ Not installed |
-| Visual Studio | 2022 17.6+ | Community/Pro/Enterprise | ❌ Not installed |
-| Ninja | 1.11+ | Optional, faster builds | ❌ Not installed |
-| Python | 3.10+ | For install scripts | ❓ Unknown |
-| 7-Zip | | For packaging | ❓ Unknown |
+| Tool | Version | Install (non-interactive) |
+|------|---------|---------------------------|
+| Git | 2.40+ | already present (2.49.0) |
+| CMake | 3.20+ | `winget install Kitware.CMake` |
+| Ninja | 1.11+ | `winget install Ninja-build.Ninja` |
+| MSVC Build Tools 2022 | 17.6+ | `winget install Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"` |
+| Qt | 6.5+ (6.6+ preferred) | `pip install aqtinstall` then `aqt install-qt windows desktop 6.6.3 win64_msvc2019_64 -O C:\Qt` |
+| Python | 3.10+ | `winget install Python.Python.3.12` |
+| 7-Zip | any | `winget install 7zip.7zip` (packaging) |
+
+MinGW-w64 is an alternative compiler (use the matching Qt `win64_mingw` arch).
 
 ### Linux
 | Tool | Version | Notes |
 |------|---------|-------|
-| Git | 2.40+ | |
-| CMake | 3.20+ | |
-| Qt | 6.5+ | `qt6-base-dev`, `qt6-tools-dev` |
-| GCC | 11+ / Clang 14+ | C++20 support |
-| Ninja | 1.11+ | Recommended |
-| sqlite3 | 3.38+ | Dev headers |
-| protobuf | 3.21+ | For simple-protobuf (bundled) |
+| Git, CMake 3.20+, Ninja 1.11+ | | package manager |
+| GCC 11+ / Clang 14+ | | C++20 |
+| Qt 6.5+ | | e.g. Debian/Ubuntu: `qt6-base-dev qt6-tools-dev qt6-l10n-tools libqt6dbus6` |
+| SQLite dev headers | 3.38+ | SQLiteCpp is bundled |
 
-### macOS
-| Tool | Version | Notes |
-|------|---------|-------|
-| Git | 2.40+ | |
-| CMake | 3.20+ | |
-| Qt | 6.5+ | `brew install qt6` |
-| Xcode | 14.3+ | Command Line Tools |
-| Ninja | 1.11+ | `brew install ninja` |
+Example: `sudo apt install -y build-essential cmake ninja-build qt6-base-dev qt6-tools-dev qt6-l10n-tools libgl1-mesa-dev`
 
 ---
 
-## Environment Verification (2026-10-10)
+## 2. Environment Verification Log
 
-**OS:** Windows 11 Pro (10.0.26300 Build 26300)  
-**Architecture:** x64  
+### 2026-10-10 (Windows 11 Pro 10.0.26300, x64)
+| Item | Result |
+|------|--------|
+| Git | OK 2.49.0.windows.1 |
+| CMake | MISSING |
+| Qt6 | MISSING (no `C:\Qt`, `C:\Qt6`, `C:\Tools\Qt`) |
+| MSVC / VS Build Tools 2022 | MISSING |
+| MinGW-w64 | MISSING |
+| Ninja | MISSING |
+| winget / Chocolatey / Scoop | winget availability NOT YET CHECKED (earlier note only said Chocolatey/Scoop absent) |
 
-**Toolchain Status:**
-- Git: ✅ Available (2.49.0.windows.1)
-- CMake: ❌ Not in PATH, not installed
-- Qt6: ❌ Not installed (no `C:\Qt\`, `C:\Qt6\`, `C:\Tools\Qt\`)
-- Visual Studio 2022: ❌ Not installed (no `C:\Program Files\Microsoft Visual Studio\2022\`)
-- Visual Studio Build Tools: ❌ Not installed
-- MinGW-w64: ❌ Not in PATH
-- Ninja: ❌ Not in PATH
-- Chocolatey/Scoop: ❌ Not available
+**Status:** M0 not reached. Next action (done by the AI, no owner input): run `winget --version`; install the tools above; if that fails, use the GitHub Actions workflow (section 6) and cite its run as evidence.
 
-**Conclusion:** The current Windows environment lacks the complete C++/Qt toolchain required to build Throne. This is a **blocker** for MI-002 (Verify baseline build).
-
-**Required to proceed:**
-1. Install Visual Studio 2022 Community/Build Tools with "Desktop development with C++" workload
-2. Install Qt 6.6+ (MSVC 2022 64-bit kit) via Qt Online Installer
-3. Install CMake 3.20+ and add to PATH
-4. Install Ninja 1.11+ and add to PATH
-
-Alternatively, use a Windows machine/VM with the toolchain pre-installed, or use GitHub Actions for CI builds.
+Add a new dated entry here every time the environment is re-checked.
 
 ---
 
-## Throne Baseline Build (Verification)
+## 3. Build (CoreDeck root)
 
-### Windows (MSVC)
+### Windows (MSVC, Ninja)
+Run from a "x64 Native Tools" prompt (or after `vcvars64.bat`):
 ```powershell
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-ninja
-# Or with VS:
-cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release ..
-cmake --build . --config Release
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:\Qt\6.6.3\msvc2019_64
+cmake --build build
 ```
 
 ### Windows (MinGW)
 ```powershell
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ..
-ninja
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_PREFIX_PATH=C:\Qt\6.6.3\mingw_64
+cmake --build build
 ```
 
 ### Linux
 ```bash
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-ninja
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build
 ```
 
-### macOS
-```bash
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt6)" ..
-ninja
-```
-
-### Expected Artifacts
+### Expected artifacts
 | Platform | Output |
 |----------|--------|
-| Windows | `build/Throne.exe` (+ DLLs in same dir) |
-| Linux | `build/Throne` (AppImage via script) |
-| macOS | `build/Throne.app` |
+| Windows | `build/CoreDeck.exe` (+ Qt DLLs via `windeployqt`) |
+| Linux | `build/CoreDeck` |
+
+(Binary name is decided at integration time; update this table when it is.)
+
+### Build verification results
+| Date | Step | Command | Result | Notes |
+|------|------|---------|--------|-------|
+| 2026-10-10 | env | `cmake --version` | FAILED | not installed |
+| 2026-10-10 | env | `where qmake` | FAILED | not installed |
+| 2026-10-10 | env | `where cl` | FAILED | not installed |
+| 2026-10-10 | configure | `cmake -S . -B build -G Ninja` | NOT RUN | blocked by toolchain |
+| 2026-10-10 | build | `cmake --build build` | NOT RUN | blocked by toolchain |
+
+Also note: no root `CMakeLists.txt` exists yet; creating it is part of the Throne integration task (MI-119).
 
 ---
 
-## Build Verification Results (2026-10-10)
+## 4. Running
 
-| Step | Command | Result | Notes |
-|------|---------|--------|-------|
-| Environment check | `cmake --version` | FAILED | CMake not installed |
-| Environment check | `where qmake` | FAILED | Qt not installed |
-| Environment check | `where cl` | FAILED | MSVC not installed |
-| CMake configure | `cmake -G "Ninja" ..` | NOT RUN | Blocked by missing tools |
-| Build | `ninja` | NOT RUN | Blocked by missing tools |
-
-**Status:** BLOCKED - Cannot proceed with build verification until toolchain is installed.
-
----
-
-## CoreDeck Build (Future)
-
-*To be documented after Phase 1 implementation.*
-
-### Linux
-| Tool | Version | Notes |
-|------|---------|-------|
-| Git | 2.40+ | |
-| CMake | 3.20+ | |
-| Qt | 6.5+ | `qt6-base-dev`, `qt6-tools-dev` |
-| GCC | 11+ / Clang 14+ | C++20 support |
-| Ninja | 1.11+ | Recommended |
-| sqlite3 | 3.38+ | Dev headers |
-| protobuf | 3.21+ | For simple-protobuf (bundled) |
-
-### macOS
-| Tool | Version | Notes |
-|------|---------|-------|
-| Git | 2.40+ | |
-| CMake | 3.20+ | |
-| Qt | 6.5+ | `brew install qt6` |
-| Xcode | 14.3+ | Command Line Tools |
-| Ninja | 1.11+ | `brew install ninja` |
-
----
-
-## Throne Baseline Build (Verification)
-
-### Windows (MSVC)
 ```powershell
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-ninja
-# Or with VS:
-cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release ..
-cmake --build . --config Release
+# Windows
+.\build\CoreDeck.exe
+.\build\CoreDeck.exe -appdata .\config     # portable data dir
 ```
-
-### Windows (MinGW)
-```powershell
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ..
-ninja
-```
-
-### Linux
 ```bash
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-ninja
+# Linux
+./build/CoreDeck
+./build/CoreDeck -appdata ~/.config/coredeck
 ```
 
-### macOS
-```bash
-cd Throne
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(brew --prefix qt6)" ..
-ninja
-```
-
-### Expected Artifacts
-| Platform | Output |
-|----------|--------|
-| Windows | `build/Throne.exe` (+ DLLs in same dir) |
-| Linux | `build/Throne` (AppImage via script) |
-| macOS | `build/Throne.app` |
-
----
-
-## CoreDeck Build (Future)
-
-*To be documented after Phase 1 implementation.*
-
-```bash
-# From CoreDeck root (not Throne/)
-mkdir build
-cd build
-cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-ninja
-```
-
----
-
-## Running the Application
-
-### Windows
-```powershell
-# From build directory
-.\Throne.exe
-# Or portable:
-.\Throne.exe -appdata .\config
-```
-
-### Linux
-```bash
-./Throne
-# Or with custom config dir:
-./Throne -appdata ~/.config/coredeck
-```
-
-### macOS
-```bash
-open ./Throne.app
-# Or CLI:
-./Throne.app/Contents/MacOS/Throne
-```
-
-### Common Arguments
 | Argument | Description |
 |----------|-------------|
-| `-appdata <path>` | Use custom config directory |
-| `-many` | Allow multiple GUI instances (dev) |
+| `-appdata <path>` | Use a custom config directory |
+| `-many` | Allow multiple GUI processes (development only) |
 | `-tray` | Start minimized to tray |
-| `-debug` | Enable debug logging |
+| `-debug` | Debug logging |
 | `-flag_restart_tun_on` | Restore TUN on start |
 
 ---
 
-## Testing
+## 5. Testing
 
-### Unit Tests (Planned)
+### Unit and integration tests (CTest)
 ```bash
-# After test infrastructure added
-cd build
-ctest --output-on-failure
+ctest --test-dir build --output-on-failure
 ```
+Tests use temporary databases and fixtures only. Record the pass/fail counts below after every real run.
 
-### Integration Tests (Manual)
+| Date | Command | Passed | Failed | Notes |
+|------|---------|--------|--------|-------|
+| — | — | — | — | No test has been executed yet |
 
-#### Test 1: Basic Startup
-1. Launch Throne
-2. Verify UI loads without errors
-3. Check log for "appdata mode" message
-4. Close normally
+Existing test sources (written, NOT compiled or run): `tests/test_instance.cpp`, `tests/test_instancemanager.cpp`. They count as `DONE_UNVERIFIED` until a CTest run is recorded. The migration, `InstanceRepository`, and `PortAllocator` tests with Throne-format fixtures are still to be written.
 
-#### Test 2: Profile Management
-1. Add subscription URL
-2. Update subscription
-3. Verify profiles appear
-4. Test profile latency
-5. Start profile
-6. Verify connection (check logs)
-7. Stop profile
+### Manual smoke tests
 
-#### Test 3: System Proxy
-1. Enable System Proxy
-2. Verify browser traffic routes through proxy
-3. Disable System Proxy
-4. Verify browser direct connection
+**S1 Startup:** launch; UI loads; log shows data dir; Default Instance exists; close cleanly; no orphan core processes.  
+**S2 Profile/subscription:** add subscription (use `YOUR_SUBSCRIPTION_URL` placeholders in docs), update, profiles appear, start/stop a profile, logs show connection.  
+**S3 System proxy:** enable, browser uses proxy, disable, browser direct.  
+**S4 TUN (Windows/Linux, needs admin/root, P2):** enable, verify routing, disable, verify cleanup.
 
-#### Test 4: TUN Mode (Linux/Windows)
-1. Enable TUN (requires admin/root)
-2. Verify system-wide routing
-3. Disable TUN
-5. Verify cleanup
-
-### Multi-Instance Tests (CoreDeck - Future)
-
-#### Test MI-1: Two Instances Running
-1. Create Instance "A" and "B"
-2. Configure different subscriptions
-3. Start both Instances
-4. Verify both show "Running" with different PIDs
-5. Connect Browser A to Instance A port
-6. Connect Browser B to Instance B port
-7. Verify different exit IPs
-
-#### Test MI-2: Instance Isolation
-1. Start Instance A and B
-2. Crash Instance A Core (kill PID)
-3. Verify Instance B still running
-4. Verify Instance A auto-restarts (if enabled)
-
-#### Test MI-3: Port Conflict Handling
-1. Create Instance A with SOCKS 10808
-2. Create Instance B with SOCKS 10808
-3. Start A, then try to start B
-4. Verify B shows port conflict error
-
-#### Test MI-4: Subscription Independence
-1. Instance A: Subscribe to URL X
-2. Instance B: Subscribe to same URL X
-3. Update in A
-4. Verify B's profiles unchanged
-5. Delete subscription in A
-6. Verify B's subscription intact
-
-#### Test MI-5: Auto-Start Recovery
-1. Configure Instance A: auto_start=true
-2. Configure Instance B: auto_start=false
-3. Close app
-4. Reopen app
-5. Verify A running, B stopped
-6. Verify A restored last profile
+### Multi-instance tests
+- **MI-1 Two Instances:** create A and B, start both, different PIDs/ports, different exit IPs through each port.
+- **MI-2 Isolation:** kill A's core PID; B keeps running; A restarts only if `restart_on_crash`.
+- **MI-3 Port conflict:** two Instances with the same SOCKS port; start A then B; B shows a clear port-conflict error and the GUI stays up.
+- **MI-4 Subscription independence:** same URL in A and B; update/delete in A; B unchanged.
+- **MI-5 Auto-start recovery:** A `auto_start=true`, B false; restart app; A running with last profile restored, B stopped.
+- **MI-6 Migration:** open a Throne-format DB fixture copy; verify Default Instance, all Groups/Profiles/Settings preserved, `.pre-coredeck.bak` created, re-run is idempotent.
 
 ---
 
-## Performance Benchmarks (Target)
+## 6. CI (GitHub Actions)
 
-| Metric | Target | Measurement Method |
-|--------|--------|-------------------|
-| Memory (1 Instance idle) | < 60 MB | Task Manager / `ps` |
-| Memory (5 Instances idle) | < 200 MB | Task Manager / `ps` |
-| CPU (5 Instances idle) | < 2% | Task Manager / `top` |
-| Startup (5 auto-start) | < 10 seconds | Stopwatch |
-| Port bind success | 100% | Automated test |
-| Core crash isolation | 100% | Kill test |
+CoreDeck owns `.github/workflows/build.yml` (to be created if local tools cannot be installed; recommended anyway).
+
+Matrix: `windows-latest` (MSVC, Qt via `jurplel/install-qt-action`) and `ubuntu-latest` (apt Qt6). Steps: checkout, configure, build, `ctest --output-on-failure`, upload artifact (Windows portable ZIP, Linux binary).
+
+A green run on the pushed commit, with its log cited in the session report, counts as build/test evidence. Do not copy Throne's macOS jobs.
 
 ---
 
-## Packaging
+## 7. Performance Targets
 
-### Windows
-- Portable ZIP: `Throne-{version}-win64.zip` (exe + DLLs + cores)
-- Installer: NSIS or WiX (future)
-
-### Linux
-- AppImage: `script/build_appimage.sh`
-- DEB: `cmake --build . --target package_deb`
-- RPM: `cmake --build . --target package_rpm`
-
-### macOS
-- DMG: `script/build_dmg.sh`
-- Notarization: `xcrun notarytool submit`
+| Metric | Target | Method |
+|--------|--------|--------|
+| Memory, 1 Instance idle | < 60 MB | Task Manager / `ps` |
+| Memory, 5 Instances idle | < 200 MB | same |
+| CPU, 5 Instances idle | < 2% | Task Manager / `top` |
+| Startup, 5 auto-start | < 10 s | stopwatch |
+| Port bind success | 100% | automated test |
+| Core crash isolation | 100% | kill test |
 
 ---
 
-## CI/CD (Reference)
+## 8. Packaging
 
-Throne uses GitHub Actions. See `.github/workflows/` for:
-- Windows build (MSVC + MinGW)
-- Linux build (Ubuntu, Arch)
-- macOS build
-- Release packaging
+| Platform | Deliverable |
+|----------|-------------|
+| Windows | Portable ZIP `CoreDeck-{version}-win64.zip` (exe + Qt DLLs via `windeployqt` + licences; cores downloaded at runtime). Installer (NSIS/WiX) later. |
+| Linux | AppImage / `.deb` / `.rpm` (P1; a built binary from CI is enough for the prototype) |
+
+Every package includes: GPL-3.0 text, third-party licence notices, source-offer link (see DEPENDENCIES_AND_LICENSES.md).
 
 ---
 
-## Troubleshooting
+## 9. Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
-| CMake can't find Qt | Set `CMAKE_PREFIX_PATH` to Qt installation |
-| MSVC: `/Zi` vs `/Z7` | CMakeLists handles this for RelWithDebInfo |
-| Linker errors (SQLiteCpp) | Ensure `BUILD_SHARED_LIBS=OFF` |
-| Core not found | Check `3rdparty/` or auto-download on first run |
-| RPC connection failed | Check firewall, socket permissions |
-| TUN requires root | Run with sudo or configure polkit |
+| CMake can't find Qt | Set `CMAKE_PREFIX_PATH` to the Qt kit directory |
+| MSVC `/Zi` vs `/Z7` | Handled in CMakeLists for RelWithDebInfo |
+| SQLiteCpp linker errors | Ensure `BUILD_SHARED_LIBS=OFF` |
+| Core not found | Check the core folder or let the app download it on first run |
+| RPC connection failed | Check firewall, local socket name, permissions |
+| TUN needs privileges | Run elevated (Windows) / root or polkit (Linux) |
+| `winget` not found | Install "App Installer" from Microsoft Store, or use the CI workflow |
 
 ---
 
-## Build Verification Checklist
+## 10. Build Verification Checklist
 
 - [ ] CMake configure succeeds
 - [ ] Build completes without errors
+- [ ] CTest passes (counts recorded)
 - [ ] Executable runs and shows UI
-- [ ] Can add subscription
-- [ ] Can start/stop profile
+- [ ] Default Instance created / Throne DB migrated on fixture
+- [ ] Can add subscription, start/stop a profile
 - [ ] Logs show RPC connection
 - [ ] System Proxy toggle works
 - [ ] Settings persist after restart
 
 ---
 
-*Update this file after every build/test session. Record actual commands and results.*
+*Update this file after every build/test session with the real commands and results.*

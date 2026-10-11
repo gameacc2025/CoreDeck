@@ -1,8 +1,8 @@
 #include <include/database/entities/Group.h>
 
-#include "include/configs/generate.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
+#include "configs/generate.h"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
 #include <QRegularExpression> 
 
 namespace Configs

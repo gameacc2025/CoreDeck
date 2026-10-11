@@ -1,10 +1,10 @@
-#include "include/ui/profile/edit_hysteria_realm.h"
+#include "ui/profile/edit_hysteria_realm.h"
 
 #include <QGuiApplication>
 #include <QScreen>
 
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Utils.hpp"
+#include "global/GuiUtils.hpp"
+#include "global/Utils.hpp"
 
 EditHysteriaRealm::EditHysteriaRealm(QWidget *parent, const std::shared_ptr<Configs::Profile> &_ent)
     : QDialog(parent)

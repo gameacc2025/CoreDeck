@@ -1,12 +1,12 @@
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainWindow/TestRunner.h"
 
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
-#include "include/api/RPC.h"
-#include "include/configs/generate.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
+#include "api/RPC.h"
+#include "configs/generate.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "stats/traffic/TrafficStatsManager.hpp"
 
 #include <QSemaphore>
 #include <QThread>

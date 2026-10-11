@@ -1,10 +1,10 @@
-#include "include/ui/widget/json/SchemaStore.h"
+#include "ui/widget/json/SchemaStore.h"
 
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 
-#include "include/global/Logger.hpp"
+#include "global/Logger.hpp"
 
 namespace JsonEdit {
     const QJsonObject& SingBoxSchema() {

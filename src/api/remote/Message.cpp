@@ -1,4 +1,4 @@
-#include "include/api/remote/Message.hpp"
+#include "api/remote/Message.hpp"
 
 #include <QCoreApplication>
 #include <QJsonArray>

@@ -1,8 +1,8 @@
-#include "include/ui/profile/dialog_edit_profile.h"
+#include "ui/profile/dialog_edit_profile.h"
 
-#include "include/configs/common/xrayStreamSetting.h"
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Utils.hpp"
+#include "configs/common/xrayStreamSetting.h"
+#include "global/GuiUtils.hpp"
+#include "global/Utils.hpp"
 
 #include <QAbstractButton>
 #include <QGridLayout>

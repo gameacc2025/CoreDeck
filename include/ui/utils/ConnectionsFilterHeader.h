@@ -10,7 +10,7 @@
 #include <QStyle>
 #include <QToolButton>
 
-#include "include/ui/utils/ConnectionsTreeModel.h"
+#include "ui/utils/ConnectionsTreeModel.h"
 
 class ConnectionsFilterHeader : public QHeaderView {
     Q_OBJECT

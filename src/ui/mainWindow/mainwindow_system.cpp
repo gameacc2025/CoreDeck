@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 #include "NkrVersion.h"
 
 #include <QApplication>
@@ -13,36 +13,36 @@
 #include <QPushButton>
 #include <QThread>
 
-#include "include/api/RPC.h"
-#include "include/api/remote/Server.hpp"
-#include "include/configs/generate.h"
-#include "include/global/Configs.hpp"
-#include "include/global/HTTPRequestHelper.hpp"
-#include "include/global/LocalNetwork.hpp"
-#include "include/global/Logger.hpp"
-#include "include/scanner/ScanManager.h"
-#include "include/sys/KillSwitch.hpp"
-#include "include/sys/Process.hpp"
-#include "include/sys/SystemProxy.hpp"
-#include "include/ui/mainWindow/MainWindowInternal.h"
+#include "api/RPC.h"
+#include "api/remote/Server.hpp"
+#include "configs/generate.h"
+#include "global/Configs.hpp"
+#include "global/HTTPRequestHelper.hpp"
+#include "global/LocalNetwork.hpp"
+#include "global/Logger.hpp"
+#include "scanner/ScanManager.h"
+#include "sys/KillSwitch.hpp"
+#include "sys/Process.hpp"
+#include "sys/SystemProxy.hpp"
+#include "ui/mainWindow/MainWindowInternal.h"
 
-#include "include/ui/group/dialog_manage_groups.h"
-#include "include/ui/setting/dialog_basic_settings.h"
-#include "include/ui/setting/dialog_integration.h"
-#include "include/ui/setting/dialog_manage_routes.h"
-#include "include/ui/setting/dialog_otp_manager.h"
-#include "include/ui/setting/dialog_preset_settings.h"
-#include "include/ui/setting/dialog_vpn_settings.h"
+#include "ui/group/dialog_manage_groups.h"
+#include "ui/setting/dialog_basic_settings.h"
+#include "ui/setting/dialog_integration.h"
+#include "ui/setting/dialog_manage_routes.h"
+#include "ui/setting/dialog_otp_manager.h"
+#include "ui/setting/dialog_preset_settings.h"
+#include "ui/setting/dialog_vpn_settings.h"
 
 #ifdef Q_OS_WIN
 #include "3rdparty/WinCommander.hpp"
-#include "include/sys/windows/WinVersion.h"
+#include "sys/windows/WinVersion.h"
 #endif
 #ifdef Q_OS_LINUX
-#include "include/sys/linux/LinuxCap.h"
+#include "sys/linux/LinuxCap.h"
 #endif
 #ifdef Q_OS_MACOS
-#include "include/sys/macos/MacOS.h"
+#include "sys/macos/MacOS.h"
 #endif
 
 qint64 MainWindow::GetCorePid() {

@@ -1,8 +1,8 @@
-#include "include/ui/setting/dialog_vpn_settings.h"
+#include "ui/setting/dialog_vpn_settings.h"
 
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Configs.hpp"
-#include "include/ui/mainwindow_interface.h"
+#include "global/GuiUtils.hpp"
+#include "global/Configs.hpp"
+#include "ui/mainwindow_interface.h"
 
 #include <QMessageBox>
 #include <QHostAddress>

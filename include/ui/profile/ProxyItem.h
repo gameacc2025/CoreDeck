@@ -4,7 +4,7 @@
 #include <QListWidgetItem>
 
 #include "ui_ProxyItem.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

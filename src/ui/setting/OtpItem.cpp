@@ -1,4 +1,4 @@
-#include "include/ui/setting/OtpItem.h"
+#include "ui/setting/OtpItem.h"
 
 #include <QCursor>
 #include <QPainter>

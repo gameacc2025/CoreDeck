@@ -6,7 +6,7 @@
 #include <QString>
 #include <memory>
 
-#include "include/configs/generate.h"
+#include "configs/generate.h"
 
 namespace Stats
 {

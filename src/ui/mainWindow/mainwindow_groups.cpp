@@ -1,4 +1,4 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
 #include <QAbstractItemView>
 #include <QMenu>
@@ -7,14 +7,14 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/database/GroupsRepo.h"
-#include "include/ui/group/dialog_edit_group.h"
-#include "include/ui/mainWindow/MainWindowInternal.h"
-#include "include/ui/mainWindow/TestRunner.h"
-#include "include/ui/stats/dialog_endpoint_details.h"
-#include "include/ui/utils/ProfilesTableFilterHeader.h"
-#include "include/global/Utils.hpp"
+#include "configs/sub/GroupUpdater.hpp"
+#include "database/GroupsRepo.h"
+#include "ui/group/dialog_edit_group.h"
+#include "ui/mainWindow/MainWindowInternal.h"
+#include "ui/mainWindow/TestRunner.h"
+#include "ui/stats/dialog_endpoint_details.h"
+#include "ui/utils/ProfilesTableFilterHeader.h"
+#include "global/Utils.hpp"
 
 void MainWindow::on_tabWidget_currentChanged(int index) {
     if (Configs::dataManager->settingsRepo->refreshing_group_list) return;

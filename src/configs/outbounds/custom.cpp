@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/custom.h"
+#include "configs/outbounds/custom.h"
 
-#include "include/configs/common/OutboundFactory.h"
-#include "include/configs/common/utils.h"
-#include "include/configs/outbounds/xrayVless.h"
-#include "include/global/Utils.hpp"
+#include "configs/common/OutboundFactory.h"
+#include "configs/common/utils.h"
+#include "configs/outbounds/xrayVless.h"
+#include "global/Utils.hpp"
 
 #include <QJsonArray>
 #include <memory>

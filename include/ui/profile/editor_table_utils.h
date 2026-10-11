@@ -6,7 +6,7 @@
 #include <QTableWidget>
 #include <QTableWidgetItem>
 
-#include "include/ui/utils/NoWheelComboBox.h"
+#include "ui/utils/NoWheelComboBox.h"
 
 // Inline rather than file-local: a unity build puts both editors in one TU.
 

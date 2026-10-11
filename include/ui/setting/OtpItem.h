@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <memory>
 
-#include "include/database/entities/OtpProfile.h"
+#include "database/entities/OtpProfile.h"
 #include "ui_OtpItem.h"
 
 QT_BEGIN_NAMESPACE

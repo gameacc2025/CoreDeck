@@ -1,10 +1,10 @@
-#include "include/global/PeriodicRunner.hpp"
+#include "global/PeriodicRunner.hpp"
 
 #include <QDateTime>
 #include <QObject>
 #include <QTimer>
 
-#include "include/global/Utils.hpp"
+#include "global/Utils.hpp"
 
 namespace Throne {
 

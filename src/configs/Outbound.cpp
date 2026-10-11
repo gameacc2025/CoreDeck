@@ -1,5 +1,5 @@
-#include "include/configs/common/Outbound.h"
-#include "include/configs/common/utils.h"
+#include "configs/common/Outbound.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     QString DisplayTransportName(const QString& type)

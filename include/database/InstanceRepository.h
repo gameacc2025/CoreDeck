@@ -1,7 +1,7 @@
 #pragma once
 
-#include "include/database/Database.h"
-#include "include/database/entities/Instance.h"
+#include "database/Database.h"
+#include "database/entities/Instance.h"
 #include <QUuid>
 #include <optional>
 #include <vector>

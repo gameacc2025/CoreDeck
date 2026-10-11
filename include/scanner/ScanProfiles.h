@@ -4,9 +4,9 @@
 #include <QString>
 #include <memory>
 
-#include "include/configs/sub/warp.h"
-#include "include/database/entities/IpScan.h"
-#include "include/database/entities/Profile.h"
+#include "configs/sub/warp.h"
+#include "database/entities/IpScan.h"
+#include "database/entities/Profile.h"
 
 namespace Scanner {
     [[nodiscard]] bool IsScanBaseType(const QString &type);

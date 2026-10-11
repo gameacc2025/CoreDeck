@@ -1,4 +1,4 @@
-#include "include/ui/scanner/dialog_ip_lists.h"
+#include "ui/scanner/dialog_ip_lists.h"
 
 #include <QClipboard>
 #include <QDir>
@@ -21,17 +21,17 @@
 #include <algorithm>
 #include <climits>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/scanner/DefaultIpLists.h"
-#include "include/scanner/IpListParse.h"
-#include "include/scanner/IpListUpdater.h"
-#include "include/scanner/ScanManager.h"
-#include "include/ui/scanner/IpListItem.h"
-#include "include/ui/scanner/dialog_edit_ip_list.h"
-#include "include/ui/utils/ReorderListWidget.h"
+#include "database/DatabaseManager.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "global/Utils.hpp"
+#include "scanner/DefaultIpLists.h"
+#include "scanner/IpListParse.h"
+#include "scanner/IpListUpdater.h"
+#include "scanner/ScanManager.h"
+#include "ui/scanner/IpListItem.h"
+#include "ui/scanner/dialog_edit_ip_list.h"
+#include "ui/utils/ReorderListWidget.h"
 
 namespace {
     constexpr qint64 kIpListsMaxImportFileSize = 50 * 1024 * 1024;

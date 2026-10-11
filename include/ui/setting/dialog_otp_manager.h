@@ -5,7 +5,7 @@
 #include <QTimer>
 #include <memory>
 
-#include "include/database/entities/OtpProfile.h"
+#include "database/entities/OtpProfile.h"
 #include "ui_dialog_otp_manager.h"
 
 QT_BEGIN_NAMESPACE

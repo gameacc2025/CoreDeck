@@ -3,7 +3,7 @@
 #include <QDialog>
 #include <QStringList>
 #include "ui_edit_openconnect_advanced.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 namespace Ui {
 class EditOpenConnectAdvanced;

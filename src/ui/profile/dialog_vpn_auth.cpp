@@ -1,6 +1,6 @@
-#include "include/ui/profile/dialog_vpn_auth.h"
+#include "ui/profile/dialog_vpn_auth.h"
 
-#include "include/ui/stats/dialog_endpoint_details.h"
+#include "ui/stats/dialog_endpoint_details.h"
 
 #include <QColor>
 #include <QComboBox>
@@ -19,9 +19,9 @@
 #include <QTimer>
 #include <QUrl>
 
-#include "include/api/RPC.h"
-#include "include/global/Utils.hpp"
-#include "include/ui/utils/NoWheelComboBox.h"
+#include "api/RPC.h"
+#include "global/Utils.hpp"
+#include "ui/utils/NoWheelComboBox.h"
 
 namespace {
     const QColor kVpnAuthErrorColor(0xE0, 0x5A, 0x5A);

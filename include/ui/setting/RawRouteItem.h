@@ -5,8 +5,8 @@
 #include <QPair>
 #include <memory>
 
-#include "include/database/entities/RouteProfile.h"
-#include "include/ui/widget/json/JsonCodeEdit.h"
+#include "database/entities/RouteProfile.h"
+#include "ui/widget/json/JsonCodeEdit.h"
 
 class QLineEdit;
 class QCheckBox;

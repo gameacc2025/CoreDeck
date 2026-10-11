@@ -4,8 +4,8 @@
 
 #include <QDialog>
 
-#include "include/global/Configs.hpp"
-#include "include/database/GroupsRepo.h"
+#include "global/Configs.hpp"
+#include "database/GroupsRepo.h"
 
 inline bool dialog_is_using = false;
 

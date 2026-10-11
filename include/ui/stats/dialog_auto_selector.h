@@ -2,7 +2,7 @@
 
 #include <QDialog>
 
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
 
 class QLabel;
 class QTableWidget;

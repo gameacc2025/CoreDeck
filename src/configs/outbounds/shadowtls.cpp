@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/shadowtls.h"
+#include "configs/outbounds/shadowtls.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool shadowtls::ParseFromLink(const QString& link)

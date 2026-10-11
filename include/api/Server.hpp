@@ -11,8 +11,8 @@
 
 class QThread;
 
-#include "include/api/remote/Message.hpp"
-#include "include/api/remote/Protocol.hpp"
+#include "api/remote/Message.hpp"
+#include "api/remote/Protocol.hpp"
 
 namespace RemoteApi {
     struct Config {

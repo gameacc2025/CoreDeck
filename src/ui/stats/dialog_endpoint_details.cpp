@@ -1,8 +1,8 @@
-#include "include/ui/stats/dialog_endpoint_details.h"
+#include "ui/stats/dialog_endpoint_details.h"
 
-#include "include/api/RPC.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/ProfilesRepo.h"
+#include "api/RPC.h"
+#include "database/DatabaseManager.h"
+#include "database/ProfilesRepo.h"
 
 #include <QBrush>
 #include <QClipboard>

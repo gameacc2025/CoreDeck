@@ -1,43 +1,43 @@
-#include "include/ui/mainwindow.h"
+#include "ui/mainwindow.h"
 
-#include "include/ui/mainWindow/MainWindowInternal.h"
-#include "include/api/RPC.h"
-#include "include/api/remote/Router.hpp"
-#include "include/api/remote/Server.hpp"
+#include "ui/mainWindow/MainWindowInternal.h"
+#include "api/RPC.h"
+#include "api/remote/Router.hpp"
+#include "api/remote/Server.hpp"
 // Full definition: MainWindow's destructor lives here and destroys the unique_ptr.
-#include "include/ui/mainWindow/TestRunner.h"
+#include "ui/mainWindow/TestRunner.h"
 
 #include <QMenu>
 
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/configs/sub/RouteUpdater.hpp"
-#include "include/global/PeriodicRunner.hpp"
-#include "include/global/Logger.hpp"
-#include "include/scanner/IpListUpdater.h"
-#include "include/scanner/ScanManager.h"
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
-#include "include/ui/stats/dialog_auto_selector.h"
-#include "include/sys/KillSwitch.hpp"
-#include "include/sys/Process.hpp"
-#include "include/sys/AutoRun.hpp"
-#include "include/sys/UrlScheme.hpp"
+#include "configs/sub/GroupUpdater.hpp"
+#include "configs/sub/RouteUpdater.hpp"
+#include "global/PeriodicRunner.hpp"
+#include "global/Logger.hpp"
+#include "scanner/IpListUpdater.h"
+#include "scanner/ScanManager.h"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
+#include "ui/stats/dialog_auto_selector.h"
+#include "sys/KillSwitch.hpp"
+#include "sys/Process.hpp"
+#include "sys/AutoRun.hpp"
+#include "sys/UrlScheme.hpp"
 
-#include "include/ui/setting/ThemeManager.hpp"
-#include "include/ui/setting/Icon.hpp"
-#include "include/ui/stats/dialog_traffic_stats.h"
-#include "include/ui/stats/RuntimeStatsWidget.h"
-#include "include/ui/widget/StartStopButton.hpp"
+#include "ui/setting/ThemeManager.hpp"
+#include "ui/setting/Icon.hpp"
+#include "ui/stats/dialog_traffic_stats.h"
+#include "ui/stats/RuntimeStatsWidget.h"
+#include "ui/widget/StartStopButton.hpp"
 
-#include "include/configs/generate.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/global/Common.h"
+#include "configs/generate.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
+#include "global/Common.h"
 
-#include "include/ui/utils/ProfilesTableFilterHeader.h"
-#include "include/ui/utils/ProfilesTableModel.h"
+#include "ui/utils/ProfilesTableFilterHeader.h"
+#include "ui/utils/ProfilesTableModel.h"
 
-#include "include/ui/group/dialog_edit_group.h"
+#include "ui/group/dialog_edit_group.h"
 
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -72,7 +72,7 @@
 #include <QToolButton>
 #include <QTextBrowser>
 #include <include/global/HTTPRequestHelper.hpp>
-#include "include/global/DeviceDetailsHelper.hpp"
+#include "global/DeviceDetailsHelper.hpp"
 
 void UI_InitMainWindow() {
     mainwindow = new MainWindow;

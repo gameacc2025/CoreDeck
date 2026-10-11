@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Database.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 #include <3rdparty/SQLiteCpp/include/SQLiteCpp.h>
 #include <memory>
 #include <mutex>

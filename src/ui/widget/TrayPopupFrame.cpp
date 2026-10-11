@@ -1,4 +1,4 @@
-#include "include/ui/widget/TrayPopupFrame.hpp"
+#include "ui/widget/TrayPopupFrame.hpp"
 
 #include <QGuiApplication>
 #include <QHBoxLayout>

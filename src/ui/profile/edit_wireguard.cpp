@@ -1,11 +1,11 @@
-#include "include/ui/profile/edit_wireguard.h"
+#include "ui/profile/edit_wireguard.h"
 
-#include "include/ui/profile/edit_wireguard_amnezia.h"
+#include "ui/profile/edit_wireguard_amnezia.h"
 
 #include <QPointer>
 
-#include "include/configs/sub/warp.h"
-#include "include/global/Utils.hpp"
+#include "configs/sub/warp.h"
+#include "global/Utils.hpp"
 
 EditWireguard::EditWireguard(QWidget *parent) : QWidget(parent), ui(new Ui::EditWireguard) {
     ui->setupUi(this);

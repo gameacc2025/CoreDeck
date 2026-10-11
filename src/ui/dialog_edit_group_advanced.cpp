@@ -1,12 +1,12 @@
-#include "include/ui/group/dialog_edit_group_advanced.h"
+#include "ui/group/dialog_edit_group_advanced.h"
 
-#include "include/configs/common/utils.h"
-#include "include/configs/generate.h"
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/SettingsRepo.h"
-#include "include/global/GuiUtils.hpp"
+#include "configs/common/utils.h"
+#include "configs/generate.h"
+#include "configs/sub/GroupUpdater.hpp"
+#include "database/DatabaseManager.h"
+#include "database/IpListsRepo.h"
+#include "database/SettingsRepo.h"
+#include "global/GuiUtils.hpp"
 
 #include <QGuiApplication>
 #include <QHostAddress>

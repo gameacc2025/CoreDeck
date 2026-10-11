@@ -1,10 +1,10 @@
-#include "include/configs/outbounds/naive.h"
+#include "configs/outbounds/naive.h"
 
 #include <QJsonArray>
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     namespace {

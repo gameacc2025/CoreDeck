@@ -1,4 +1,4 @@
-#include "include/database/entities/EndpointSource.h"
+#include "database/entities/EndpointSource.h"
 
 namespace Configs {
     QJsonObject EndpointSource::ToJson() const {

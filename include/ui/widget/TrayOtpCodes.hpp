@@ -4,8 +4,8 @@
 #include <QString>
 #include <memory>
 
-#include "include/database/entities/OtpProfile.h"
-#include "include/ui/widget/TrayPopupFrame.hpp"
+#include "database/entities/OtpProfile.h"
+#include "ui/widget/TrayPopupFrame.hpp"
 
 class QListWidgetItem;
 class QTimer;

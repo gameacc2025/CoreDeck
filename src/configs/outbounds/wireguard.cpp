@@ -1,11 +1,11 @@
-#include "include/configs/outbounds/wireguard.h"
+#include "configs/outbounds/wireguard.h"
 
 #include <QJsonArray>
 #include <QRegularExpression>
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     // QUrlQuery defaults to PrettyDecoded, which keeps %2F/%2B/%2C encoded and corrupts base64 keys and CIDRs.

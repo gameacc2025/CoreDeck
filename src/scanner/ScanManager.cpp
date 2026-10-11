@@ -1,4 +1,4 @@
-#include "include/scanner/ScanManager.h"
+#include "scanner/ScanManager.h"
 
 #include <QCoreApplication>
 #include <QPointer>
@@ -6,13 +6,13 @@
 
 #include <utility>
 
-#include "include/api/RPC.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/scanner/IpListUpdater.h"
-#include "include/scanner/ScanProfiles.h"
-#include "include/scanner/ScanWorker.h"
+#include "api/RPC.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "global/Configs.hpp"
+#include "scanner/IpListUpdater.h"
+#include "scanner/ScanProfiles.h"
+#include "scanner/ScanWorker.h"
 
 namespace Scanner {
     namespace {

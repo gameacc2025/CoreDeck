@@ -1,10 +1,10 @@
-#include "include/configs/outbounds/ssh.h"
+#include "configs/outbounds/ssh.h"
 
 #include <QJsonArray>
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool ssh::ParseFromLink(const QString& link)

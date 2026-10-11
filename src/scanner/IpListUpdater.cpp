@@ -1,4 +1,4 @@
-#include "include/scanner/IpListUpdater.h"
+#include "scanner/IpListUpdater.h"
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -13,12 +13,12 @@
 
 #include <srslist.h>
 
-#include "include/api/RPC.h"
-#include "include/configs/generate.h"
-#include "include/database/IpListsRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/global/HTTPRequestHelper.hpp"
-#include "include/scanner/IpListParse.h"
+#include "api/RPC.h"
+#include "configs/generate.h"
+#include "database/IpListsRepo.h"
+#include "global/Configs.hpp"
+#include "global/HTTPRequestHelper.hpp"
+#include "scanner/IpListParse.h"
 
 namespace Scanner {
     namespace {

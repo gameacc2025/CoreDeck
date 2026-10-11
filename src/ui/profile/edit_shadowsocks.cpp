@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_shadowsocks.h"
+#include "ui/profile/edit_shadowsocks.h"
 
 EditShadowSocks::EditShadowSocks(QWidget *parent) : QWidget(parent),
                                                     ui(new Ui::EditShadowSocks) {

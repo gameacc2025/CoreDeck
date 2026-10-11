@@ -1,7 +1,7 @@
 #pragma once
 
-#include "include/configs/common/multiplex.h"
-#include "include/configs/common/Outbound.h"
+#include "configs/common/multiplex.h"
+#include "configs/common/Outbound.h"
 
 namespace Configs
 {

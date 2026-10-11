@@ -1,12 +1,12 @@
-#include "include/configs/AutoSelectorPlan.h"
+#include "configs/AutoSelectorPlan.h"
 
-#include "include/configs/outbounds/autoselector.h"
-#include "include/configs/outbounds/custom.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/entities/Group.h"
-#include "include/database/entities/Profile.h"
+#include "configs/outbounds/autoselector.h"
+#include "configs/outbounds/custom.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/entities/Group.h"
+#include "database/entities/Profile.h"
 
 #include <QDateTime>
 #include <QRegularExpression>

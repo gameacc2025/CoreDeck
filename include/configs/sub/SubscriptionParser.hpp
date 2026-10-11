@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 #include <QByteArray>
 #include <QString>

@@ -1,10 +1,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
-#include "include/database/entities/RouteRule.h"
+#include "database/entities/RouteRule.h"
 
 
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
 
 namespace Configs {
     template<typename Converter = std::nullptr_t>

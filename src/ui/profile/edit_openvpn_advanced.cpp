@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_openvpn_advanced.h"
+#include "ui/profile/edit_openvpn_advanced.h"
 
 #include <QComboBox>
 #include <QGuiApplication>
@@ -9,9 +9,9 @@
 #include <QScrollBar>
 #include <QTableWidgetItem>
 
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Utils.hpp"
-#include "include/ui/profile/editor_table_utils.h"
+#include "global/GuiUtils.hpp"
+#include "global/Utils.hpp"
+#include "ui/profile/editor_table_utils.h"
 
 namespace {
     const QStringList kNetworks = {"", "udp", "udp4", "udp6", "tcp", "tcp4", "tcp6"};

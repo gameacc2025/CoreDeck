@@ -1,6 +1,6 @@
-#include "include/ui/profile/edit_snell.h"
+#include "ui/profile/edit_snell.h"
 
-#include "include/global/GuiUtils.hpp"
+#include "global/GuiUtils.hpp"
 
 EditSnell::EditSnell(QWidget *parent) : QWidget(parent), ui(new Ui::EditSnell) {
     ui->setupUi(this);

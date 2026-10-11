@@ -1,11 +1,11 @@
-#include "include/configs/sub/SubscriptionParser.hpp"
+#include "configs/sub/SubscriptionParser.hpp"
 
-#include "include/configs/common/utils.h"
-#include "include/configs/sub/SubscriptionScan.hpp"
-#include "include/configs/sub/clash.hpp"
-#include "include/configs/sub/vpnFileImport.hpp"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Utils.hpp"
+#include "configs/common/utils.h"
+#include "configs/sub/SubscriptionScan.hpp"
+#include "configs/sub/clash.hpp"
+#include "configs/sub/vpnFileImport.hpp"
+#include "database/ProfilesRepo.h"
+#include "global/Utils.hpp"
 
 #include <QJsonArray>
 #include <QJsonDocument>

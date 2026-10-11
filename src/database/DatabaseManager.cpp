@@ -1,15 +1,15 @@
-#include "include/database/GroupsRepo.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/database/MarkersRepo.h"
-#include "include/database/OtpProfilesRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/database/TrafficStatsRepo.h"
-#include "include/database/Migration.h"
+#include "database/GroupsRepo.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "database/MarkersRepo.h"
+#include "database/OtpProfilesRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/RoutesRepo.h"
+#include "database/TrafficStatsRepo.h"
+#include "database/Migration.h"
 
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
 #include <3rdparty/SQLiteCpp/include/sqlite3.h>
 

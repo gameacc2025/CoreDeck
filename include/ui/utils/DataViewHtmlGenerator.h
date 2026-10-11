@@ -3,7 +3,7 @@
 #include <QString>
 #include <QStringList>
 #include <QMutex>
-#include "include/global/HTTPRequestHelper.hpp"
+#include "global/HTTPRequestHelper.hpp"
 #ifndef Q_MOC_RUN
 #include <core/gen/libcore.pb.h>
 #endif

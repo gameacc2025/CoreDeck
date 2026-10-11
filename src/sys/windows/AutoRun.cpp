@@ -1,4 +1,4 @@
-#include "include/sys/AutoRun.hpp"
+#include "sys/AutoRun.hpp"
 
 #include <QCoreApplication>
 #include <QCryptographicHash>
@@ -6,8 +6,8 @@
 #include <QFileInfo>
 #include <QSettings>
 #include <vector>
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
 #include "3rdparty/WinCommander.hpp"
 

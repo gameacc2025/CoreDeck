@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_vmess.h"
+#include "ui/profile/edit_vmess.h"
 
 #include <QUuid>
 

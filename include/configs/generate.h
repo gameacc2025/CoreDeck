@@ -4,7 +4,7 @@
 #include <QJsonObject>
 #include <QSet>
 
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 namespace Configs
 {

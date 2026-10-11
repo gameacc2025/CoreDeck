@@ -2,7 +2,7 @@
 
 #include <QDialog>
 #include "ui_dialog_edit_group_advanced.h"
-#include "include/database/entities/Group.h"
+#include "database/entities/Group.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_openconnect_advanced.h"
+#include "ui/profile/edit_openconnect_advanced.h"
 
 #include <QGuiApplication>
 #include <QHeaderView>
@@ -8,9 +8,9 @@
 #include <QScrollBar>
 #include <QTableWidgetItem>
 
-#include "include/global/GuiUtils.hpp"
-#include "include/global/Utils.hpp"
-#include "include/ui/profile/editor_table_utils.h"
+#include "global/GuiUtils.hpp"
+#include "global/Utils.hpp"
+#include "ui/profile/editor_table_utils.h"
 
 namespace {
     // The row shows a state; the PEM itself lives in the item's user role.

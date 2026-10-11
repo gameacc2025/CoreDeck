@@ -1,4 +1,4 @@
-#include "include/ui/profile/edit_vless.h"
+#include "ui/profile/edit_vless.h"
 
 EditVless::EditVless(QWidget *parent)
     : QWidget(parent),

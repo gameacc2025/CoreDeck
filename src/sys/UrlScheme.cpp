@@ -1,7 +1,7 @@
-#include "include/sys/UrlScheme.hpp"
+#include "sys/UrlScheme.hpp"
 
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
 static bool &autoRegisterFlag(Association a) {
     auto &settings = *Configs::dataManager->settingsRepo;

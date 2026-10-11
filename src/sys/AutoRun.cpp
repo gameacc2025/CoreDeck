@@ -1,8 +1,8 @@
-#include "include/sys/AutoRun.hpp"
+#include "sys/AutoRun.hpp"
 
 #include <QApplication>
 #include <QDir>
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 #include <QSettings>
 
 

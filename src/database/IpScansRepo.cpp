@@ -1,4 +1,4 @@
-#include "include/database/IpScansRepo.h"
+#include "database/IpScansRepo.h"
 
 #include <QJsonDocument>
 

@@ -1,4 +1,4 @@
-#include "include/global/Configs.hpp"
+#include "global/Configs.hpp"
 
 #include <QApplication>
 #include <QDir>
@@ -13,14 +13,14 @@
 #include <utility>
 #include <include/api/RPC.h>
 
-#include "include/database/GroupsRepo.h"
-#include "include/database/MarkersRepo.h"
-#include "include/database/RoutesRepo.h"
-#include "include/scanner/DefaultIpLists.h"
+#include "database/GroupsRepo.h"
+#include "database/MarkersRepo.h"
+#include "database/RoutesRepo.h"
+#include "scanner/DefaultIpLists.h"
 
 
 #ifdef Q_OS_WIN
-#include "include/sys/windows/guihelper.h"
+#include "sys/windows/guihelper.h"
 #else
 #ifdef Q_OS_LINUX
 #include <include/sys/linux/LinuxCap.h>

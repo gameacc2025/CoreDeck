@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/anyTLS.h"
+#include "configs/outbounds/anyTLS.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool anyTLS::ParseFromLink(const QString& link)

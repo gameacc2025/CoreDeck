@@ -1,15 +1,15 @@
-#include "include/ui/group/GroupItem.h"
+#include "ui/group/GroupItem.h"
 
-#include "include/ui/group/dialog_edit_group.h"
-#include "include/global/GuiUtils.hpp"
-#include "include/configs/sub/GroupUpdater.hpp"
+#include "ui/group/dialog_edit_group.h"
+#include "global/GuiUtils.hpp"
+#include "configs/sub/GroupUpdater.hpp"
 
 #include <QMessageBox>
 
-#include "include/database/GroupsRepo.h"
-#include "include/ui/mainwindow.h"
-#include "include/ui/stats/dialog_endpoint_details.h"
-#include "include/ui/widget/SubscriptionInfoCard.hpp"
+#include "database/GroupsRepo.h"
+#include "ui/mainwindow.h"
+#include "ui/stats/dialog_endpoint_details.h"
+#include "ui/widget/SubscriptionInfoCard.hpp"
 
 namespace {
     QString ParseSubInfo(const Configs::Group &group) {

@@ -1,8 +1,8 @@
-#include "include/ui/profile/ProxyItem.h"
+#include "ui/profile/ProxyItem.h"
 
 #include <QMessageBox>
 
-#include "include/configs/generate.h"
+#include "configs/generate.h"
 
 ProxyItem::ProxyItem(QWidget *parent, const std::shared_ptr<Configs::Profile> &ent, QListWidgetItem *item)
     : QWidget(parent), ui(new Ui::ProxyItem) {

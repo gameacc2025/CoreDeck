@@ -3,7 +3,7 @@
 #include <QJsonObject>
 #include <QString>
 
-#include "include/global/OTP.hpp"
+#include "global/OTP.hpp"
 
 namespace Configs {
     class OtpProfile : public OTP::Entry {

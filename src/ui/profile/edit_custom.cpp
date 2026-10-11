@@ -1,7 +1,7 @@
-#include "include/ui/profile/edit_custom.h"
+#include "ui/profile/edit_custom.h"
 
-#include "include/ui/widget/json/JsonEditorDialog.h"
-#include "include/ui/widget/json/SchemaStore.h"
+#include "ui/widget/json/JsonEditorDialog.h"
+#include "ui/widget/json/SchemaStore.h"
 
 #include <QMessageBox>
 #include <QClipboard>

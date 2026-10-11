@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/socks.h"
+#include "configs/outbounds/socks.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool socks::ParseFromLink(const QString& link)

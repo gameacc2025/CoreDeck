@@ -1,4 +1,4 @@
-#include "include/sys/GlobalHotkeyBackend.hpp"
+#include "sys/GlobalHotkeyBackend.hpp"
 
 #include <QAbstractNativeEventFilter>
 #include <QDebug>

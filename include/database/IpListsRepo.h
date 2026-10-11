@@ -8,7 +8,7 @@
 #include <set>
 
 #include "Database.h"
-#include "include/database/entities/IpList.h"
+#include "database/entities/IpList.h"
 
 namespace Configs {
     // Getters return fresh objects; safe from any thread.

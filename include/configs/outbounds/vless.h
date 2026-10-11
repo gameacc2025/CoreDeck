@@ -1,8 +1,8 @@
 #pragma once
-#include "include/configs/common/multiplex.h"
-#include "include/configs/common/Outbound.h"
-#include "include/configs/common/TLS.h"
-#include "include/configs/common/transport.h"
+#include "configs/common/multiplex.h"
+#include "configs/common/Outbound.h"
+#include "configs/common/TLS.h"
+#include "configs/common/transport.h"
 
 namespace Configs
 {

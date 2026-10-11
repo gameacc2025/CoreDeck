@@ -15,7 +15,7 @@
 #include <algorithm>
 #include <cmath>
 
-#include "include/ui/setting/ThemeManager.hpp"
+#include "ui/setting/ThemeManager.hpp"
 
 #include <QGlobalStatic>
 

@@ -2,7 +2,7 @@
 
 #include <QDialog>
 #include "ui_edit_wireguard_amnezia.h"
-#include "include/database/entities/Profile.h"
+#include "database/entities/Profile.h"
 
 namespace Ui {
 class EditWireguardAmnezia;

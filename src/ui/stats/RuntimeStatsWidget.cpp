@@ -1,15 +1,15 @@
-#include "include/ui/stats/RuntimeStatsWidget.h"
+#include "ui/stats/RuntimeStatsWidget.h"
 
-#include "include/ui/mainwindow.h"
-#include "include/ui/stats/dialog_endpoint_details.h"
-#include "include/api/RPC.h"
-#include "include/configs/sub/GroupUpdater.hpp"
-#include "include/stats/traffic/TrafficLooper.hpp"
-#include "include/database/DatabaseManager.h"
-#include "include/database/SettingsRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/global/HTTPRequestHelper.hpp"
-#include "include/global/CountryHelper.hpp"
+#include "ui/mainwindow.h"
+#include "ui/stats/dialog_endpoint_details.h"
+#include "api/RPC.h"
+#include "configs/sub/GroupUpdater.hpp"
+#include "stats/traffic/TrafficLooper.hpp"
+#include "database/DatabaseManager.h"
+#include "database/SettingsRepo.h"
+#include "global/Utils.hpp"
+#include "global/HTTPRequestHelper.hpp"
+#include "global/CountryHelper.hpp"
 
 #include <QBrush>
 #include <QColor>

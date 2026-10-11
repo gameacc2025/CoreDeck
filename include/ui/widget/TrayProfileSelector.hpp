@@ -6,7 +6,7 @@
 #include <functional>
 #include <utility>
 
-#include "include/ui/widget/TrayPopupFrame.hpp"
+#include "ui/widget/TrayPopupFrame.hpp"
 
 class QLabel;
 class QListWidgetItem;

@@ -1,8 +1,8 @@
-#include "include/ui/setting/DiagnosticsTab.h"
+#include "ui/setting/DiagnosticsTab.h"
 
-#include "include/global/Configs.hpp"
-#include "include/sys/CoreDiagnostics.hpp"
-#include "include/ui/setting/ThemeManager.hpp"
+#include "global/Configs.hpp"
+#include "sys/CoreDiagnostics.hpp"
+#include "ui/setting/ThemeManager.hpp"
 
 #include <QColor>
 #include <QFileInfo>

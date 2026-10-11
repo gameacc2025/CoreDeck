@@ -1,4 +1,4 @@
-#include "include/ui/scanner/dialog_scanner.h"
+#include "ui/scanner/dialog_scanner.h"
 
 #include <QCheckBox>
 #include <QGuiApplication>
@@ -7,14 +7,14 @@
 #include <QScreen>
 #include <QScrollBar>
 
-#include "include/database/DatabaseManager.h"
-#include "include/database/IpScansRepo.h"
-#include "include/global/Utils.hpp"
-#include "include/scanner/ScanManager.h"
-#include "include/ui/mainwindow.h"
-#include "include/ui/scanner/ScanItem.h"
-#include "include/ui/scanner/dialog_new_scan.h"
-#include "include/ui/scanner/dialog_scan_instance.h"
+#include "database/DatabaseManager.h"
+#include "database/IpScansRepo.h"
+#include "global/Utils.hpp"
+#include "scanner/ScanManager.h"
+#include "ui/mainwindow.h"
+#include "ui/scanner/ScanItem.h"
+#include "ui/scanner/dialog_new_scan.h"
+#include "ui/scanner/dialog_scan_instance.h"
 
 DialogScanner::DialogScanner(QWidget *parent) : QDialog(parent), ui(new Ui::DialogScanner) {
     ui->setupUi(this);

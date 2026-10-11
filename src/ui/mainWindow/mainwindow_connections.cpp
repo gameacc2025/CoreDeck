@@ -1,12 +1,12 @@
-#include "include/ui/mainwindow.h"
-#include "include/api/RPC.h"
-#include "include/database/entities/RouteProfile.h"
-#include "include/database/RoutesRepo.h"
-#include "include/database/SettingsRepo.h"
-#include "include/global/LocalNetwork.hpp"
-#include "include/ui/utils/ConnectionsFilterHeader.h"
-#include "include/ui/utils/ConnectionsTreeFilterProxyModel.h"
-#include "include/ui/utils/ConnectionsTreeModel.h"
+#include "ui/mainwindow.h"
+#include "api/RPC.h"
+#include "database/entities/RouteProfile.h"
+#include "database/RoutesRepo.h"
+#include "database/SettingsRepo.h"
+#include "global/LocalNetwork.hpp"
+#include "ui/utils/ConnectionsFilterHeader.h"
+#include "ui/utils/ConnectionsTreeFilterProxyModel.h"
+#include "ui/utils/ConnectionsTreeModel.h"
 
 #include <QHostAddress>
 

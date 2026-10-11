@@ -1,4 +1,4 @@
-#include "include/global/VpnCredentialOverride.hpp"
+#include "global/VpnCredentialOverride.hpp"
 
 #include <QHash>
 #include <QMutex>

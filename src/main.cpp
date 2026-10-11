@@ -18,22 +18,22 @@
 #include "WinCommander.hpp"
 
 
-#include "include/global/Configs.hpp"
-#include "include/global/Logger.hpp"
+#include "global/Configs.hpp"
+#include "global/Logger.hpp"
 
-#include "include/ui/mainwindow_interface.h"
-#include "include/stats/traffic/TrafficStatsManager.hpp"
-#include "include/api/RPC.h"
+#include "ui/mainwindow_interface.h"
+#include "stats/traffic/TrafficStatsManager.hpp"
+#include "api/RPC.h"
 
 #ifdef Q_OS_WIN
-#include "include/sys/windows/MiniDump.h"
-#include "include/sys/windows/eventHandler.h"
-#include "include/sys/windows/WinVersion.h"
+#include "sys/windows/MiniDump.h"
+#include "sys/windows/eventHandler.h"
+#include "sys/windows/WinVersion.h"
 #include <qfontdatabase.h>
 #include <windows.h>
 #endif
 #ifdef Q_OS_LINUX
-#include "include/sys/coreDump.h"
+#include "sys/coreDump.h"
 #include <qfontdatabase.h>
 #include <QSocketNotifier>
 #include <signal.h>

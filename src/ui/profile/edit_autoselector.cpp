@@ -1,13 +1,13 @@
-#include "include/ui/profile/edit_autoselector.h"
+#include "ui/profile/edit_autoselector.h"
 
-#include "include/configs/AutoSelectorPlan.h"
-#include "include/database/DatabaseManager.h"
-#include "include/database/GroupsRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/database/entities/Group.h"
-#include "include/database/entities/Profile.h"
-#include "include/stats/autoselector/AutoSelectorMonitor.hpp"
-#include "include/ui/mainwindow_interface.h"
+#include "configs/AutoSelectorPlan.h"
+#include "database/DatabaseManager.h"
+#include "database/GroupsRepo.h"
+#include "database/ProfilesRepo.h"
+#include "database/entities/Group.h"
+#include "database/entities/Profile.h"
+#include "stats/autoselector/AutoSelectorMonitor.hpp"
+#include "ui/mainwindow_interface.h"
 
 #include <QFormLayout>
 #include <QGridLayout>

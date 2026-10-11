@@ -1,4 +1,4 @@
-#include "include/ui/widget/json/JsonSchemaValidator.h"
+#include "ui/widget/json/JsonSchemaValidator.h"
 
 #include <QJsonArray>
 #include <QObject>

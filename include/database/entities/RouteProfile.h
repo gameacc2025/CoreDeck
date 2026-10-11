@@ -1,6 +1,6 @@
 #pragma once
 
-#include "include/database/entities/RouteRule.h"
+#include "database/entities/RouteRule.h"
 #include <QUrl>
 #include <QJsonArray>
 #include <QStringList>

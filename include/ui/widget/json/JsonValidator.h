@@ -3,7 +3,7 @@
 #include <QList>
 #include <QString>
 
-#include "include/ui/widget/json/JsonTree.h"
+#include "ui/widget/json/JsonTree.h"
 
 namespace JsonEdit {
     enum class Severity { Error, Warning };

@@ -1,10 +1,10 @@
-#include "include/ui/setting/dialog_integration.h"
+#include "ui/setting/dialog_integration.h"
 
 #include <include/global/GuiUtils.hpp>
 
-#include "include/api/remote/Server.hpp"
-#include "include/global/LocalNetwork.hpp"
-#include "include/ui/mainwindow_interface.h"
+#include "api/remote/Server.hpp"
+#include "global/LocalNetwork.hpp"
+#include "ui/mainwindow_interface.h"
 #include <QAction>
 #include <QClipboard>
 #include <QHostAddress>

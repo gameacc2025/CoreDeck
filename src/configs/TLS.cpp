@@ -1,10 +1,10 @@
-#include "include/configs/common/TLS.h"
+#include "configs/common/TLS.h"
 
 #include <QJsonArray>
 #include <QRegularExpression>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 
 

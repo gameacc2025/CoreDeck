@@ -1,4 +1,4 @@
-#include "include/configs/sub/SubscriptionReconcile.hpp"
+#include "configs/sub/SubscriptionReconcile.hpp"
 
 namespace Subscription {
     ContentIndex::ContentIndex(const QList<OldEntry> &old) {

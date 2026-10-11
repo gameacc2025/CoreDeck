@@ -1,9 +1,9 @@
-#include "include/configs/outbounds/trojan.h"
+#include "configs/outbounds/trojan.h"
 
 #include <QUrlQuery>
 #include <include/global/Utils.hpp>
 
-#include "include/configs/common/utils.h"
+#include "configs/common/utils.h"
 
 namespace Configs {
     bool Trojan::ParseFromLink(const QString& link)

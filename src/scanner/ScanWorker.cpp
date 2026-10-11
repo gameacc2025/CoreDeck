@@ -1,4 +1,4 @@
-#include "include/scanner/ScanWorker.h"
+#include "scanner/ScanWorker.h"
 
 #include <QDateTime>
 #include <QRandomGenerator>
@@ -10,14 +10,14 @@
 #include <limits>
 #include <utility>
 
-#include "include/api/RPC.h"
-#include "include/configs/generate.h"
-#include "include/database/IpListsRepo.h"
-#include "include/database/IpScansRepo.h"
-#include "include/database/ProfilesRepo.h"
-#include "include/global/Configs.hpp"
-#include "include/scanner/IpListParse.h"
-#include "include/scanner/IpListUpdater.h"
+#include "api/RPC.h"
+#include "configs/generate.h"
+#include "database/IpListsRepo.h"
+#include "database/IpScansRepo.h"
+#include "database/ProfilesRepo.h"
+#include "global/Configs.hpp"
+#include "scanner/IpListParse.h"
+#include "scanner/IpListUpdater.h"
 
 namespace Scanner {
     namespace {

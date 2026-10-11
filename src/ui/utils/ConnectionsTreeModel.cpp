@@ -1,5 +1,5 @@
-#include "include/ui/utils/ConnectionsTreeModel.h"
-#include "include/global/Utils.hpp"
+#include "ui/utils/ConnectionsTreeModel.h"
+#include "global/Utils.hpp"
 
 #include <QHash>
 
