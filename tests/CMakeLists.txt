@@ -50,6 +50,7 @@ add_executable(test_instancemanager
 target_link_libraries(test_instancemanager PRIVATE
     Qt6::Core
     Qt6::Widgets
+    Qt6::Network
     Qt6::Test
     spb-proto
     Threads::Threads
