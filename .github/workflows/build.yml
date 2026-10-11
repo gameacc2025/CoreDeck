@@ -40,8 +40,12 @@ jobs:
 
       - name: Install CMake, Ninja, and SQLite3
         run: |
-          choco install cmake ninja sqlite protobuf --no-progress -y
+          choco install cmake ninja sqlite --no-progress -y
           refreshenv
+
+      - name: Install Protobuf (vcpkg)
+        run: |
+          vcpkg install protobuf:x64-windows --triplet=x64-windows
 
       - name: Configure (MSVC)
         shell: cmd
@@ -49,6 +53,7 @@ jobs:
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
+            -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
             -B build
 
       - name: Build

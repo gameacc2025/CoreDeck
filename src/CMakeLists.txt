@@ -178,6 +178,7 @@ endif ()
 
 # UI
 set(UI_SOURCES
+    ../include/ui/mainwindow.ui
     ui/mainWindow/mainwindow_setup.cpp
     ui/mainWindow/mainwindow_events.cpp
     ui/mainWindow/mainwindow_groups.cpp
