@@ -24,6 +24,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -41,7 +46,6 @@ jobs:
       - name: Configure (MSVC)
         shell: cmd
         run: |
-          call "%VCVARSALL%" amd64
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
@@ -50,13 +54,11 @@ jobs:
       - name: Build
         shell: cmd
         run: |
-          call "%VCVARSALL%" amd64
           cmake --build build --config Release --parallel
 
       - name: Run Tests
         shell: cmd
         run: |
-          call "%VCVARSALL%" amd64
           cd build
           ctest --output-on-failure --parallel 2
 

@@ -2,6 +2,14 @@
 
 enable_testing()
 
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/3rdparty/SQLiteCpp/include
+    ${CMAKE_SOURCE_DIR}/3rdparty/simple-protobuf
+    ${CMAKE_BINARY_DIR}
+    ${PROTOBUF_INCLUDE_DIRS}
+)
+
 # SQLiteCpp sources for tests (compiled directly to avoid submodule dependency on sqlite3)
 set(SQLITECPP_TEST_SOURCES
     ../3rdparty/SQLiteCpp/src/Backup.cpp
