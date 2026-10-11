@@ -15,7 +15,10 @@ InstanceManager& InstanceManager::instance() {
     return manager;
 }
 
-InstanceManager::~InstanceManager() = default;
+InstanceManager::~InstanceManager() {
+    delete instanceRepo_;
+    instanceRepo_ = nullptr;
+}
 
 void InstanceManager::initialize(DatabaseManager* dbManager) {
     std::lock_guard<std::mutex> lock(mutex_);
@@ -31,7 +34,7 @@ void InstanceManager::initialize(DatabaseManager* dbManager) {
     }
     
     dbManager_ = dbManager;
-    instanceRepo_ = &dbManager_->instanceRepo;
+    instanceRepo_ = new InstanceRepository(dbManager_->getDatabase());
     
     loadInstances();
     ensureDefaultInstanceExists();

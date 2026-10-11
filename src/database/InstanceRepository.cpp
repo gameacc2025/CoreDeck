@@ -130,8 +130,8 @@ void InstanceRepository::bindInstance(SQLite::Statement& query, const Instance& 
     QJsonDocument coreDoc(instance.core_config.ToJson());
     query.bind(startIdx + 14, QString::fromUtf8(coreDoc.toJson(QJsonDocument::Compact)).toStdString());
     
-    query.bind(startIdx + 15, instance.created_at);
-    query.bind(startIdx + 16, instance.updated_at);
+    query.bind(startIdx + 15, static_cast<int64_t>(instance.created_at));
+    query.bind(startIdx + 16, static_cast<int64_t>(instance.updated_at));
 }
 
 std::optional<Instance> InstanceRepository::getById(const QUuid& id) const {
@@ -315,7 +315,7 @@ std::vector<QUuid> InstanceRepository::getAutoStartInstances() const {
     
     if (query) {
         while (query->executeStep()) {
-            QUuid uuid = QUuid::fromString(QString::fromStdString(query.getColumn(0).getText()));
+            QUuid uuid = QUuid::fromString(QString::fromStdString(query->getColumn(0).getText()));
             if (!uuid.isNull()) {
                 uuids.push_back(uuid);
             }
