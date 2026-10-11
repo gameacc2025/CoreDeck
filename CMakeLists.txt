@@ -43,7 +43,7 @@ include(cmake/nkr.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Network Test ${QT_DBUS_COMPONENT})
 find_package(SQLite3 REQUIRED)
-find_package(protobuf REQUIRED)
+find_package(Protobuf REQUIRED)
 
 # Protobuf generation via myproto.cmake
 include(cmake/myproto.cmake)
@@ -83,6 +83,7 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SQLiteCpp/include
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/simple-protobuf
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${PROTOBUF_INCLUDE_DIRS}
 )
 
 # 3rdparty: simple-protobuf (SQLiteCpp sources added directly in src/CMakeLists.txt)
