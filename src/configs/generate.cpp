@@ -2025,30 +2025,33 @@ namespace Configs {
                 }
                 else
                     if (auto url = ruleSetUrl(item.toStdString()); !url.empty()) {
-                        ruleSetArray += QJsonObject{
+                        QJsonObject ruleSetObj{
                                     {"type", "remote"},
                                     {"tag", item},
                                     {"format", "binary"},
                                     {"url", get_jsdelivr_link(QString::fromUtf8(url.data(), url.size()))},
                                 };
+                        ruleSetArray += ruleSetObj;
                     }
             }
 
             if (dataManager->settingsRepo->adblock_enable) {
-                ruleSetArray += QJsonObject{
+                QJsonObject adblockObj{
                             {"type", "remote"},
                             {"tag", tags::adblockRuleSet},
                             {"format", "binary"},
                             {"url", get_jsdelivr_link("https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs")},
                         };
+                ruleSetArray += adblockObj;
             }
 
             if (const auto &tun = ctx.prerequisites.tun; tun.privateRangesAsRuleSet) {
-                ruleSetArray += QJsonObject{
+                QJsonObject privateRangesObj{
                             {"type", "inline"},
                             {"tag", tags::privateRangesRuleSet},
                             {"rules", QJsonArray{QJsonObject{{"ip_cidr", QJsonArray::fromStringList(tun.bypassedPrivateRanges)}}}},
                         };
+                ruleSetArray += privateRangesObj;
             }
             return ruleSetArray;
         }

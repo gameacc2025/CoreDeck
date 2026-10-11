@@ -116,24 +116,5 @@ namespace Configs {
         return qApp->applicationDirPath();
     }
 
-    QString get_jsdelivr_link(const QString& url) {
-        // Convert GitHub raw URLs to jsDelivr CDN for faster global downloads
-        // https://raw.githubusercontent.com/owner/repo/branch/path -> https://cdn.jsdelivr.net/gh/owner/repo@branch/path
-        if (url.startsWith("https://raw.githubusercontent.com/")) {
-            QString cdnUrl = url;
-            cdnUrl.replace("https://raw.githubusercontent.com/", "https://cdn.jsdelivr.net/gh/");
-            cdnUrl.replace("/raw/", "@");
-            // Replace the first / after @ with @ to separate repo@branch from path
-            int atIndex = cdnUrl.indexOf("@");
-            if (atIndex > 0) {
-                int slashIndex = cdnUrl.indexOf("/", atIndex + 1);
-                if (slashIndex > 0) {
-                    cdnUrl.insert(slashIndex, "@");
-                    cdnUrl.remove(atIndex, 1);
-                }
-            }
-            return cdnUrl;
-        }
-        return url;
-    }
+    
 } // namespace Configs
