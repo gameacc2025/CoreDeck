@@ -366,7 +366,7 @@ target_link_libraries(CoreDeck PRIVATE
     ${QT_DBUS_LIBRARY}
     SQLiteCpp
     spb-proto
-    protobuf::libprotobuf
+    Protobuf::libprotobuf
     Threads::Threads
     ${CMAKE_DL_LIBS}
 )

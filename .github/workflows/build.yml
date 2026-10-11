@@ -85,7 +85,7 @@ jobs:
             cmake ninja-build \
             qt6-base-dev qt6-tools-dev \
             libsqlite3-dev \
-            protobuf-compiler protobuf-dev \
+            protobuf-compiler libprotobuf-dev \
             libssl-dev
 
       - name: Install Qt (aqtinstall)
@@ -135,7 +135,7 @@ jobs:
             cmake ninja-build clang \
             qt6-base-dev qt6-tools-dev \
             libsqlite3-dev \
-            protobuf-compiler protobuf-dev \
+            protobuf-compiler libprotobuf-dev \
             libssl-dev
 
       - name: Install Qt (aqtinstall)
