@@ -369,6 +369,16 @@ target_link_libraries(CoreDeck PRIVATE
     ${CMAKE_DL_LIBS}
 )
 
+target_include_directories(CoreDeck PRIVATE
+    ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/3rdparty
+    ${CMAKE_SOURCE_DIR}/3rdparty/SQLiteCpp/include
+    ${CMAKE_SOURCE_DIR}/3rdparty/simple-protobuf
+    ${CMAKE_SOURCE_DIR}/3rdparty/simple-protobuf/include
+    ${CMAKE_BINARY_DIR}
+)
+
 if (WIN32)
     target_link_libraries(CoreDeck PRIVATE
         version
