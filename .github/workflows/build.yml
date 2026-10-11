@@ -49,8 +49,9 @@ jobs:
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
             -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
-            -DProtobuf_INCLUDE_DIRS="C:/ProgramData/chocolatey/lib/protobuf/tools/include" ^
-            -DProtobuf_LIBRARIES="C:/ProgramData/chocolatey/lib/protobuf/tools/lib/libprotobuf.lib;C:/ProgramData/chocolatey/lib/protobuf/tools/lib/libprotoc.lib" ^
+            -DProtobuf_INCLUDE_DIR="C:/ProgramData/chocolatey/lib/protobuf/tools/include" ^
+            -DProtobuf_LIBRARY="C:/ProgramData/chocolatey/lib/protobuf/tools/lib/libprotobuf.lib" ^
+            -DProtobuf_PROTOC_EXECUTABLE="C:/ProgramData/chocolatey/lib/protobuf/tools/protoc.exe" ^
             -B build
 
       - name: Build
