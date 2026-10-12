@@ -182,7 +182,6 @@ set(UI_FILES
     ../include/ui/profile/dialog_vpn_auth.ui
     ../include/ui/profile/edit_advanced.ui
     ../include/ui/profile/edit_anytls.ui
-    ../include/ui/profile/edit_autoselector.ui
     ../include/ui/profile/edit_chain.ui
     ../include/ui/profile/edit_custom.ui
     ../include/ui/profile/edit_direct.ui
@@ -236,6 +235,95 @@ set(UI_FILES
 )
 
 qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+
+# Headers with Q_OBJECT macro that need MOC processing
+set(MOC_HEADERS
+    ../include/ui/mainwindow.h
+    ../include/ui/dialog_manage_groups.h
+    ../include/ui/dialog_edit_group.h
+    ../include/ui/group/GroupItem.h
+    ../include/ui/group/dialog_manage_groups.h
+    ../include/ui/group/dialog_edit_group_advanced.h
+    ../include/ui/group/dialog_edit_group.h
+    ../include/ui/setting/RouteItem.h
+    ../include/ui/setting/dialog_integration.h
+    ../include/ui/dialog_edit_group_advanced.h
+    ../include/ui/setting/RawRouteItem.h
+    ../include/ui/setting/dialog_edit_otp.h
+    ../include/ui/setting/OtpListWidget.h
+    ../include/ui/GroupItem.h
+    ../include/ui/setting/dialog_basic_settings.h
+    ../include/ui/stats/TrafficChartWidget.h
+    ../include/ui/setting/OtpItem.h
+    ../include/ui/stats/RuntimeStatsWidget.h
+    ../include/ui/widget/json/JsonIssueList.h
+    ../include/ui/setting/dialog_vpn_settings.h
+    ../include/ui/setting/dialog_preset_settings.h
+    ../include/ui/widget/json/JsonEditorDialog.h
+    ../include/ui/setting/dialog_otp_manager.h
+    ../include/ui/setting/dialog_manage_routes.h
+    ../include/ui/widget/json/JsonCodeEdit.h
+    ../include/ui/scanner/IpListUpdater.h
+    ../include/ui/stats/dialog_auto_selector.h
+    ../include/ui/setting/DiagnosticsTab.h
+    ../include/ui/scanner/ScanItem.h
+    ../include/ui/stats/MiniChartWidget.h
+    ../include/ui/utils/ReorderListWidget.h
+    ../include/ui/scanner/IpListItem.h
+    ../include/ui/scanner/IpEntriesModel.h
+    ../include/ui/scanner/dialog_scan_instance.h
+    ../include/ui/scanner/dialog_scanner.h
+    ../include/ui/scanner/dialog_new_scan.h
+    ../include/ui/scanner/dialog_ip_lists.h
+    ../include/ui/scanner/dialog_edit_ip_list.h
+    ../include/ui/profile/ProxyItem.h
+    ../include/ui/profile/edit_xrayvless.h
+    ../include/ui/profile/edit_wireguard_amnezia.h
+    ../include/ui/profile/edit_wireguard.h
+    ../include/ui/profile/edit_vmess.h
+    ../include/ui/profile/edit_vless.h
+    ../include/ui/profile/edit_tuic.h
+    ../include/ui/profile/edit_trusttunnel.h
+    ../include/ui/profile/edit_trojan.h
+    ../include/ui/profile/edit_tailscale.h
+    ../include/ui/profile/edit_ssh.h
+    ../include/ui/stats/dialog_endpoint_details.h
+    ../include/ui/profile/edit_socks.h
+    ../include/ui/utils/ProfilesTableView.h
+    ../include/ui/profile/edit_snell.h
+    ../include/ui/profile/edit_shadowtls.h
+    ../include/ui/profile/edit_shadowsocks.h
+    ../include/ui/profile/edit_openvpn_advanced.h
+    ../include/ui/stats/dialog_traffic_stats.h
+    ../include/ui/utils/ProfilesTableVerticalHeader.h
+    ../include/ui/profile/edit_openvpn.h
+    ../include/ui/utils/ProfilesTableModel.h
+    ../include/ui/profile/edit_openconnect_advanced.h
+    ../include/ui/utils/ProfilesFilterProxyModel.h
+    ../include/ui/profile/edit_openconnect.h
+    ../include/ui/profile/edit_naive.h
+    ../include/ui/profile/edit_mieru.h
+    ../include/ui/profile/edit_masque.h
+    ../include/ui/profile/edit_juicity.h
+    ../include/ui/profile/edit_hysteria_realm.h
+    ../include/ui/profile/edit_hysteria.h
+    ../include/ui/profile/edit_http.h
+    ../include/ui/profile/edit_extra_core.h
+    ../include/ui/profile/edit_direct.h
+    ../include/ui/profile/edit_custom.h
+    ../include/ui/profile/edit_chain.h
+    ../include/ui/utils/ConnectionsTreeModel.h
+    ../include/ui/utils/ProfilesTableFilterHeader.h
+    ../include/ui/profile/edit_autoselector.h
+    ../include/ui/profile/edit_anytls.h
+    ../include/ui/profile/edit_advanced.h
+    ../include/ui/utils/ConnectionsFilterHeader.h
+    ../include/ui/utils/ConnectionsTreeFilterProxyModel.h
+    ../include/ui/profile/dialog_vpn_auth.h
+    ../include/ui/profile/dialog_edit_profile.h
+)
+
+qt6_wrap_cpp(MOC_SOURCES ${MOC_HEADERS})
 
 set(UI_SOURCES
     ui/mainWindow/mainwindow_setup.cpp
@@ -387,6 +475,7 @@ qt_add_executable(CoreDeck
     ${PROTO_SRCS}
     ${PROTO_HDRS}
     ${UI_HEADERS}
+    ${MOC_SOURCES}
 )
 
 # Qt setup
@@ -404,6 +493,10 @@ endif ()
 set_property(SOURCE "../3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 set_property(SOURCE "../3rdparty/monocypher/monocypher.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 set_property(SOURCE "sys/windows/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+if (WIN32)
+    set_property(SOURCE "sys/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+    set_property(SOURCE "sys/linux/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+endif ()
 
 target_compile_definitions(CoreDeck PRIVATE
     SQLITE_DQS=0
@@ -461,6 +554,7 @@ if (UNIX AND NOT APPLE)
         rt
         xcb
         xcb-xkb
+        sqlite3
     )
 endif ()
 

@@ -39,7 +39,7 @@ jobs:
           arch: amd64
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           version: ${{ env.QT_VERSION }}
           target: desktop
@@ -54,7 +54,7 @@ jobs:
 
       - name: Install Protobuf (vcpkg)
         run: |
-          vcpkg install protobuf:x64-windows --triplet=x64-windows
+          vcpkg install protobuf:x64-windows sqlitecpp:x64-windows --triplet=x64-windows
 
       - name: Download srslist.h
         run: |
@@ -66,7 +66,7 @@ jobs:
         run: |
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
-            -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
+            -DCMAKE_PREFIX_PATH="%Qt6_DIR%;C:/Program Files/vcpkg/installed/x64-windows" ^
             -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
             -B build
 
