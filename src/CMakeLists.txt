@@ -407,6 +407,8 @@ endif ()
 
 set_property(SOURCE "../3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 set_property(SOURCE "../3rdparty/monocypher/monocypher.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+set_property(SOURCE "sys/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
+set_property(SOURCE "sys/windows/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_compile_definitions(CoreDeck PRIVATE
     SQLITE_DQS=0
@@ -425,7 +427,6 @@ target_link_libraries(CoreDeck PRIVATE
     Qt6::Widgets
     Qt6::Network
     ${QT_DBUS_LIBRARY}
-    SQLiteCpp
     spb-proto
     ${PROTOBUF_LIBRARIES}
     Threads::Threads
