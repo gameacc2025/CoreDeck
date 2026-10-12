@@ -488,7 +488,8 @@ set_target_properties(CoreDeck PROPERTIES
 )
 
 if (WIN32 AND MSVC)
-    set_target_properties(CoreDeck PROPERTIES UNITY_BUILD ON)
+    # Unity builds don't work well with Qt AUTOUIC/AUTOMOC - disable for now
+    # set_target_properties(CoreDeck PROPERTIES UNITY_BUILD ON)
 endif ()
 
 set_property(SOURCE "../3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
