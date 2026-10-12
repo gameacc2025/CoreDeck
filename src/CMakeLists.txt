@@ -158,8 +158,6 @@ else ()
         sys/KillSwitch.cpp
         sys/ProcessMetrics.cpp
         sys/CoreDiagnostics.cpp
-        sys/UrlScheme.cpp
-        sys/SystemProxy.cpp
         sys/GlobalHotkeys.cpp
         sys/linux/coreDump.cpp
         sys/LinuxCap.cpp
@@ -461,6 +459,8 @@ if (UNIX AND NOT APPLE)
         pthread
         dl
         rt
+        xcb
+        xcb-xkb
     )
 endif ()
 

@@ -29,14 +29,10 @@ jobs:
         with:
           arch: amd64
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version: ${{ env.QT_VERSION }}
-          target: desktop
-          host: windows
-          arch: win64_msvc2019_64
-          cache: true
+      - name: Install Qt (aqtinstall)
+        run: |
+          pip3 install aqtinstall
+          aqt install-qt windows desktop ${{ env.QT_VERSION }} win64_msvc2019_64 -O C:/Qt --noarchives
 
       - name: Install CMake, Ninja, SQLite3, Protobuf
         run: |
@@ -53,7 +49,7 @@ jobs:
         run: |
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
-            -DCMAKE_PREFIX_PATH="%Qt6_DIR%;C:/ProgramData/chocolatey/lib/protobuf/tools" ^
+            -DCMAKE_PREFIX_PATH="C:/Qt/6.6.3/msvc2019_64;C:/ProgramData/chocolatey/lib/protobuf/tools" ^
             -B build
 
       - name: Build
