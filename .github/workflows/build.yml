@@ -109,18 +109,10 @@ jobs:
       - name: Build
         run: cmake --build build --config Release --parallel
 
-- name: Run Tests
+      - name: Run Tests
         run: |
           cd build
           ctest --output-on-failure --parallel 2
-
-      - name: Upload Artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coredeck-linux-clang-${{ github.run_id }}
-          path: build/CoreDeck
-          retention-days: 7
 
       - name: Upload Artifact
         if: success()
@@ -171,3 +163,11 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure --parallel 2
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coredeck-linux-clang-${{ github.run_id }}
+          path: build/CoreDeck
+          retention-days: 7
