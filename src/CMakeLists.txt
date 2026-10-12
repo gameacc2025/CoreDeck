@@ -271,7 +271,7 @@ set(MOC_HEADERS
     ../include/ui/stats/MiniChartWidget.h
     ../include/ui/utils/ReorderListWidget.h
     ../include/scanner/IpListItem.h
-    ../include/scanner/IpEntriesModel.h
+    ../include/ui/scanner/IpEntriesModel.h
     ../include/ui/scanner/dialog_scan_instance.h
     ../include/ui/scanner/dialog_scanner.h
     ../include/ui/scanner/dialog_new_scan.h
