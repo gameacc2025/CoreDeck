@@ -23,6 +23,19 @@ set(SQLITECPP_TEST_SOURCES
     ../3rdparty/SQLiteCpp/src/Transaction.cpp
 )
 
+# Platform-specific sys sources for tests
+if (WIN32)
+    set(SYS_TEST_SOURCES
+        ../src/sys/windows/UrlScheme.cpp
+        ../src/sys/windows/WinVersion.cpp
+        ../src/sys/windows/guihelper.cpp
+    )
+else ()
+    set(SYS_TEST_SOURCES
+        ../src/sys/linux/UrlScheme.cpp
+    )
+endif ()
+
 # Test: Instance entity
 add_executable(test_instance
     test_instance.cpp
@@ -46,6 +59,7 @@ add_executable(test_instancemanager
     ../src/global/Logger.cpp
     ../src/global/Utils.cpp
     ${SQLITECPP_TEST_SOURCES}
+    ${SYS_TEST_SOURCES}
 )
 target_link_libraries(test_instancemanager PRIVATE
     Qt6::Core
@@ -55,6 +69,35 @@ target_link_libraries(test_instancemanager PRIVATE
     spb-proto
     Threads::Threads
 )
+
+target_compile_definitions(test_instancemanager PRIVATE
+    SQLITE_DQS=0
+    SQLITE_DEFAULT_MEMSTATUS=0
+    SQLITE_DEFAULT_WAL_SYNCHRONOUS=1
+    SQLITE_LIKE_DOESNT_MATCH_BLOBS
+    SQLITE_MAX_EXPR_DEPTH=0
+    SQLITE_UNTESTABLE
+    SQLITE_OMIT_DEPRECATED
+    SQLITE_OMIT_LOAD_EXTENSION
+    SQLITE_THREADSAFE=1
+    SQLITE_USE_ALLOCA
+)
+
+if (WIN32)
+    target_link_libraries(test_instancemanager PRIVATE
+        version
+        winmm
+        ws2_32
+        iphlpapi
+        userenv
+        shell32
+        ole32
+        oleaut32
+        uuid
+        advapi32
+    )
+endif ()
+
 add_test(NAME test_instancemanager COMMAND test_instancemanager)
 
 # TODO: Add more tests as they are created
