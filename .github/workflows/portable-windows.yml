@@ -1,0 +1,169 @@
+name: Portable Windows x64 Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ feature/multi-instance ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'res/**'
+      - 'CMakeLists.txt'
+      - 'cmake/**'
+      - '.github/workflows/portable-windows.yml'
+      - '3rdparty/**'
+
+permissions:
+  contents: read
+
+env:
+  QT_VERSION: "6.6"
+  CMAKE_GENERATOR: "Ninja"
+  BUILD_TYPE: "Release"
+  ARTIFACT_NAME: "CoreDeck-portable-windows-x64"
+
+jobs:
+  build-portable:
+    name: Build Portable Windows x64
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: desktop
+          host: windows
+          arch: win64_msvc2019_64
+          cache: true
+
+      - name: Install CMake, Ninja, SQLite3
+        run: |
+          choco install cmake ninja sqlite --no-progress -y
+          refreshenv
+
+      - name: Install Protobuf (vcpkg)
+        run: |
+          vcpkg install protobuf:x64-windows --triplet=x64-windows
+
+      - name: Download srslist.h
+        run: |
+          curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
+          copy srslist.h src\configs\srslist.h
+
+      - name: Configure (MSVC Release)
+        shell: cmd
+        run: |
+          cmake -G "Ninja" ^
+            -DCMAKE_BUILD_TYPE=Release ^
+            -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
+            -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
+            -B build
+
+      - name: Build
+        shell: cmd
+        run: |
+          cmake --build build --config Release --parallel
+
+      - name: Run Tests
+        shell: cmd
+        run: |
+          cd build
+          ctest --output-on-failure --parallel 2
+
+      - name: Find Qt windeployqt
+        id: qt-tools
+        shell: cmd
+        run: |
+          where windeployqt.exe > nul 2>&1 && echo "WINDEPLOYQT=%Qt6_DIR%\bin\windeployqt.exe" >> %GITHUB_OUTPUT% || echo "WINDEPLOYQT=NOT_FOUND" >> %GITHUB_OUTPUT%
+
+      - name: Prepare Portable Package Directory
+        shell: pwsh
+        run: |
+          $packageDir = "CoreDeck-portable"
+          if (Test-Path $packageDir) { Remove-Item -Recurse -Force $packageDir }
+          New-Item -ItemType Directory -Path $packageDir | Out-Null
+          New-Item -ItemType Directory -Path "$packageDir\config" | Out-Null
+          New-Item -ItemType Directory -Path "$packageDir\translations" | Out-Null
+          New-Item -ItemType Directory -Path "$packageDir\themes" | Out-Null
+          echo "PACKAGE_DIR=$packageDir" >> $env:GITHUB_OUTPUT
+
+      - name: Deploy Qt Dependencies (windeployqt)
+        if: steps.qt-tools.outputs.WINDEPLOYQT != 'NOT_FOUND'
+        shell: cmd
+        run: |
+          "%Qt6_DIR%\bin\windeployqt.exe" --release --no-translations --no-angle --no-webkit2 --no-compiler-runtime --dir build\CoreDeck-portable build\CoreDeck.exe
+
+      - name: Copy Executable and Config
+        shell: pwsh
+        run: |
+          $packageDir = "CoreDeck-portable"
+          # Copy main executable
+          Copy-Item "build\CoreDeck.exe" "$packageDir\" -Force
+          # Copy core binary if it exists (ThroneCore.exe)
+          if (Test-Path "build\ThroneCore.exe") {
+            Copy-Item "build\ThroneCore.exe" "$packageDir\" -Force
+          }
+          # Copy translations from Qt
+          $qtTranslations = "$env:Qt6_DIR\translations"
+          if (Test-Path $qtTranslations) {
+            Get-ChildItem "$qtTranslations\qt_*.qm" | Copy-Item -Destination "$packageDir\translations\" -Force
+          }
+          # Copy translations from project
+          Get-ChildItem "res\translations\*.qm" -ErrorAction SilentlyContinue | Copy-Item -Destination "$packageDir\translations\" -Force
+          # Create default config marker for portable mode
+          New-Item -ItemType File -Path "$packageDir\config\.portable" -Force | Out-Null
+
+      - name: Verify Package Contents
+        shell: pwsh
+        run: |
+          $packageDir = "CoreDeck-portable"
+          Write-Host "=== Package Contents ==="
+          Get-ChildItem -Recurse $packageDir | Select-Object FullName, Length | Format-Table -AutoSize
+          Write-Host ""
+          Write-Host "=== Required Files Check ==="
+          $required = @("CoreDeck.exe")
+          foreach ($file in $required) {
+            if (Test-Path "$packageDir\$file") {
+              Write-Host "✓ $file"
+            } else {
+              Write-Host "✗ MISSING: $file"
+              exit 1
+            }
+          }
+          # Check Qt Core DLLs
+          $qtDlls = @("Qt6Core.dll", "Qt6Widgets.dll", "Qt6Network.dll", "Qt6Gui.dll")
+          foreach ($dll in $qtDlls) {
+            if (Test-Path "$packageDir\$dll") {
+              Write-Host "✓ $dll"
+            } else {
+              Write-Host "⚠ $dll (may be in subdirectory)"
+            }
+          }
+
+      - name: Create Portable ZIP
+        shell: pwsh
+        run: |
+          $packageDir = "CoreDeck-portable"
+          $zipName = "${{ env.ARTIFACT_NAME }}.zip"
+          Compress-Archive -Path "$packageDir\*" -DestinationPath $zipName -Force
+          Write-Host "Created $zipName"
+          (Get-Item $zipName).Length | ForEach-Object { Write-Host "Size: $_ bytes ($([math]::Round($_/1MB, 2)) MB)" }
+
+      - name: Upload Portable Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACT_NAME }}.zip
+          retention-days: 14
