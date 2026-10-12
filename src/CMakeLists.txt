@@ -267,10 +267,10 @@ set(MOC_HEADERS
     ../include/scanner/ScanManager.h
     ../include/ui/stats/dialog_auto_selector.h
     ../include/ui/setting/DiagnosticsTab.h
-    ../include/scanner/ScanItem.h
+    ../include/ui/scanner/ScanItem.h
     ../include/ui/stats/MiniChartWidget.h
     ../include/ui/utils/ReorderListWidget.h
-    ../include/scanner/IpListItem.h
+    ../include/ui/scanner/IpListItem.h
     ../include/ui/scanner/IpEntriesModel.h
     ../include/ui/scanner/dialog_scan_instance.h
     ../include/ui/scanner/dialog_scanner.h
