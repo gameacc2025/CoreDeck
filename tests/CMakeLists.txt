@@ -70,6 +70,10 @@ target_link_libraries(test_instancemanager PRIVATE
     Threads::Threads
 )
 
+if (UNIX AND NOT APPLE)
+    target_link_libraries(test_instancemanager PRIVATE sqlite3)
+endif ()
+
 target_compile_definitions(test_instancemanager PRIVATE
     SQLITE_DQS=0
     SQLITE_DEFAULT_MEMSTATUS=0

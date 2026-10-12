@@ -142,8 +142,6 @@ if (WIN32)
         sys/KillSwitch.cpp
         sys/ProcessMetrics.cpp
         sys/CoreDiagnostics.cpp
-        sys/UrlScheme.cpp
-        sys/SystemProxy.cpp
         sys/GlobalHotkeys.cpp
         sys/windows/AutoRun.cpp
         sys/windows/eventHandler.cpp
@@ -407,7 +405,6 @@ endif ()
 
 set_property(SOURCE "../3rdparty/SQLiteCpp/src/sqlite3.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 set_property(SOURCE "../3rdparty/monocypher/monocypher.c" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
-set_property(SOURCE "sys/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 set_property(SOURCE "sys/windows/SystemProxy.cpp" PROPERTY SKIP_UNITY_BUILD_INCLUSION ON)
 
 target_compile_definitions(CoreDeck PRIVATE

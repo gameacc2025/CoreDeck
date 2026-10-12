@@ -38,14 +38,10 @@ jobs:
           arch: win64_msvc2019_64
           cache: true
 
-      - name: Install CMake, Ninja, SQLite3
+      - name: Install CMake, Ninja, SQLite3, Protobuf
         run: |
-          choco install cmake ninja sqlite --no-progress -y
+          choco install cmake ninja sqlite protobuf --no-progress -y
           refreshenv
-
-      - name: Install Protobuf (vcpkg)
-        run: |
-          vcpkg install protobuf:x64-windows --triplet=x64-windows
 
       - name: Download srslist.h
         run: |
@@ -57,8 +53,7 @@ jobs:
         run: |
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
-            -DCMAKE_PREFIX_PATH="%Qt6_DIR%" ^
-            -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
+            -DCMAKE_PREFIX_PATH="%Qt6_DIR%;C:/ProgramData/chocolatey/lib/protobuf/tools" ^
             -B build
 
       - name: Build
@@ -105,27 +100,27 @@ jobs:
           curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
           cp srslist.h src/configs/srslist.h
 
-      - name: Install Qt (aqtinstall)
-        run: |
-          pip3 install aqtinstall
-          aqt install-qt linux desktop ${{ env.QT_VERSION }} gcc_64 -O /opt/qt
-
       - name: Configure (GCC)
-        env:
-          CMAKE_PREFIX_PATH: /opt/qt/${{ env.QT_VERSION }}/gcc_64
         run: |
           cmake -G "${{ env.CMAKE_GENERATOR }}" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}" \
             -B build
 
       - name: Build
         run: cmake --build build --config Release --parallel
 
-      - name: Run Tests
+- name: Run Tests
         run: |
           cd build
           ctest --output-on-failure --parallel 2
+
+      - name: Upload Artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coredeck-linux-clang-${{ github.run_id }}
+          path: build/CoreDeck
+          retention-days: 7
 
       - name: Upload Artifact
         if: success()
@@ -160,18 +155,13 @@ jobs:
           curl -fLso srslist.h "https://raw.githubusercontent.com/throneproj/routeprofiles/rule-set/srslist.h"
           cp srslist.h src/configs/srslist.h
 
-      - name: Install Qt (aqtinstall)
-        run: |
-          pip3 install aqtinstall
-          aqt install-qt linux desktop ${{ env.QT_VERSION }} gcc_64 -O /opt/qt
-
       - name: Configure (Clang)
         env:
-          CMAKE_PREFIX_PATH: /opt/qt/${{ env.QT_VERSION }}/gcc_64
+          CC: clang
+          CXX: clang++
         run: |
-          CC=clang CXX=clang++ cmake -G "${{ env.CMAKE_GENERATOR }}" \
+          cmake -G "${{ env.CMAKE_GENERATOR }}" \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_PREFIX_PATH="${{ env.CMAKE_PREFIX_PATH }}" \
             -B build
 
       - name: Build
