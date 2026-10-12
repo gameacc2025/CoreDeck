@@ -263,14 +263,15 @@ set(MOC_HEADERS
     ../include/ui/setting/dialog_otp_manager.h
     ../include/ui/setting/dialog_manage_routes.h
     ../include/ui/widget/json/JsonCodeEdit.h
-    ../include/ui/scanner/IpListUpdater.h
+    ../include/scanner/IpListUpdater.h
+    ../include/scanner/ScanManager.h
     ../include/ui/stats/dialog_auto_selector.h
     ../include/ui/setting/DiagnosticsTab.h
-    ../include/ui/scanner/ScanItem.h
+    ../include/scanner/ScanItem.h
     ../include/ui/stats/MiniChartWidget.h
     ../include/ui/utils/ReorderListWidget.h
-    ../include/ui/scanner/IpListItem.h
-    ../include/ui/scanner/IpEntriesModel.h
+    ../include/scanner/IpListItem.h
+    ../include/scanner/IpEntriesModel.h
     ../include/ui/scanner/dialog_scan_instance.h
     ../include/ui/scanner/dialog_scanner.h
     ../include/ui/scanner/dialog_new_scan.h
