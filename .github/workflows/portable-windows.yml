@@ -66,7 +66,7 @@ jobs:
         run: |
           cmake -G "Ninja" ^
             -DCMAKE_BUILD_TYPE=Release ^
-            -DCMAKE_PREFIX_PATH="%Qt6_DIR%;C:/Program Files/vcpkg/installed/x64-windows" ^
+            -DCMAKE_PREFIX_PATH="%Qt6_DIR%;C:/vcpkg/installed/x64-windows" ^
             -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake ^
             -B build
 
