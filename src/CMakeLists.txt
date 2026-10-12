@@ -145,8 +145,6 @@ if (WIN32)
         sys/UrlScheme.cpp
         sys/SystemProxy.cpp
         sys/GlobalHotkeys.cpp
-        sys/coreDump.cpp
-        sys/LinuxCap.cpp
         sys/windows/AutoRun.cpp
         sys/windows/eventHandler.cpp
         sys/windows/GlobalHotkeys.cpp
@@ -165,7 +163,7 @@ else ()
         sys/UrlScheme.cpp
         sys/SystemProxy.cpp
         sys/GlobalHotkeys.cpp
-        sys/coreDump.cpp
+        sys/linux/coreDump.cpp
         sys/LinuxCap.cpp
         sys/linux/AutoRun.cpp
         sys/linux/GlobalHotkeysKde.cpp
